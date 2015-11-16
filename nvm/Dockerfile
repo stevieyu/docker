@@ -16,11 +16,8 @@ RUN echo "root:'" |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
-#nvm
+#nvm github.com/creationix/nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
-
-RUN nvm install 5.0.0
-RUN nvm install 4.2.2
 
 #zsh 配置
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
