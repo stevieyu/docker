@@ -17,7 +17,7 @@ RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 #LAMP 安装
-RUN wget https://bitnami.com/redirect/to/76842/bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
+RUN wget https://bitnami.com/redirect/to/77750/bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
 RUN chmod 777 bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
 RUN ./bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp
 RUN rm bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
