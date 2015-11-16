@@ -21,19 +21,21 @@ RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 #LAMP 安装
-RUN wget https://bitnami.com/redirect/to/76842/bitnami-lampstack-7.0.0RC6-0-dev-linux-x64-installer.run
-RUN chmod 777 bitnami-lampstack-7.0.0RC6-0-dev-linux-x64-installer.run
-RUN ./bitnami-lampstack-7.0.0RC6-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp
-RUN rm bitnami-lampstack-7.0.0RC6-0-dev-linux-x64-installer.run
-
+RUN wget https://bitnami.com/redirect/to/76842/bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
+RUN chmod 777 bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
+RUN ./bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp
+RUN rm bitnami-lampstack-7.0.0RC7-0-dev-linux-x64-installer.run
+#phpmyadmin开启外网访问
 RUN rm /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf
 COPY ./httpd-app.conf /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf
-
+#mysql开启外网访问
 RUN rm /opt/lamp/mysql/my.cnf
 COPY ./my.cnf /opt/lamp/mysql/my.cnf
-
+#设置环境变量
 RUN echo PATH="/opt/lamp/heroku/bin:/opt/lamp/ruby/bin:/opt/lamp/git/bin:/opt/lamp/varnish/bin:/opt/lamp/sqlite/bin:/opt/lamp/php/bin:/opt/lamp/mysql/bin:/opt/lamp/apache2/bin:/opt/lamp/common/bin:$PATH" >> ~/.bashrc
-
+#设置环境变量
+RUN echo PATH="/opt/lamp/heroku/bin:/opt/lamp/ruby/bin:/opt/lamp/git/bin:/opt/lamp/varnish/bin:/opt/lamp/sqlite/bin:/opt/lamp/php/bin:/opt/lamp/mysql/bin:/opt/lamp/apache2/bin:/opt/lamp/common/bin:$PATH" >> ~/.zshrc
+#安装文件管理
 RUN git clone https://github.com/kalcaddle/KODExplorer.git /opt/lamp/apache2/htdocs/k
 RUN chmod -R 777 /opt/lamp/apache2/htdocs
 
