@@ -10,10 +10,6 @@ RUN apt-get update
 RUN apt-get install -y apt-utils openssh-server vim zsh screen git curl wget unzip
 RUN apt-get dist-upgrade -y
 
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
 #ssh 配置
 RUN mkdir /var/run/sshd
 RUN echo "root:'" |chpasswd
@@ -23,6 +19,12 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 #nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
 
+RUN nvm install 5.0.0
+RUN nvm install 4.2.2
+
+#zsh 配置
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

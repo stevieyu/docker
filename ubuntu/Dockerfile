@@ -10,16 +10,15 @@ RUN apt-get update
 RUN apt-get install -y apt-utils openssh-server vim zsh screen git curl wget unzip
 RUN apt-get dist-upgrade -y
 
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
 #ssh 配置
 RUN mkdir /var/run/sshd
 RUN echo "root:'" |chpasswd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
+#zsh 配置
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

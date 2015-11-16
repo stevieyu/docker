@@ -10,10 +10,6 @@ RUN apt-get update
 RUN apt-get install -y apt-utils openssh-server vim zsh fish screen git curl wget unzip
 RUN apt-get dist-upgrade -y
 
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
 #ssh 配置
 RUN mkdir /var/run/sshd
 RUN echo "root:'" |chpasswd
@@ -38,6 +34,10 @@ RUN echo PATH="/opt/lamp/heroku/bin:/opt/lamp/ruby/bin:/opt/lamp/git/bin:/opt/la
 #安装文件管理
 RUN git clone https://github.com/kalcaddle/KODExplorer.git /opt/lamp/apache2/htdocs/k
 RUN chmod -R 777 /opt/lamp/apache2/htdocs
+
+#zsh 配置
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
