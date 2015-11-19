@@ -55,7 +55,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 
 #nodejs
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -  && \
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -  && \
     apt-get install -y nodejs
 
 #nodejs tools
