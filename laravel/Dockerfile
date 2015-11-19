@@ -47,12 +47,13 @@ RUN wget https://phar.phpunit.de/phpunit.phar && \
 
 #composer
 RUN curl -sS https://getcomposer.org/installer | php && \
-    mv composer.phar /usr/local/bin/composer
+    mv composer.phar /usr/local/bin/composer && \
+    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 
 # Configure PHP-FPM
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;zlib.output_compression =.*/zlib.output_compression = On/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;zlib.output_compression_level =.*/zlib.output_compression_level = 5/" /etc/php5/fpm/php.ini && \
+    sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /etc/php5/fpm/php.ini && \
+    sed -i "s/;zlib.output_compression_level = 1/zlib.output_compression_level = 5/" /etc/php5/fpm/php.ini && \
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
     sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini && \
     sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php5/fpm/php.ini && \
