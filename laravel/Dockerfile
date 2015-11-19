@@ -48,7 +48,8 @@ RUN wget https://phar.phpunit.de/phpunit.phar && \
 #composer
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
-    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
+#    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
+    composer config -g repositories.packagist composer http://packagist.cn    
 
 # Configure PHP-FPM
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
