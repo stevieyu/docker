@@ -24,6 +24,7 @@ RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
 RUN apt-get install -y nodejs
 
 #nodejs tools
+#RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install -g node-gyp gulp bower jspm ied --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
