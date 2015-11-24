@@ -7,7 +7,6 @@ COPY ./sources.list /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update
-RUN apt-get install -y apt-utils
 RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
 RUN apt-get dist-upgrade -y
 
