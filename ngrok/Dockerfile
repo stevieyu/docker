@@ -30,6 +30,6 @@ RUN cd ngrok && make
 EXPOSE 22
 EXPOSE 80
 EXPOSE 443
-EXPOSE 3306
+EXPOSE 4443
 
 CMD ["/usr/sbin/sshd", "-D"]
