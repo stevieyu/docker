@@ -6,16 +6,25 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
 COPY ./sources.list /etc/apt/sources.list
 
 #安装&更新
-RUN apt-get update
-RUN apt-get install -y openssh-server vim zsh screen git curl wget unzip
-#RUN apt-get dist-upgrade -y
+RUN apt-get update && \
+    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
+
+#ssh 配置
+RUN mkdir /var/run/sshd && \
+    echo "root:'" |chpasswd && \
+    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+#zsh 配置
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs make
 
 #nodejs tools
-RUN npm install -g node-gyp gulp bower --registry=https://registry.npm.taobao.org
+RUN npm install -g node-gyp gulp bower jspm ied --registry=https://registry.npm.taobao.org
 
 #php-fpm
 RUN apt-get install -y \
@@ -50,7 +59,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
 #    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
-    composer config -g repositories.packagist composer http://packagist.cn    
+    composer config -g repositories.packagist composer http://packagist.cn
 
 # Configure PHP-FPM
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
@@ -65,16 +74,6 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && 
     sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
     sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
     sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
-
-#ssh 配置
-RUN mkdir /var/run/sshd
-RUN echo "root:'" |chpasswd
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-RUN cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

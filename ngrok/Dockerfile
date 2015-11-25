@@ -19,13 +19,10 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-#nodejs
-RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
-RUN apt-get install -y nodejs make
+RUN apt-get install -y build-essential golang mercurial && \
+    git clone https://github.com/yzm629/ngrok.git
 
-#nodejs tools
-#RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install -g node-gyp gulp bower jspm ied --registry=https://registry.npm.taobao.org
+RUN cd ngrok && make
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
