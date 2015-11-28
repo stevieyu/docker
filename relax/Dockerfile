@@ -20,10 +20,20 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
-RUN apt-get install -y nodejs make libvips pkg-config make gcc g++ clang python
+RUN apt-get install -y cmake libvips pkg-config make gcc g++ clang python
+#ENV http_proxy http://120.198.231.86:8080
+ENV https_proxy http://119.105.177.105:8118
+
+RUN apt-get install -y nodejs
+
+ENV https_proxy ""
 
 #nodejs
 RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
+RUN git clone https://github.com/relax/relax.git /root/relax
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm i -g node-gyp
+RUN cd /root/relax && npm i
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
