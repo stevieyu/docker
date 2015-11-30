@@ -1,6 +1,11 @@
 FROM       ubuntu:15.10
 MAINTAINER Stevie "https://github.com/yzm629"
 
+#代理设置
+#ENV http_proxy http://120.198.231.86:8080
+#ENV https_proxy http://119.105.177.105:8118
+#ENV https_proxy ""
+
 #更换为网易镜像
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 
@@ -19,11 +24,11 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y nodejs make
 
 #nodejs tools
-#RUN npm config set registry https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org
 RUN npm install -g node-gyp gulp bower jspm ied webpack --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
