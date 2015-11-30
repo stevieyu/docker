@@ -25,7 +25,7 @@ RUN apt-get install -y nodejs make
 
 #nodejs tools
 #RUN npm config set registry https://registry.npm.taobao.org
-RUN npm install -g node-gyp gulp bower jspm ied --registry=https://registry.npm.taobao.org
+RUN npm install -g node-gyp gulp bower jspm ied webpack --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

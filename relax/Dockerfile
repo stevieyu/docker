@@ -32,7 +32,7 @@ ENV https_proxy ""
 RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 RUN git clone https://github.com/relax/relax.git /root/relax
 RUN npm config set registry https://registry.npm.taobao.org
-RUN npm i -g node-gyp
+RUN npm i -g node-gyp webpack
 RUN cd /root/relax && npm i
 
 #RUN mkdir /root/data
