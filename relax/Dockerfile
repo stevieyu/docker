@@ -25,7 +25,7 @@ RUN apt-get install -y nodejs
 RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 RUN git clone https://github.com/relax/relax.git /root/relax
 #RUN npm config set registry https://registry.npm.taobao.org
-RUN npm i -g node-gyp webpack
+RUN npm i --unsafe-perm --verbose -g node-gyp webpack
 RUN cd /root/relax && npm i
 
 #RUN mkdir /root/data
