@@ -37,4 +37,4 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/opt/lnmp/ctlscript.sh start && /usr/sbin/sshd", "-D"]
