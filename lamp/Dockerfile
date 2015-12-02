@@ -30,6 +30,8 @@ RUN sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lamp/mysql/m
 #安装文件管理
 RUN git clone https://github.com/kalcaddle/KODExplorer.git /opt/lamp/apache2/htdocs/k && \
     chmod -R 777 /opt/lamp/apache2/htdocs
+#添加软链接
+RUN ln -s /opt/lnmp/apache2/htdocs /root/htdocs
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
