@@ -28,6 +28,8 @@ RUN sed -i "s/allow 127.0.0.1;/#allow 127.0.0.1;/" /opt/lnmp/apps/phpmyadmin/con
     sed -i "s/deny all;/#deny all;/" /opt/lnmp/apps/phpmyadmin/conf/nginx-app.conf
 #mysql开启外网访问
 RUN sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lnmp/mysql/my.cnf
+#添加软链接
+RUN ln -s /opt/lnmp/nginx/html /root/html
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

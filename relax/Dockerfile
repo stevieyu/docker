@@ -2,7 +2,7 @@ FROM       ubuntu:15.10
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+#RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
@@ -18,15 +18,14 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
+#nodejs
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y cmake make libvips pkg-config gcc g++ clang python
 RUN apt-get install -y nodejs
-
-#nodejs
 RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 RUN git clone https://github.com/relax/relax.git /root/relax
-RUN npm config set registry https://registry.npm.taobao.org
-RUN npm i -g node-gyp webpack
+#RUN npm config set registry https://registry.npm.taobao.org
+RUN npm i --unsafe-perm --verbose -g node-gyp webpack
 RUN cd /root/relax && npm i
 
 #RUN mkdir /root/data
