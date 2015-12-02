@@ -7,11 +7,11 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #ENV https_proxy ""
 
 #更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
+    apt-get update
 
 #安装&更新
-RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
+RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
 
 #ssh 配置
 RUN mkdir /var/run/sshd && \
