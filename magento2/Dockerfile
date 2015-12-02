@@ -6,12 +6,12 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get update
 
 #安装&更新
-RUN apt-get install -y wget
+RUN apt-get install -y wget git
 
 #LAMP 安装
-RUN wget https://bitnami.com/redirect/to/82871/bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run
-RUN chmod 777 bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run && \
-    ./bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp && \
+RUN wget https://bitnami.com/redirect/to/82871/bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run && \
+    chmod 755 bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run
+RUN ./bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp && \
     rm bitnami-lampstack-7.0.0RC8-0-dev-linux-x64-installer.run
 #phpmyadmin开启外网访问
 RUN sed -i "s/Require local/Require all granted/" /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf
@@ -24,6 +24,16 @@ RUN rm -rf /opt/lamp/apache2/htdocs && \
 #添加软链接
 RUN ln -s /opt/lnmp/apache2/htdocs /root/htdocs
 
+RUN apt-get install -y openssh-server
+#ssh 配置
+RUN mkdir /var/run/sshd && \
+    echo "root:'" |chpasswd && \
+    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+RUN echo "/opt/lamp/ctlscript.sh start" >> /etc/profile
+
+EXPOSE 22
 EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
