@@ -2,11 +2,11 @@ FROM       ubuntu:15.10
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
+    apt-get update
 
 #安装&更新
-RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
+RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip
 
 #ssh 配置
 RUN mkdir /var/run/sshd && \
@@ -31,6 +31,8 @@ RUN sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lamp/mysql/m
 RUN rm -rf /opt/lamp/apache2/htdocs/*
     git clone https://github.com/kalcaddle/KODExplorer.git /opt/lamp/apache2/htdocs/k && \
     chmod -R 777 /opt/lamp/apache2/htdocs
+#添加软链接
+RUN ln -s /opt/lnmp/apache2/htdocs /root/htdocs
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
