@@ -32,7 +32,7 @@ RUN rm -rf /opt/lamp/apache2/htdocs/* && \
     git clone https://github.com/kalcaddle/KODExplorer.git /opt/lamp/apache2/htdocs/k && \
     chmod -R 777 /opt/lamp/apache2/htdocs
 #添加软链接
-RUN ln -s /opt/lnmp/apache2/htdocs /root/htdocs
+RUN ln -s /opt/lamp/apache2/htdocs /root/htdocs
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
