@@ -34,8 +34,7 @@ RUN rm -rf /opt/lamp/apache2/htdocs/* && \
 #添加软链接
 RUN ln -s /opt/lamp/apache2/htdocs /root/htdocs
 
-#RUN mkdir /root/data
-#VOLUME ["/root/data"]
+VOLUME ["/root/htdocs"]
 
 EXPOSE 22
 EXPOSE 80
