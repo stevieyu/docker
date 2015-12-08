@@ -18,18 +18,41 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-RUN apt-get install autoconf automake libtool re2c flex bison
+#编译 php7
+RUN wget https://github.com/php/php-src/archive/php-7.0.0.zip && unzip php-7.0.0.zip && rm php-7.0.0.zip && mv php-src-php-7.0.0 php7
+#RUN git clone https://github.com/php/php-src.git && mv php-src php7
 
-RUN git clone https://github.com/php/php-src.git && \
-    cd php-src && \
+RUN apt-get -y install autoconf make automake libtool re2c flex bison libxml2-dev \
+    libxslt1-dev zlib1g-dev libcurl4-openssl-dev \
+    libmcrypt-dev \
+    libjpeg-dev libpng++-dev libfreetype6-dev \
+    pkg-config libssl-dev
+
+RUN cd /php7 && \
     ./buildconf --force && \
-    ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www && \
-    --with-libdir=lib64 --with-xsl && \
-    --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-sqlite --without-pdo-sqlite && \
-    --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf && \
-    --with-openssl --with-iconv-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --disable-fileinfo --enable-maintainer-zts
+    ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd \
+    --with-libdir=lib64 --with-xsl --with-xmlrpc --enable-zip --disable-fileinfo --with-iconv-dir --with-zlib --with-libxml-dir=/usr --enable-xml --with-curl \
+    --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
+    --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf \
+    --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts && \
+    make && make install
 
-RUN make && make install
+COPY init_start.sh /etc/profile.d/init_start.sh
+
+RUN wget http://curl.haxx.se/ca/cacert.pem && \
+    mv cacert.pem /usr/local/php/cacert.pem && \
+    cp /php7/php.ini-* /usr/local/php/etc/ && \
+    cp /usr/local/php/etc/php.ini-development /usr/local/php/etc/php.ini && \
+    cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
+    cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
+    groupadd www && useradd -g www www
+
+RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini
+
+#composer config -g repositories.packagist composer http://packagist.phpcomposer.com
+#composer config -g repositories.packagist composer http://packagist.cn
+RUN curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php && \
+    mv composer.phar /usr/local/bin/composer
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]

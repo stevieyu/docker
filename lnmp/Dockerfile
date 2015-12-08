@@ -19,9 +19,9 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #LNMP 安装
-RUN wget https://bitnami.com/redirect/to/81886/bitnami-nginxstack-1.9.7-0-linux-x64-installer.run
-RUN chmod 777 bitnami-nginxstack-1.9.7-0-linux-x64-installer.run && \
-    ./bitnami-nginxstack-1.9.7-0-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lnmp && \
+RUN wget https://bitnami.com/redirect/to/81886/bitnami-nginxstack-1.9.7-0-linux-x64-installer.run && \
+    chmod 777 bitnami-nginxstack-1.9.7-0-linux-x64-installer.run
+RUN /bitnami-nginxstack-1.9.7-0-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lnmp && \
     rm bitnami-nginxstack-1.9.7-0-linux-x64-installer.run
 #phpmyadmin开启外网访问
 RUN sed -i "s/allow 127.0.0.1;/#allow 127.0.0.1;/" /opt/lnmp/apps/phpmyadmin/conf/nginx-app.conf && \
@@ -30,6 +30,8 @@ RUN sed -i "s/allow 127.0.0.1;/#allow 127.0.0.1;/" /opt/lnmp/apps/phpmyadmin/con
 RUN sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lnmp/mysql/my.cnf
 #添加软链接
 RUN ln -s /opt/lnmp/nginx/html /root/html
+
+COPY init_start.sh /etc/profile.d/init_start.sh
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
