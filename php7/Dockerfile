@@ -61,7 +61,7 @@ RUN ln -s /usr/local/php/bin/php /usr/local/bin/php && \
 RUN curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php && \
     mv composer.phar /usr/local/bin/composer && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
-    composer config -g repositories.packagist composer http://packagist.cn
+    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
