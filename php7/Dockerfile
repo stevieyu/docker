@@ -35,9 +35,11 @@ RUN cd /php7 && \
     --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
     --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf \
     --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts && \
-    make && make install
+    make -j 4 && make install
 
-COPY init_start.sh /etc/profile.d/init_start.sh
+#COPY init_start.sh /etc/profile.d/init_start.sh
+RUN ln -s /usr/local/php/bin /usr/local/bin/php && \
+    ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/php-fpm
 
 RUN wget http://curl.haxx.se/ca/cacert.pem && \
     mv cacert.pem /usr/local/php/cacert.pem && \
