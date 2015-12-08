@@ -34,7 +34,7 @@ RUN cd /php7 && \
     --with-libdir=lib64 --with-xsl --with-xmlrpc --enable-zip --disable-fileinfo --with-iconv-dir --with-zlib --with-libxml-dir=/usr --enable-xml --with-curl \
     --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
     --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf \
-    --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts && \
+    --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts --enable-intl && \
     make -j 4 && make install
 
 RUN wget http://curl.haxx.se/ca/cacert.pem && \
@@ -55,10 +55,13 @@ RUN ln -s /usr/local/php/bin/php /usr/local/bin/php && \
     ln -s /usr/local/php/bin/php-cgi /usr/local/bin/php-cgi && \
     ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/php-fpm
 
+
 #composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 #composer config -g repositories.packagist composer http://packagist.cn
 RUN curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php && \
-    mv composer.phar /usr/local/bin/composer
+    mv composer.phar /usr/local/bin/composer && \
+    composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
+    composer config -g repositories.packagist composer http://packagist.cn
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
