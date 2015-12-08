@@ -31,8 +31,6 @@ RUN sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lnmp/mysql/m
 #添加软链接
 RUN ln -s /opt/lnmp/nginx/html /root/html
 
-COPY init_start.sh /etc/profile.d/init_start.sh
-
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
 

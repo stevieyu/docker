@@ -37,10 +37,6 @@ RUN cd /php7 && \
     --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts && \
     make -j 4 && make install
 
-#COPY init_start.sh /etc/profile.d/init_start.sh
-RUN ln -s /usr/local/php/bin /usr/local/bin/php && \
-    ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/php-fpm
-
 RUN wget http://curl.haxx.se/ca/cacert.pem && \
     mv cacert.pem /usr/local/php/cacert.pem && \
     cp /php7/php.ini-* /usr/local/php/etc/ && \
@@ -49,7 +45,15 @@ RUN wget http://curl.haxx.se/ca/cacert.pem && \
     cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
     groupadd www && useradd -g www www
 
-RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini
+RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini && \
+    sed -i "s/;date.timezone =.*/date.timezone = UTC/" /usr/local/php/etc/php.ini && \
+    sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /usr/local/php/etc/php.ini && \
+    sed -i "s/;zlib.output_compression_level = 1/zlib.output_compression_level = 5/" /usr/local/php/etc/php.ini && \
+    sed -i "s/;opcache.enable=0/opcache.enable=0/" /usr/local/php/etc/php.ini
+
+RUN ln -s /usr/local/php/bin/php /usr/local/bin/php && \
+    ln -s /usr/local/php/bin/php-cgi /usr/local/bin/php-cgi && \
+    ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/php-fpm
 
 #composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 #composer config -g repositories.packagist composer http://packagist.cn
