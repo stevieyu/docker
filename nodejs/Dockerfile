@@ -29,7 +29,7 @@ RUN apt-get install -y make build-essential
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp gulp bower jspm ied webpack --registry=https://registry.npm.taobao.org
+    npm install -g node-gyp gulp bower jspm ied webpack pm2 --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
