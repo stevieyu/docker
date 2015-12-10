@@ -1,6 +1,11 @@
 FROM       ubuntu:15.10
 MAINTAINER Stevie "https://github.com/yzm629"
 
+#代理设置
+#ENV http_proxy http://120.198.231.86:8080
+#ENV https_proxy http://119.105.177.105:8118
+#ENV https_proxy ""
+
 #更换为网易镜像
 RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
     apt-get update

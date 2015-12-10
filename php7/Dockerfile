@@ -48,6 +48,7 @@ RUN wget http://curl.haxx.se/ca/cacert.pem && \
 RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini && \
     sed -i "s/;date.timezone =.*/date.timezone = UTC/" /usr/local/php/etc/php.ini && \
     sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /usr/local/php/etc/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = stderr/" /usr/local/php/etc/php.ini && \
     sed -i "s/;zlib.output_compression_level = 1/zlib.output_compression_level = 5/" /usr/local/php/etc/php.ini && \
     sed -i "s/;opcache.enable=0/opcache.enable=0/" /usr/local/php/etc/php.ini
 
