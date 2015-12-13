@@ -25,7 +25,6 @@ RUN wget https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz && \
     mv /node-v4.2.3-linux-x64 /opt/node && \
     ln -s /opt/node/bin/node /usr/local/bin/node && \
     ln -s /opt/node/bin/npm /usr/local/bin/npm
-RUN apt-get install -y make build-essential
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
