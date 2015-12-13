@@ -28,7 +28,7 @@ RUN wget https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz && \
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp --registry=https://registry.npm.taobao.org
+    npm install -g node-gyp gulp bower jspm --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
