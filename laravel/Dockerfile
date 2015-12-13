@@ -20,10 +20,10 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
-RUN apt-get install -y nodejs make
+RUN apt-get install -y nodejs make build-essential
 
 #nodejs tools
-RUN npm install -g node-gyp gulp bower jspm ied --registry=https://registry.npm.taobao.org
+RUN npm install -g node-gyp gulp bower --registry=https://registry.npm.taobao.org
 
 #php-fpm
 RUN apt-get install -y \
@@ -39,7 +39,6 @@ RUN apt-get install -y \
     php5-memcache \
     php5-memcached \
     php5-mongo \
-    php5-mssql \
     php5-mysqlnd \
     php5-pgsql \
     php5-redis \
