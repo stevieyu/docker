@@ -1,4 +1,4 @@
-FROM       ubuntu:15.10
+FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
@@ -19,10 +19,10 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #LAMP 安装
-RUN wget https://downloads.bitnami.com/files/stacks/lampstack/7.0.0-0/bitnami-lampstack-7.0.0-0-dev-linux-x64-installer.run
-RUN chmod 777 /bitnami-lampstack-7.0.0-0-dev-linux-x64-installer.run && \
-    /bitnami-lampstack-7.0.0-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp && \
-    rm /bitnami-lampstack-7.0.0-0-dev-linux-x64-installer.run
+RUN wget https://downloads.bitnami.com/files/stacks/lampstack/7.0.1-0/bitnami-lampstack-7.0.1-0-dev-linux-x64-installer.run
+RUN chmod 777 /bitnami-lampstack-7.0.1-0-dev-linux-x64-installer.run && \
+    /bitnami-lampstack-7.0.1-0-dev-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lamp && \
+    rm /bitnami-lampstack-7.0.1-0-dev-linux-x64-installer.run
 #phpmyadmin开启外网访问
 RUN sed -i "s/Require local/Require all granted/" /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf
 #mysql开启外网访问

@@ -1,4 +1,4 @@
-FROM       ubuntu:15.10
+FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
@@ -19,8 +19,8 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #编译 php7
-RUN wget https://github.com/php/php-src/archive/php-7.0.0.zip && unzip php-7.0.0.zip && rm php-7.0.0.zip && mv php-src-php-7.0.0 php7
-#RUN git clone https://github.com/php/php-src.git && mv php-src php7
+#RUN wget https://github.com/php/php-src/archive/php-7.0.0.zip && unzip php-7.0.0.zip && rm php-7.0.0.zip && mv php-src-php-7.0.0 php7
+RUN git clone https://github.com/php/php-src.git /php7
 
 RUN apt-get -y install autoconf make automake libtool re2c flex bison libxml2-dev \
     libxslt1-dev zlib1g-dev libcurl4-openssl-dev \
