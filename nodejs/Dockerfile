@@ -19,16 +19,18 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-RUN wget https://nodejs.org/dist/v4.2.3/node-v4.2.3-linux-x64.tar.gz && \
-    tar -vxf node-v4.2.3-linux-x64.tar.gz && \
-    rm node-v4.2.3-linux-x64.tar.gz && \
-    mv /node-v4.2.3-linux-x64 /opt/node && \
+RUN wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz --no-check-certificate && \
+    tar -vxf node-v4.2.4-linux-x64.tar.gz && \
+    rm node-v4.2.4-linux-x64.tar.gz && \
+    mv /node-v4.2.4-linux-x64 /opt/node && \
     ln -s /opt/node/bin/node /usr/local/bin/node && \
-    ln -s /opt/node/bin/npm /usr/local/bin/npm
+    ln -s /opt/node/bin/npm /usr/local/bin/npm && \
+    sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
+    echo 'source /etc/environment' >> /root/.bashrc
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp gulp bower jspm --registry=https://registry.npm.taobao.org
+    npm install -g node-gyp --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
@@ -36,6 +38,7 @@ RUN npm config set registry https://registry.npm.taobao.org && \
 EXPOSE 22
 EXPOSE 80
 EXPOSE 443
+EXPOSE 3000
 EXPOSE 3306
 
 CMD ["/usr/sbin/sshd", "-D"]

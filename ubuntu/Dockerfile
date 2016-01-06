@@ -29,6 +29,7 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
 EXPOSE 22
 EXPOSE 80
 EXPOSE 443
+EXPOSE 3000
 EXPOSE 3306
 
 CMD ["/usr/sbin/sshd", "-D"]

@@ -19,12 +19,12 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #编译 php7
-#RUN wget https://github.com/php/php-src/archive/php-7.0.0.zip && unzip php-7.0.0.zip && rm php-7.0.0.zip && mv php-src-php-7.0.0 php7
-RUN git clone https://github.com/php/php-src.git /php7
+RUN wget https://github.com/php/php-src/archive/master.zip && unzip master.zip && rm master.zip && mv php-src-master php7
+#RUN git clone https://github.com/php/php-src.git /php7
 
 RUN apt-get -y install autoconf make automake libtool re2c flex bison libxml2-dev \
     libxslt1-dev zlib1g-dev libcurl4-openssl-dev \
-    libmcrypt-dev \
+    mcrypt libmcrypt-dev libmhash-dev \
     libjpeg-dev libpng++-dev libfreetype6-dev \
     pkg-config libssl-dev
 
@@ -46,11 +46,9 @@ RUN wget http://curl.haxx.se/ca/cacert.pem && \
     groupadd www && useradd -g www www
 
 RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini && \
-    sed -i "s/;date.timezone =.*/date.timezone = UTC/" /usr/local/php/etc/php.ini && \
+    sed -i "s/;date.timezone =.*/date.timezone = PRC/" /usr/local/php/etc/php.ini && \
     sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /usr/local/php/etc/php.ini && \
-    sed -i "s/display_errors = Off/display_errors = stderr/" /usr/local/php/etc/php.ini && \
-    sed -i "s/;zlib.output_compression_level = 1/zlib.output_compression_level = 5/" /usr/local/php/etc/php.ini && \
-    sed -i "s/;opcache.enable=0/opcache.enable=0/" /usr/local/php/etc/php.ini
+    sed -i "s/;zlib.output_compression_level =.*/zlib.output_compression_level = 9/" /usr/local/php/etc/php.ini
 
 RUN ln -s /usr/local/php/bin/php /usr/local/bin/php && \
     ln -s /usr/local/php/bin/php-cgi /usr/local/bin/php-cgi && \
