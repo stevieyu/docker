@@ -7,7 +7,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #ENV https_proxy ""
 
 #更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
     apt-get update
 
 #安装&更新
