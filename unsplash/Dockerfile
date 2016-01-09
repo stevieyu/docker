@@ -29,7 +29,7 @@ RUN wget https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.
 
 #nodejs tools
 RUN /opt/node/bin/npm config set registry https://registry.npm.taobao.org && \
-    /opt/node/bin/npm install -g node-gyp --registry=https://registry.npm.taobao.org
+    /opt/node/bin/npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
 RUN git clone https://github.com/DMarby/unsplash-it.git && \
     git clone https://github.com/DMarby/unsplash-downloader.git
