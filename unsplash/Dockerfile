@@ -6,7 +6,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && 
     apt-get update
 
 #安装&更新
-RUN apt-get install -y openssh-server vim zsh screen git curl wget unzip make build-essential pkg-config lsb-release && \
+RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
     curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
 #ssh 配置
@@ -24,15 +24,17 @@ RUN wget https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.
     tar -vxf node-v0.12.9-linux-x64.tar.gz && \
     rm node-v0.12.9-linux-x64.tar.gz && \
     mv /node-v0.12.9-linux-x64 /opt/node && \
+    ln -s /opt/node/bin/node /usr/local/bin/node && \
+    ln -s /opt/node/bin/npm /usr/local/bin/npm && \
     sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
     echo 'source /etc/environment' >> /root/.bashrc
 
 #nodejs tools
-RUN /opt/node/bin/npm config set registry https://registry.npm.taobao.org && \
-    /opt/node/bin/npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org && \
+    npm install -g node-gyp pm2
 
-RUN git clone https://github.com/DMarby/unsplash-it.git && \
-    git clone https://github.com/DMarby/unsplash-downloader.git
+RUN git clone https://github.com/DMarby/unsplash-it.git /root/unsplash-it && \
+    git clone https://github.com/DMarby/unsplash-downloader.git /root/unsplash-downloader
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
