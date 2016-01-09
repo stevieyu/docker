@@ -1,0 +1,44 @@
+FROM       ubuntu:16.04
+MAINTAINER Stevie "https://github.com/yzm629"
+
+#更换为网易镜像
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    apt-get update
+
+#安装&更新
+RUN apt-get install -y openssh-server vim zsh screen git curl wget unzip make build-essential pkg-config lsb-release && \
+    curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
+
+#ssh 配置
+RUN mkdir /var/run/sshd && \
+    echo "root:'" |chpasswd && \
+    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+#zsh 配置
+RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+
+#nodejs
+RUN wget https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.gz --no-check-certificate && \
+    tar -vxf node-v0.12.9-linux-x64.tar.gz && \
+    rm node-v0.12.9-linux-x64.tar.gz && \
+    mv /node-v0.12.9-linux-x64 /opt/node && \
+    sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
+    echo 'source /etc/environment' >> /root/.bashrc
+
+#nodejs tools
+RUN /opt/node/bin/npm config set registry https://registry.npm.taobao.org && \
+    /opt/node/bin/npm install -g node-gyp --registry=https://registry.npm.taobao.org
+
+RUN git clone https://github.com/DMarby/unsplash-it.git && \
+    git clone https://github.com/DMarby/unsplash-downloader.git
+
+#RUN mkdir /root/data
+#VOLUME ["/root/data"]
+
+EXPOSE 22
+EXPOSE 80
+EXPOSE 5000
+
+CMD ["/usr/sbin/sshd", "-D"]
