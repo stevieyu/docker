@@ -6,7 +6,8 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && 
     apt-get update
 
 #安装&更新
-RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential
+RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
+    curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
 #ssh 配置
 RUN mkdir /var/run/sshd && \
