@@ -20,10 +20,11 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-RUN wget https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.gz --no-check-certificate && \
-    tar -vxf node-v0.12.9-linux-x64.tar.gz && \
-    rm node-v0.12.9-linux-x64.tar.gz && \
-    mv /node-v0.12.9-linux-x64 /opt/node && \
+ENV NODE_VERSION 0.12.9
+RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz --no-check-certificate && \
+    tar -vxf node-v$NODE_VERSION-linux-x64.tar.gz && \
+    rm node-v$NODE_VERSION-linux-x64.tar.gz && \
+    mv /node-v$NODE_VERSION-linux-x64 /opt/node && \
     ln -s /opt/node/bin/node /usr/local/bin/node && \
     ln -s /opt/node/bin/npm /usr/local/bin/npm && \
     sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
