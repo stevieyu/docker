@@ -1,4 +1,4 @@
-FROM       ubuntu:16.04
+FROM       ubuntu:15.10
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #代理设置
