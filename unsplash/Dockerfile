@@ -2,8 +2,8 @@ FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
-#RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-RUN apt-get update
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    apt-get update
 
 #安装&更新
 RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
@@ -30,8 +30,8 @@ RUN wget https://nodejs.org/download/release/v0.12.9/node-v0.12.9-linux-x64.tar.
     echo 'source /etc/environment' >> /root/.bashrc
 
 #nodejs tools
-#RUN npm config set registry https://registry.npm.taobao.org && \
-#    npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
+RUN npm config set registry https://registry.npm.taobao.org && \
+    npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
 RUN git clone https://github.com/DMarby/unsplash-it.git /root/unsplash-it && \
     git clone https://github.com/DMarby/unsplash-downloader.git /root/unsplash-downloader
