@@ -1,13 +1,13 @@
 FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
-#更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    apt-get update
+#更换镜像
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
-RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
-    curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
+RUN apt-get update && \
+    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential
+
 
 #ssh 配置
 RUN mkdir /var/run/sshd && \
@@ -35,8 +35,9 @@ RUN npm config set registry https://registry.npm.taobao.org && \
     npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
 RUN git clone https://github.com/DMarby/unsplash-it.git /root/unsplash-it && \
-    git clone https://github.com/DMarby/unsplash-downloader.git /root/unsplash-downloader
-
+    git clone https://github.com/DMarby/unsplash-downloader.git /root/unsplash-downloader && \
+    apt-get install -y pkg-config lsb-release vnstat && \
+    curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
 
