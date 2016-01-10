@@ -2,11 +2,11 @@ FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换为网易镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    apt-get update
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
-RUN apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
+RUN apt-get update
+    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
     curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
 #ssh 配置
@@ -20,10 +20,11 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-RUN wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz --no-check-certificate && \
-    tar -vxf node-v4.2.4-linux-x64.tar.gz && \
-    rm node-v4.2.4-linux-x64.tar.gz && \
-    mv /node-v4.2.4-linux-x64 /opt/node && \
+ENV NODE_VERSION 4.2.4
+RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz --no-check-certificate && \
+    tar -vxf node-v$NODE_VERSION-linux-x64.tar.gz && \
+    rm node-v$NODE_VERSION-linux-x64.tar.gz && \
+    mv /node-v$NODE_VERSION-linux-x64 /opt/node && \
     ln -s /opt/node/bin/node /usr/local/bin/node && \
     ln -s /opt/node/bin/npm /usr/local/bin/npm && \
     sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
@@ -31,7 +32,7 @@ RUN wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz --no-check-
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp --registry=https://registry.npm.taobao.org
+    npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
