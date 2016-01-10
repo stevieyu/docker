@@ -19,10 +19,11 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #LNMP 安装
-RUN wget https://downloads.bitnami.com/files/stacks/nginxstack/1.9.9-0/bitnami-nginxstack-1.9.9-0-linux-x64-installer.run && \
-    chmod 777 bitnami-nginxstack-1.9.9-0-linux-x64-installer.run
-RUN /bitnami-nginxstack-1.9.9-0-linux-x64-installer.run --installer-language zh_CN --mode unattended --base_password 666666 --prefix /opt/lnmp && \
-    rm bitnami-nginxstack-1.9.9-0-linux-x64-installer.run
+ENV LNMP_VERSION 1.9.9
+RUN wget https://downloads.bitnami.com/files/stacks/nginxstack/$LNMP_VERSION-0/bitnami-nginxstack-$LNMP_VERSION-0-linux-x64-installer.run && \
+    chmod 777 bitnami-nginxstack-$LNMP_VERSION-0-linux-x64-installer.run && \
+    ./bitnami-nginxstack-$LNMP_VERSION-0-linux-x64-installer.run --mode unattended --base_password 666666 --prefix /opt/lnmp && \
+    rm bitnami-nginxstack-$LNMP_VERSION-0-linux-x64-installer.run
 #phpmyadmin开启外网访问
 RUN sed -i "s/allow 127.0.0.1;/#allow 127.0.0.1;/" /opt/lnmp/apps/phpmyadmin/conf/nginx-app.conf && \
     sed -i "s/deny all;/#deny all;/" /opt/lnmp/apps/phpmyadmin/conf/nginx-app.conf
