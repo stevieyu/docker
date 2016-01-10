@@ -5,7 +5,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
-RUN apt-get update
+RUN apt-get update && \
     apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential pkg-config lsb-release && \
     curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
