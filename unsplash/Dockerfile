@@ -36,7 +36,8 @@ RUN npm config set registry https://registry.npm.taobao.org && \
 
 RUN git clone https://github.com/DMarby/unsplash-it.git /root/unsplash-it && \
     git clone https://github.com/DMarby/unsplash-downloader.git /root/unsplash-downloader && \
-    apt-get install -y pkg-config lsb-release vnstat && \
+    apt-get install -y pkg-config lsb-release vnstat cron && \
+    vnstat --dumpdb --xml && \
     curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
