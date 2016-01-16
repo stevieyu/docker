@@ -33,6 +33,12 @@ RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.ta
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
+#清理操作
+RUN apt-get autoclean && \
+    apt-get clean && \
+    apt-get autoremove && \
+    deborphan | xargs apt-get -y remove --purge
+
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
 
