@@ -23,6 +23,13 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
+
+#清理操作
+RUN apt-get autoclean && \
+    apt-get clean && \
+    apt-get autoremove && \
+    deborphan | xargs apt-get -y remove --purge
+
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
 
