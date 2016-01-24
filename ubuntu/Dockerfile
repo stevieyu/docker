@@ -6,8 +6,9 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #ENV https_proxy http://119.105.177.105:8118
 #ENV https_proxy ""
 
-#更换为阿里云镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+#更换镜像
+RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+#RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \

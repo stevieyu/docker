@@ -1,8 +1,9 @@
 FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
-#更换为阿里云镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+#更换镜像
+RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+#RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
