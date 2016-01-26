@@ -34,7 +34,7 @@ RUN cd /php7 && \
     ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd \
     --with-libdir=lib64 --with-xsl --with-xmlrpc --enable-zip --disable-fileinfo --with-iconv-dir --with-zlib --with-libxml-dir=/usr --enable-xml --with-curl \
     --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
-    --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf \
+    --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf --enable-phpdbg --with-readline \
     --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts --enable-intl && \
     make -j 4 && make install
 
