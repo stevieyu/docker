@@ -7,7 +7,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 #安装&更新
 RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh fish screen git curl wget unzip make build-essential
+    apt-get install -y openssh-server vim zsh screen git curl wget make build-essential
 
 #ssh 配置
 RUN mkdir /var/run/sshd && \
