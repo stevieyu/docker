@@ -3,7 +3,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
 # RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
-# RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
@@ -23,8 +23,8 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
 ENV NODE_VERSION 4.2.4
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 
-#RUN mkdir /root/data
-#VOLUME ["/root/data"]
+RUN mkdir /root/data
+VOLUME ["/root/data"]
 
 EXPOSE 22
 EXPOSE 80
