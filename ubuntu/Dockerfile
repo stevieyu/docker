@@ -9,11 +9,11 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #更换镜像
 #RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 #RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
-#RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
-    apt-get dist-upgrade && \
+    apt-get dist-upgrade -y && \
     apt-get install -y openssh-server vim zsh screen git curl wget
 
 #ssh 配置
