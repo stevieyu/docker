@@ -20,19 +20,19 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-ENV NODE_VERSION 4.2.4
-RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz --no-check-certificate && \
+ENV NODE_VERSION 4.3.0
+RUN wget http://oss.npm.taobao.org/dist/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz && \
     tar -vxf node-v$NODE_VERSION-linux-x64.tar.gz && \
     rm node-v$NODE_VERSION-linux-x64.tar.gz && \
     mv /node-v$NODE_VERSION-linux-x64 /opt/node && \
-    ln -s /opt/node/bin/node /usr/local/bin/node && \
-    ln -s /opt/node/bin/npm /usr/local/bin/npm && \
+#    ln -s /opt/node/bin/node /usr/local/bin/node && \
+#    ln -s /opt/node/bin/npm /usr/local/bin/npm && \
     sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
     echo 'source /etc/environment' >> /root/.bashrc
 
 #nodejs tools
-RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
+RUN /opt/node/bin/npm config set registry https://registry.npm.taobao.org && \
+    /opt/node/bin/npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
 #清理操作
 RUN apt-get autoclean && \
