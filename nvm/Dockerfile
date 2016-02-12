@@ -19,8 +19,7 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-#nodejs
-ENV NODE_VERSION 4.2.4
+#nvm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 
 RUN mkdir /root/data
