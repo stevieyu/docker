@@ -2,8 +2,8 @@ FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #代理设置
-#ENV http_proxy http://120.198.231.86:8080
-#ENV https_proxy http://119.105.177.105:8118
+#ENV http_proxy http://192.198.99.1:1080
+#ENV https_proxy http://192.198.99.1:1080
 #ENV https_proxy ""
 
 #更换镜像
