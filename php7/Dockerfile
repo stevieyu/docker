@@ -20,8 +20,8 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #编译 php7
-#RUN wget https://github.com/php/php-src/archive/master.zip && unzip master.zip && rm master.zip && mv php-src-master php7
-RUN git clone https://github.com/php/php-src.git /php7
+RUN wget https://github.com/php/php-src/archive/master.zip && unzip master.zip && rm master.zip && mv php-src-master php7
+#RUN git clone https://github.com/php/php-src.git /php7
 
 RUN apt-get -y install autoconf make automake libtool re2c flex bison libxml2-dev \
     libxslt1-dev zlib1g-dev libcurl4-openssl-dev \
