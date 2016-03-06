@@ -7,7 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh screen git curl wget make build-essential
+    apt-get install -y openssh-server vim zsh screen git curl wget make build-essential apt-transport-https lsb-release
 
 
 #ssh 配置
@@ -21,21 +21,15 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-ENV NODE_VERSION 0.12.9
-RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz --no-check-certificate && \
-    tar -vxf node-v$NODE_VERSION-linux-x64.tar.gz && \
-    rm node-v$NODE_VERSION-linux-x64.tar.gz && \
-    mv /node-v$NODE_VERSION-linux-x64 /opt/node && \
-    ln -s /opt/node/bin/node /usr/local/bin/node && \
-    ln -s /opt/node/bin/npm /usr/local/bin/npm && \
-    sed -ri 's/games"/games:\/opt\/node\/bin"/g' /etc/environment && \
-    echo 'source /etc/environment' >> /root/.bashrc
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_0.12 wily main' > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && apt-get install -y nodejs python make
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm install -g node-gyp pm2 --registry=https://registry.npm.taobao.org
 
-RUN apt-get install -y pkg-config lsb-release vnstat cron && \
+RUN apt-get install -y pkg-config vnstat && \
     curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
 RUN git clone https://github.com/DMarby/unsplash-it.git /root/unsplash-it && \
