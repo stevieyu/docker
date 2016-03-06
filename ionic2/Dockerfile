@@ -40,7 +40,6 @@ ENV PATH $PATH:$GRADLE_HOME/bin
 #android
 WORKDIR "/opt"
 RUN curl -sL ${ANDROID_SDK_URL} | tar xz -C . && \
-    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} && \
-    rm ${ANDROID_SDK_FILE}
+    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION}
     
 CMD ["node"]
