@@ -9,7 +9,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 #安装&更新
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y curl wget build-essential apt-transport-https lsb-release openjdk-7-jre openjdk-7-jdk \
+    apt-get install -y curl build-essential apt-transport-https lsb-release openjdk-7-jre openjdk-7-jdk
 
 #nodejs
 RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
@@ -20,5 +20,11 @@ RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm i -g node-gyp ionic@beta --registry=https://registry.npm.taobao.org
 
-
-CMD ["/usr/sbin/sshd", "-D"]
+#android
+ENV ANDROID_SDK_FILENAME android-sdk_r24.4.1-linux.tgz
+RUN apt-get install -y gcc-multilib lib32z1 lib32stdc++6 wget && \
+    wget -q http://dl.google.com/android/${ANDROID_SDK_FILENAME} && \
+    tar -xzf ${ANDROID_SDK_FILENAME} && \
+    rm ${ANDROID_SDK_FILENAME}
+    
+CMD ["node"]
