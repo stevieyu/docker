@@ -27,7 +27,7 @@ RUN buildDeps='software-properties-common'; \
     # automatically accept the Oracle license
     echo oracle-java9-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
     apt-get install -y oracle-java9-installer && \
-    apt-get install -y oracle-java9-set-default && \
+    apt-get install -y oracle-java9-set-default
 ENV JAVA_HOME /usr/lib/jvm/java-9-oracle
 
 # Build-Variables
