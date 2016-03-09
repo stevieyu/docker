@@ -8,5 +8,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm install -g --unsafe-perm ionic@beta cordova@6.0.0 --registry=https://registry.npm.taobao.org
-    
+
+#ionic hooks add
+
 CMD ["node"]
