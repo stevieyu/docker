@@ -11,12 +11,6 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 
-ENV NODEJS_VERSION=4.3.2 \
-    PATH=$PATH:/opt/node/bin
-WORKDIR "/opt/node"
-RUN apt-get update && apt-get install -y curl ca-certificates --no-install-recommends && \
-    curl -sL https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz | tar xz --strip-components=1
-
     # required to use add-apt-repository
 RUN buildDeps='software-properties-common'; \
     set -x && \
@@ -33,7 +27,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-9-oracle
 ENV ANDROID_SDK_FILE android-sdk_r24.4.1-linux.tgz
 ENV ANDROID_SDK_URL https://dl.google.com/android/${ANDROID_SDK_FILE}
 ENV ANDROID_BUILD_TOOLS_VERSION 23.0.2
-ENV ANDROID_APIS android-10,android-15,android-16,android-17,android-18,android-19,android-20,android-21,android-22,android-23
+ENV ANDROID_APIS android-23
 # Set Environment Variables
 ENV ANT_HOME /usr/share/ant
 ENV MAVEN_HOME /usr/share/maven
@@ -55,6 +49,5 @@ RUN apt-get update -y && \
     apt-get install -y ant gradle && \
     # Installs Android SDK
     curl -sL ${ANDROID_SDK_URL} | tar xz -C . && \
-    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION}
+    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} --proxy-host android-mirror.bugly.qq.com --proxy-port 8080
 
-CMD ["npm"]
