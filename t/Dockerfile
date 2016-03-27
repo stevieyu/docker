@@ -1,11 +1,6 @@
 FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
-#代理设置
-#ENV http_proxy http://192.198.99.1:1080
-#ENV https_proxy http://192.198.99.1:1080
-#ENV https_proxy ""
-
 #更换镜像
 #RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
 #RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
@@ -48,4 +43,13 @@ RUN apt-get update -y && \
     # Installs Android SDK
     curl -sL ${ANDROID_SDK_URL} | tar xz -C . && \
     echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} -s --proxy-host android-mirror.bugly.qq.com --proxy-port 8080
+
+RUN apt-get update && \
+    apt-get install -y python make build-essential apt-transport-https lsb-release && \
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_5.x wily main' > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs && \
+    npm config set registry https://registry.npm.taobao.org && \
+    npm install -g --unsafe-perm node-gyp ionic@beta cordova@6.0.0 --registry=https://registry.npm.taobao.org
 
