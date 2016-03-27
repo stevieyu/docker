@@ -26,8 +26,8 @@ ENV JAVA_HOME /usr/lib/jvm/java-9-oracle
 # Build-Variables
 ENV ANDROID_SDK_FILE android-sdk_r24.4.1-linux.tgz
 ENV ANDROID_SDK_URL https://dl.google.com/android/${ANDROID_SDK_FILE}
-ENV ANDROID_BUILD_TOOLS_VERSION 23.0.2
-ENV ANDROID_APIS android-23
+ENV ANDROID_BUILD_TOOLS_VERSION 23.0.3
+ENV ANDROID_APIS android-21
 # Set Environment Variables
 ENV ANT_HOME /usr/share/ant
 ENV MAVEN_HOME /usr/share/maven
@@ -39,15 +39,13 @@ ENV PATH $PATH:$MAVEN_HOME/bin
 ENV PATH $PATH:$GRADLE_HOME/bin
 WORKDIR "/opt"
 RUN apt-get update -y && \
-    # <3 curl
-    apt-get install -y curl && \
     # install 32-bit dependencies require by the android sdk
     dpkg --add-architecture i386 && \
     apt-get update -y && \
     apt-get install -y libncurses5:i386 libstdc++6:i386 zlib1g:i386 && \
-    # install Ant and Gradle
-    apt-get install -y ant gradle && \
+    # install curl Ant and Gradle
+    apt-get install -y curl ant gradle && \
     # Installs Android SDK
     curl -sL ${ANDROID_SDK_URL} | tar xz -C . && \
-    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} --proxy-host android-mirror.bugly.qq.com --proxy-port 8080
+    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} -s --proxy-host android-mirror.bugly.qq.com --proxy-port 8080
 
