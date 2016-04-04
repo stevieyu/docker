@@ -36,7 +36,7 @@ RUN cd /php7 && \
     --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
     --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf --enable-phpdbg --with-readline \
     --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts --enable-intl && \
-    make -j 4 && make install
+    make -j && make install
 
 RUN wget http://curl.haxx.se/ca/cacert.pem && \
     mv cacert.pem /usr/local/php/cacert.pem && \
@@ -51,16 +51,14 @@ RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /
     sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /usr/local/php/etc/php.ini && \
     sed -i "s/;zlib.output_compression_level =.*/zlib.output_compression_level = 9/" /usr/local/php/etc/php.ini
 
-RUN ln -s /usr/local/php/bin/php /usr/local/bin/php && \
-    ln -s /usr/local/php/bin/php-cgi /usr/local/bin/php-cgi && \
-    ln -s /usr/local/php/sbin/php-fpm /usr/local/bin/php-fpm
-
+ENV PATH $PATH:/usr/local/php/bin
 
 #composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 #composer config -g repositories.packagist composer http://packagist.cn
 RUN curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php && \
     mv composer.phar /usr/local/bin/composer && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
+    composer config -g secure-http false && \
     composer config -g repositories.packagist composer http://packagist.phpcomposer.com
 
 #RUN mkdir /root/data

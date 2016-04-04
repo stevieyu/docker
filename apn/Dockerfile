@@ -2,7 +2,7 @@ FROM alpine:edge
 MAINTAINER Stevie yzm629@gmail.com
 
 #https://pkgs.alpinelinux.org/packages
-RUN apk --update \ 
+RUN apk --update \
     add curl nodejs make python php-cli php-json php-phar php-openssl
 
 RUN php --ini && \
