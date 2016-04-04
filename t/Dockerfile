@@ -52,5 +52,5 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npm.taobao.org
 
-RUN npm install -g --unsafe-perm node-gyp ionic@beta cordova@6.0.0 --registry=https://registry.npm.taobao.org
+RUN npm install -g node-gyp ionic@beta cordova --registry=http://registry.npm.taobao.org
 

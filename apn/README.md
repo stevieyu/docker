@@ -1,4 +1,4 @@
-#php && node
+#alpine && php && node
 
 ```shell
 docker build t apn .
