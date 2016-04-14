@@ -18,7 +18,7 @@ docker exec -it {container_id} sh
 ```
 
 ```sh
-# 创建一台安装有Docker环境的Linux虚拟机，指定机器名称为default，同时配置Docker加速器地址。
+# 创建一台安装有Docker环境的virtualbox Linux虚拟机，指定机器名称为default，同时配置Docker加速器地址。
 docker-machine create --engine-registry-mirror=https://8dqe4zuz.mirror.aliyuncs.com -d virtualbox default
 
 # 查看机器的环境配置，并配置到本地。然后通过Docker客户端访问Docker服务。
