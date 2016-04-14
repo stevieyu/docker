@@ -2,8 +2,8 @@ FROM alpine:edge
 MAINTAINER Stevie yzm629@gmail.com
 
 #https://pkgs.alpinelinux.org/packages
-RUN apk --update \
-    add curl nodejs make python php-cli php-json php-phar php-openssl
+RUN apk --update --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
+    add curl nodejs make python php-cli php-json php-phar php-openssl php-mysql php-sqlite3 php-mysqli php-pdo_mysql php-pdo_sqlite
 
 RUN php --ini && \
     curl -sS https://getcomposer.org/installer | php && \
