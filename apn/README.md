@@ -1,4 +1,4 @@
-#alpine && php && node
+#alpine && php && node && composer && node-gyp && gulp
 
 ```shell
 docker build t apn .
