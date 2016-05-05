@@ -16,6 +16,6 @@ RUN wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp --registry=https://registry.npm.taobao.org
+    npm install -g node-gyp --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
 
 CMD ["node"]
