@@ -47,8 +47,7 @@ RUN apt-get update && \
     echo 'deb https://deb.nodesource.com/node_6.x xenial  main' > /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     apt-get install -y nodejs && \
-    npm config set registry https://registry.npm.taobao.org
-
-RUN npm install -g node-gyp ionic@beta cordova --registry=http://registry.npm.taobao.org
+    npm config set registry https://registry.npm.taobao.org && \
+    npm install -g node-gyp ionic@beta cordova --registry=http://registry.npm.taobao.org
 
 CMD ["ionic"]
