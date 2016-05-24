@@ -15,7 +15,7 @@ RUN wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add
     apt-get install -y nodejs
 
 RUN npm config set registry https://registry.npm.taobao.org && \
-    npm install -g --unsafe-perm node-gyp ionic@beta cordova@6.0.0 --registry=https://registry.npm.taobao.org
+    npm install -g --unsafe-perm node-gyp ionic@beta cordova --registry=https://registry.npm.taobao.org
 
 #ionic hooks add
 
