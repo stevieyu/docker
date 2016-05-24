@@ -7,15 +7,15 @@ services:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=db
+      - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=root
     restart: always
     links:
-      - db
+      - mysql
     depends_on:
-      - db
-  db:
+      - mysql
+  mysql:
     container_name: db
     image: mysql:latest
     ports:
