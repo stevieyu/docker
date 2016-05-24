@@ -1,7 +1,6 @@
 version: '2'
 services:
-  pma:
-    container_name: pma
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
       - 8080:80
@@ -16,9 +15,8 @@ services:
     depends_on:
       - mysql
   mysql:
-    container_name: db
     image: mysql:latest
     ports:
-      - 3306:3306
+      - 3306
     environment:
       - MYSQL_ROOT_PASSWORD=root
