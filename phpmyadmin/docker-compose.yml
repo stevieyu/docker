@@ -7,30 +7,18 @@ services:
       - 8080:80
     environment:
       - PMA_ARBITRARY=1
-      - PMA_HOST=172.16.238.11
+      - PMA_HOST=db
       - PMA_USER=root
       - PMA_PASSWORD=root
     restart: always
     links:
-      - db:mysql
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.10
+      - db
+    depends_on:
+      - db
   db:
     container_name: db
     image: mysql:latest
     ports:
-      - 3306:3306
+      - 33066:3306
     environment:
       - MYSQL_ROOT_PASSWORD=root
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.11
-networks:
-  app_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.16.238.0/24
-        gateway: 172.16.238.1
