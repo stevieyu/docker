@@ -42,9 +42,8 @@ RUN dpkg --add-architecture i386 && \
 
 #nodejs
 RUN apt-get update && \
-    apt-get install -y python make build-essential apt-transport-https lsb-release && \
-    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_6.x xenial  main' > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get install -y python make build-essential && \
+    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npm.taobao.org && \
