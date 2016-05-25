@@ -15,5 +15,6 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     npm install -g --unsafe-perm node-gyp ionic@beta cordova --registry=https://registry.npm.taobao.org
 
 #ionic hooks add
+#docker run --rm -it -p 8100:8100 -p 35729:35729 --privileged -v e:/code/nodejs/ionic:/root/data -w /root/data i2 bash
 
 CMD ["node"]
