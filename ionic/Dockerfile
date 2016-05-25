@@ -42,10 +42,9 @@ RUN dpkg --add-architecture i386 && \
 
 #nodejs
 RUN apt-get update && \
-    apt-get install -y python make build-essential && \
     curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get update && \
-    apt-get install -y nodejs && \
+    apt-get install -y nodejs python make build-essential && \
     npm config set registry https://registry.npm.taobao.org && \
     npm install -g node-gyp ionic@beta cordova --registry=http://registry.npm.taobao.org
 
