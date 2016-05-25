@@ -36,9 +36,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get -qq install -y curl ant gradle libncurses5:i386 libstdc++6:i386 zlib1g:i386 && \
     # Installs Android SDK
     curl -sL ${ANDROID_SDK_URL} | tar xz -C /opt && \
-    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} && \
+    echo y | android update sdk -a -u -t platform-tools,${ANDROID_APIS},build-tools-${ANDROID_BUILD_TOOLS_VERSION} -s --proxy-host android-mirror.bugly.qq.com --proxy-port 8080 && \
     chmod a+x -R $ANDROID_HOME && \
-    chown -R root:root $ANDROID_HOME && \
+    chown -R root:root $ANDROID_HOME
 
 #nodejs
 RUN apt-get update && \
