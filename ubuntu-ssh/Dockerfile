@@ -3,8 +3,8 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
 #RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
-#RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
+# RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
@@ -21,8 +21,8 @@ RUN mkdir /var/run/sshd && \
 RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-RUN mkdir /root/data
-VOLUME ["/root/data"]
+# RUN mkdir /root/data
+# VOLUME ["/root/data"]
 
 EXPOSE 22
 
