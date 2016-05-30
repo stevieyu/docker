@@ -41,8 +41,7 @@ RUN dpkg --add-architecture i386 && \
     chown -R root:root $ANDROID_HOME
 
 #nodejs
-RUN apt-get update && \
-    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs python make build-essential && \
     npm config set registry https://registry.npm.taobao.org && \

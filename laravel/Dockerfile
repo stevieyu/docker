@@ -2,7 +2,7 @@ FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 #RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
@@ -20,11 +20,9 @@ RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
 #nodejs
-RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
-RUN apt-get install -y nodejs make build-essential
-
-#nodejs tools
-RUN npm install -g node-gyp gulp bower --registry=https://registry.npm.taobao.org
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -y nodejs make build-essential  && \
+    npm install -g node-gyp gulp --registry=https://registry.npm.taobao.org
 
 #php-fpm
 RUN apt-get install -y \
@@ -57,8 +55,7 @@ RUN wget https://phar.phpunit.de/phpunit.phar && \
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
-#    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
-    composer config -g repositories.packagist composer http://packagist.cn
+    composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 # Configure PHP-FPM
 RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
