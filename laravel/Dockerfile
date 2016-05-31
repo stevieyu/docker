@@ -26,10 +26,9 @@ RUN apt-get install -y \
     php7.0-zip \
     php7.0-bz2 \
     php7.0-mbstring \
-    php7.0-pcntl \
     php7.0-xsl \
-    php7.0-mysqlnd \
-    php7.0-sqlite \
+    php7.0-mysql \
+    php7.0-sqlite3 \
     php7.0-xmlrpc
 
 
