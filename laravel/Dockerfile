@@ -7,7 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
-    apt-get install -y vim git curl wget
+    apt-get install -y vim git curl wget sqlite3 libsqlite3-dev
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
@@ -29,7 +29,8 @@ RUN apt-get install -y \
     php7.0-xsl \
     php7.0-mysql \
     php7.0-sqlite3 \
-    php7.0-xmlrpc
+    php7.0-xmlrpc \
+    php7.0-soap
 
 
 #phpunit
