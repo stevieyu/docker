@@ -7,17 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh screen git curl wget
-
-#ssh 配置
-RUN mkdir /var/run/sshd && \
-    echo "root:'" |chpasswd && \
-    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    apt-get install -y vim git curl wget
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
@@ -26,25 +16,22 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 
 #php-fpm
 RUN apt-get install -y \
-    php5-fpm \
-    php5-curl \
-    php5-gd \
-    php5-geoip \
-    php5-imagick \
-    php5-imap \
-    php5-json \
-    php5-ldap \
-    php5-mcrypt \
-    php5-memcache \
-    php5-memcached \
-    php5-mongo \
-    php5-mysqlnd \
-    php5-pgsql \
-    php5-redis \
-    php5-sqlite \
-    php5-xdebug \
-    php5-xmlrpc \
-    php5-xcache
+    php7.0-cli \
+    php7.0-curl \
+    php7.0-gd \
+    php7.0-imap \
+    php7.0-json \
+    php7.0-ldap \
+    php7.0-mcrypt \
+    php7.0-zip \
+    php7.0-bz2 \
+    php7.0-mbstring \
+    php7.0-pcntl \
+    php7.0-xsl \
+    php7.0-mysqlnd \
+    php7.0-sqlite \
+    php7.0-xmlrpc
+
 
 #phpunit
 RUN wget https://phar.phpunit.de/phpunit.phar && \
@@ -57,20 +44,6 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
-# Configure PHP-FPM
-RUN sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini && \
-    sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;zlib.output_compression_level = 1/zlib.output_compression_level = 5/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
-    sed -i "s/display_errors = Off/display_errors = stderr/" /etc/php5/fpm/php.ini && \
-    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 30M/" /etc/php5/fpm/php.ini && \
-    sed -i "s/;opcache.enable=0/opcache.enable=0/" /etc/php5/fpm/php.ini && \
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
-    sed -i '/^listen = /clisten = 9000' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf && \
-    sed -i '/^;env\[TEMP\] = .*/aenv[DB_PORT_3306_TCP_ADDR] = $DB_PORT_3306_TCP_ADDR' /etc/php5/fpm/pool.d/www.conf
-
 #RUN mkdir /root/data
 #VOLUME ["/root/data"]
 
@@ -79,4 +52,4 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["bash"]
