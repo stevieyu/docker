@@ -14,7 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     apt-get install -y nodejs make build-essential  && \
     npm install -g node-gyp gulp --registry=https://registry.npm.taobao.org
 
-#php-fpm
+#php
 RUN apt-get install -y \
     php7.0-cli \
     php7.0-curl \
