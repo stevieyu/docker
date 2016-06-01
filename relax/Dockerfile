@@ -14,6 +14,11 @@ RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list 
 #http://sharp.readthedocs.io/en/stable/install/
 RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
 
+RUN git clone https://github.com/relax/relax.git /root/relax && \
+    cd /root/relax && \
+    npm i
+
+WORKDIR /root/relax
 
 
 
