@@ -26,4 +26,4 @@ EXPOSE 4443
 EXPOSE 19892
 EXPOSE 19957
 
-CMD ["/ngrok/bin/ngrok"]
+CMD ["bash"]
