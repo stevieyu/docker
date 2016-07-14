@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get update && apt-get install -y nodejs
+    apt-get install -y nodejs
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
