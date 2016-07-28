@@ -1,12 +1,11 @@
-FROM       ubuntu:16.04
+FROM       alpine:edge
 MAINTAINER Stevie "https://github.com/yzm629"
 
 ENV COW_INSTALLDIR="/root"
 
-RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get install -y curl && \
-    curl -L git.io/cow | bash
+RUN apk update && \
+    apk add curl && \
+    curl -L git.io/cow | sh
 
 WORKDIR /root/.cow/
 RUN mv rc rc.bak && \
