@@ -11,8 +11,9 @@ RUN apt-get update && \
 
 #nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get install -y nodejs make build-essential  && \
-    npm install -g node-gyp gulp --registry=https://registry.npm.taobao.org
+    apt-get install -y nodejs python make build-essential  && \
+    npm config set loglevel=http && \
+    npm install -g node-gyp gulp
 
 #php
 RUN apt-get install -y \
@@ -29,8 +30,7 @@ RUN apt-get install -y \
     php7.0-xsl \
     php7.0-mysql \
     php7.0-sqlite3 \
-    php7.0-xmlrpc \
-    php7.0-soap
+    php7.0-xmlrpc
 
 
 #phpunit
@@ -50,6 +50,6 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 EXPOSE 22
 EXPOSE 80
 EXPOSE 443
-EXPOSE 3306
+EXPOSE 9000
 
 CMD ["bash"]
