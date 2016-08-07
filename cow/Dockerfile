@@ -3,9 +3,6 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 ENV COW_INSTALLDIR="/root"
 
-#mirrors.ustc.edu.cn
-#mirror.tuna.tsinghua.edu.cn
-#mirrors.cug.edu.cn/
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     apk update && \
     apk add curl && \
