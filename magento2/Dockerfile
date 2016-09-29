@@ -1,4 +1,4 @@
-FROM       ubuntu:16.04
+FROM       ubuntu:devel
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
