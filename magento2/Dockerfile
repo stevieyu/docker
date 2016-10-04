@@ -15,20 +15,20 @@ RUN sed -i 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list && \
     a2enmod headers && \
     a2enmod deflate && \
 
-    cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf vhost.conf
+    cp /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/vhost.conf && \
 
-RUN curl -sS https://getcomposer.org/installer | php && \
+    curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
     composer config -g repositories.packagist composer https://packagist.phpcomposer.com
 
-RUN apt-get install wget unzip && \
+RUN apt-get install -y wget unzip git && \
     wget https://github.com/magento/magento2/archive/2.1.1.zip && \
     unzip 2.1.1.zip && \
     rm 2.1.1.zip && \
     mv magento2-2.1.1 magento2 && \
     cd magento2 && \
     composer install && \
-    chmod -R 777 mg2/var mg2/app/etc mg2/pub/media mg2/pub/static
+    chmod -R 777 magento2/var magento2/app/etc magento2/pub/media magento2/pub/static
 
 CMD ["bash"]
