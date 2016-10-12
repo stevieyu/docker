@@ -29,3 +29,11 @@ services:
 ```shell
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
 ```
+
+docker-compose up -d
+
+#查看端口进程
+lsof -i :****
+
+#结束进程
+kill 1011
