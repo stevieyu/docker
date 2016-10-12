@@ -37,3 +37,4 @@ lsof -i :****
 
 #结束进程
 kill 1011
+lsof -P | grep ':80' | awk '{print $2}' | xargs kill -9
