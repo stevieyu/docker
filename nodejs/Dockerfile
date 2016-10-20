@@ -1,4 +1,4 @@
-FROM       ubuntu:16.04
+FROM       ubuntu:devel
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
@@ -17,6 +17,8 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm config set loglevel=http && \
     npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass/ && \
-    npm install -g node-gyp
+    npm install -g node-gyp && \
+    npm i -g yarn && \
+    yarn config set registry 'https://registry.npm.taobao.org'
 
 CMD ["node"]
