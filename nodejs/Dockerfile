@@ -16,6 +16,8 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
     npm config set loglevel=http && \
+    #@3.9.3
+#    npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
     npm config set sass_binary_site=https://github.com/sass/node-sass/releases/download && \
     npm install -g node-gyp && \
     npm i -g yarn && \
