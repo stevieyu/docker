@@ -26,3 +26,10 @@ docker-machine env default
 eval "$(docker-machine env default)"
 docker info
 ```
+
+
+#### caddy link
+```
+https://caddyserver.com/download/build?os=darwin&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
+https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
+```

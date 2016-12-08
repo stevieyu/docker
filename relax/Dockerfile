@@ -7,7 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list 
     apt-get update && \
     apt-get install -y curl build-essential python make libvips-dev && \
     curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get update && \ 
+    apt-get update && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npm.taobao.org && \
     npm install -g node-gyp sharp --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist

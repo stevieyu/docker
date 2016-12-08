@@ -8,8 +8,8 @@ MAINTAINER Stevie yzm629@gmail.com
 #mirror.tuna.tsinghua.edu.cn
 #mirrors.cug.edu.cn/
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update && \ 
-    apk add curl nodejs make python \ 
+    apk update && \
+    apk add curl nodejs make python \
     php5-cli php5-json php5-phar php5-openssl php5-mysql php5-sqlite3 php5-mysqli php5-pdo_mysql php5-pdo_sqlite
 
 RUN php --ini && \

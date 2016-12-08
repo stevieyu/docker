@@ -28,6 +28,7 @@ services:
 
 ```shell
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
+docker run -d -p 8080:80 -e PMA_ARBITRARY=1 -e PMA_HOST=127.0.0.1 -e PMA_USER=root phpmyadmin/phpmyadmin
 ```
 
 docker-compose up -d
