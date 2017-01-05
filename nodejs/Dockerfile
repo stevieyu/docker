@@ -10,11 +10,12 @@ RUN apt-get update && \
     apt-get install -y curl build-essential python make
 
 #nodejs
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
     apt-get install -y nodejs
 
 #nodejs tools
 RUN npm config set registry https://registry.npm.taobao.org && \
+	npm config set disturl https://npm.taobao.org/dist && \
     npm config set loglevel=http && \
     npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
     npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \

@@ -20,6 +20,4 @@ RUN git clone https://github.com/relax/relax.git /root/relax && \
 
 WORKDIR /root/relax
 
-
-
 CMD ["node"]
