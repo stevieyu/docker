@@ -3,6 +3,11 @@ MAINTAINER Stevie yzm629@gmail.com
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+	apk add --update ruby python zsh vim git curl && \
+
+#zsh 配置
+	git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
 
 #npm配置
     npm config set registry https://registry.npm.taobao.org && \
@@ -16,4 +21,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 #yarn镜像配置
     yarn config set registry 'https://registry.npm.taobao.org'
 
-CMD ["sh"]
+CMD ["zsh"]
+
+#docker run --rm -it -p 8100:8100 -v $PWD:/root/data:rw -w /root/data node-tool sh
