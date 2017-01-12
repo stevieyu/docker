@@ -9,10 +9,15 @@ RUN apt-get update && \
     apt-get install -y curl python make build-essential
 
 #nodejs
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get update && apt-get install -y nodejs && \
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+    apt-get update && \
+    apt-get install -y nodejs && \
     npm config set registry https://registry.npm.taobao.org && \
-    npm install -g --unsafe-perm node-gyp ionic@beta cordova --registry=https://registry.npm.taobao.org
+    npm config set disturl https://npm.taobao.org/dist && \
+    npm config set loglevel=http && \
+    npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
+    npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \
+    npm install -g ionic cordova
 
 #ionic hooks add
 #docker run --rm -it -p 8100:8100 -p 35729:35729 --privileged -v e:/code/nodejs/ionic:/root/data:rw -w /root/data i2 bash
