@@ -1,4 +1,4 @@
-FROM       ubuntu:16.04
+FROM       ubuntu:devel
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #https://github.com/relax/relax
@@ -6,15 +6,19 @@ MAINTAINER Stevie "https://github.com/yzm629"
 RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get install -y curl build-essential python make libvips-dev && \
-    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npm.taobao.org && \
-    npm install -g node-gyp sharp --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
+	npm config set disturl https://npm.taobao.org/dist && \
+    npm config set loglevel=http && \
+    npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
+    npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \
+    npm install -g sharp && \
 #http://sharp.readthedocs.io/en/stable/install/
-RUN curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash -
+	curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash - && \
 
-RUN git clone https://github.com/relax/relax.git /root/relax && \
+	git clone https://github.com/relax/relax.git /root/relax && \
     cd /root/relax && \
     npm i
 
