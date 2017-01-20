@@ -17,11 +17,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 	npm config set sqlite3_binary_site=http://npm.taobao.org/mirrors/sqlite3 && \
     
 #全局安装
-    npm i -g yarn vue-cli browser-sync pm2 && \
+    npm i -g yarn vue-cli browser-sync pm2 whistle && \
     
 #yarn镜像配置
     yarn config set registry 'https://registry.npm.taobao.org'
 
 CMD ["zsh"]
-
-#docker run --rm -it -p 8100:8100 -v $PWD:/root/data:rw -w /root/data node-tool sh

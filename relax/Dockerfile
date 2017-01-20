@@ -3,9 +3,9 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 #https://github.com/relax/relax
 
-RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list && \
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
     apt-get update && \
-    apt-get install -y curl build-essential python make libvips-dev && \
+    apt-get install -y curl build-essential python make libvips-dev mongodb && \
     curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
     apt-get update && \
     apt-get install -y nodejs && \
