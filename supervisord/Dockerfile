@@ -7,7 +7,7 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 #安装&更新
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y supervisor openssh-server vim screen git curl wget axel unzip && \
+    apt-get install -y supervisor openssh-server vim screen git curl wget axel unzip tmux && \
 
 #ssh 配置
 	mkdir /var/run/sshd && \

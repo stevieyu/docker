@@ -15,6 +15,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
     npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \
 	npm config set sqlite3_binary_site=http://npm.taobao.org/mirrors/sqlite3 && \
+    npm config set electron_mirror=http://npm.taobao.org/mirrors/electron/ && \
     
 #全局安装
     npm i -g yarn vue-cli browser-sync pm2 whistle && \
