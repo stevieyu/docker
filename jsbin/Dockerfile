@@ -16,7 +16,7 @@ RUN npm config set registry https://registry.npm.taobao.org && \
     npm config set PHANTOMJS_CDNURL https://npm.taobao.org/mirrors/phantomjs && \
 	npm config set SQLITE3_BINARY_SITE http://npm.taobao.org/mirrors/sqlite3 && \
     npm config set ELECTRON_MIRROR http://npm.taobao.org/mirrors/electron/ && \
-	npm i
+	npm i grunt-cli -g && npm i && grunt build
 
 EXPOSE 3000
 
