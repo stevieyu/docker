@@ -6,7 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 	apk add --update ruby python zsh vim git curl && \
 
 #zsh 配置
-	git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+	git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
 
 #npm配置
@@ -22,5 +22,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     
 #yarn镜像配置
     yarn config set registry 'https://registry.npm.taobao.org'
+
+WORKDIR /root
 
 CMD ["zsh"]
