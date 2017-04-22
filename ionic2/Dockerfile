@@ -17,7 +17,7 @@ RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
     npm config set loglevel=http && \
     npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
     npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \
-    npm install -g ionic cordova
+    npm install -g ionic@beta cordova
 
 #ionic hooks add
 #docker run --rm -it -p 8100:8100 -p 35729:35729 --privileged -v e:/code/nodejs/ionic:/root/data:rw -w /root/data i2 bash
