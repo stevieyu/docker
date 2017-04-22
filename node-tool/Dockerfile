@@ -3,7 +3,7 @@ MAINTAINER Stevie yzm629@gmail.com
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-	apk add --update ruby python zsh vim git curl && \
+	apk add --no-cache ruby python zsh vim git curl && \
 
 #zsh 配置
 	git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
@@ -18,7 +18,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     npm config set electron_mirror=http://npm.taobao.org/mirrors/electron/ && \
     
 #全局安装
-    npm i -g yarn vue-cli browser-sync whistle ionic@beta @angular/cli && \
+    npm i -g browser-sync whistle ionic@beta @angular/cli && \
     
 #yarn镜像配置
     yarn config set registry 'https://registry.npm.taobao.org'
