@@ -6,8 +6,8 @@ ENV VERSION=v0.10.48 \
 	RM_DIRS=/usr/include
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-	apk add --no-cache libgcc libstdc++ make gcc g++ python git && \
-	apk add --no-cache --virtual .build-deps curl linux-headers paxctl gnupg && \
+	apk add --no-cache libgcc libstdc++ && \
+	apk add --no-cache --virtual .build-deps curl make gcc g++ python linux-headers paxctl gnupg && \
 
 	curl -o node-${VERSION}.tar.gz -sSL https://npm.taobao.org/mirrors/node/${VERSION}/node-${VERSION}.tar.gz && \
 	tar -zxf node-${VERSION}.tar.gz && \
@@ -36,6 +36,7 @@ RUN	npm config set registry https://registry.npm.taobao.org && \
 	npm config set ELECTRON_MIRROR http://npm.taobao.org/mirrors/electron/ && \
 
 	#安装jsbin
+	apk add --no-cache git make gcc g++ python && \
 	git clone --depth=1 https://git.coding.net/yzm/jsbin.git /root/jsbin && \
     cd /root/jsbin && \
     npm i -g grunt-cli && \
