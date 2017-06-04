@@ -18,7 +18,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     npm config set electron_mirror=http://npm.taobao.org/mirrors/electron/ && \
     
 #全局安装
-    npm i -g browser-sync whistle ionic@beta @angular/cli && \
+    npm i -g yarn browser-sync whistle ionic@beta @angular/cli && \
     
 #yarn镜像配置
     yarn config set registry 'https://registry.npm.taobao.org'
