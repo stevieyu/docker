@@ -17,9 +17,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     
 #yarn镜像配置
     yarn config set registry 'http://registry.npm.taobao.org' && \
-    yarn global add browser-sync whistle vue-cli ionic @angular/cli && \
+    yarn global add browser-sync whistle vue-cli quasar-cli ionic @angular/cli && \
 
     npm cache clean --force && \
     yarn cache clean
+
+EXPOSE 3000 3001
 
 CMD ["zsh"]
