@@ -1,27 +1,29 @@
-FROM       ubuntu:devel
+FROM       node:6
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #https://github.com/relax/relax
 
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+ENV relax_db__uri="mongodb://127.0.0.1/relax"
+
+WORKDIR /root
+
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
     apt-get update && \
-    apt-get install -y curl build-essential python make libvips-dev mongodb && \
-    curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
-    apt-get update && \
-    apt-get install -y nodejs && \
+    apt-get install -y git libvips-dev mongodb && \
+
     npm config set registry https://registry.npm.taobao.org && \
 	npm config set disturl https://npm.taobao.org/dist && \
     npm config set loglevel=http && \
     npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass && \
     npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs && \
-    npm install -g sharp && \
-#http://sharp.readthedocs.io/en/stable/install/
-	curl -s https://raw.githubusercontent.com/lovell/sharp/master/preinstall.sh | bash - && \
 
-	git clone https://github.com/relax/relax.git /root/relax && \
-    cd /root/relax && \
-    npm i
+	git clone --depth=1 https://github.com/relax/relax.git && \
+    cd relax && \
+    npm i && \
+    npm run build
 
 WORKDIR /root/relax
 
-CMD ["node"]
+EXPOSE 8080
+
+CMD ["npm start"]

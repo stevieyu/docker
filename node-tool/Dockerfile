@@ -5,7 +5,12 @@ WORKDIR ~
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-	apk add --no-cache ruby python && \
+    echo http://mirrors.ustc.edu.cn/alpine/edge/testing >> /etc/apk/repositories && \
+	apk add --no-cache git ruby python zsh make && \
+
+#zsh 配置
+    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
 
 #npm配置
     npm config set registry http://registry.npm.taobao.org && \
@@ -17,11 +22,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     
 #yarn镜像配置
     yarn config set registry 'http://registry.npm.taobao.org' && \
-    yarn global add browser-sync whistle vue-cli quasar-cli ionic @angular/cli && \
+    npm i browser-sync whistle vue-cli quasar-cli ionic @angular/cli sails && \
 
     npm cache clean --force && \
     yarn cache clean
 
-EXPOSE 3000 3001
+EXPOSE 3000 3001 8899
 
 CMD ["zsh"]
