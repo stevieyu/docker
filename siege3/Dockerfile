@@ -3,25 +3,22 @@ MAINTAINER Stevie yzm629@gmail.com
 
 WORKDIR /root
 
-ENV VERSION=4.0.2
+ENV VERSION=3.1.4
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     echo http://mirrors.ustc.edu.cn/alpine/edge/testing >> /etc/apk/repositories && \
-	apk add --no-cache curl make gcc g++ zlib-dev libssl1.0 ca-certificates && \
+	apk add --no-cache curl g++ make && \
 
 	curl -O http://download.joedog.org/siege/siege-${VERSION}.tar.gz && \
 	tar -vxf siege-${VERSION}.tar.gz && \
 	rm siege-${VERSION}.tar.gz && \
 	cd siege-${VERSION} && \
 
-	sed -i "25i #include <stdint.h>" ./src/hash.c && \
-	sed -i 's/u_int32_t/uint32_t/g' ./src/hash.c && \
-
 	./configure && \
 	make install && \
 
 	rm -rf /root/siege-${VERSION}
 
-#ENTRYPOINT ["siege"]
-#CMD ["-h"]
+ENTRYPOINT ["siege"]
+CMD ["-h"]
