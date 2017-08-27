@@ -1,72 +1,21 @@
-FROM       ubuntu:16.04
-MAINTAINER Stevie "https://github.com/yzm629"
+FROM       alpine:edge
+MAINTAINER Stevie yzm629@gmail.com
 
-#更换镜像
-#RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+#https://pkgs.alpinelinux.org/packages
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    echo http://mirrors.ustc.edu.cn/alpine/edge/testing >> /etc/apk/repositories && \
 
-#安装&更新
-RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh screen git curl wget unzip
+    apk add --no-cache \
+    php7 php7-json php7-phar php7-zlib php7-openssl php7-curl php7-pdo php7-mbstring php7-tokenizer php7-dom php7-xml php7-opcache php7-session && \
 
-#ssh 配置
-RUN mkdir /var/run/sshd && \
-    echo "root:'" |chpasswd && \
-    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
-#编译 php7
-RUN wget https://github.com/php/php-src/archive/master.zip && unzip master.zip && rm master.zip && mv php-src-master php7
-#RUN git clone https://github.com/php/php-src.git /php7
-
-RUN apt-get -y install autoconf make automake libtool re2c flex bison libxml2-dev \
-    libxslt1-dev zlib1g-dev libcurl4-openssl-dev \
-    mcrypt libmcrypt-dev libmhash-dev \
-    libjpeg-dev libpng++-dev libfreetype6-dev \
-    pkg-config libssl-dev
-
-RUN cd /php7 && \
-    ./buildconf --force && \
-    ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd \
-    --with-libdir=lib64 --with-xsl --with-xmlrpc --enable-zip --disable-fileinfo --with-iconv-dir --with-zlib --with-libxml-dir=/usr --enable-xml --with-curl \
-    --with-mhash --enable-bcmath --with-mcrypt --enable-mbstring --enable-sockets --enable-soap --without-pear --with-gettext \
-    --with-freetype-dir --with-jpeg-dir --with-png-dir --with-gd --enable-gd-native-ttf --enable-phpdbg --with-readline \
-    --with-openssl --disable-rpath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-ftp --with-mhash --enable-pcntl --enable-maintainer-zts --enable-intl && \
-    make -j && make install
-
-RUN wget http://curl.haxx.se/ca/cacert.pem && \
-    mv cacert.pem /usr/local/php/cacert.pem && \
-    cp /php7/php.ini-* /usr/local/php/etc/ && \
-    cp /usr/local/php/etc/php.ini-development /usr/local/php/etc/php.ini && \
-    cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
-    cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
-    groupadd www && useradd -g www www
-
-RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/usr\/local\/php\/cacert.pem/g' /usr/local/php/etc/php.ini && \
-    sed -i "s/;date.timezone =.*/date.timezone = PRC/" /usr/local/php/etc/php.ini && \
-    sed -i "s/zlib.output_compression = Off/zlib.output_compression = On/" /usr/local/php/etc/php.ini && \
-    sed -i "s/;zlib.output_compression_level =.*/zlib.output_compression_level = 9/" /usr/local/php/etc/php.ini
-
-ENV PATH $PATH:/usr/local/php/bin
-
-#composer config -g repositories.packagist composer http://packagist.phpcomposer.com
-#composer config -g repositories.packagist composer http://packagist.cn
-RUN curl -sS https://getcomposer.org/installer | /usr/local/php/bin/php && \
+    php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    rm composer-setup.php && \
     mv composer.phar /usr/local/bin/composer && \
-    composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
     composer config -g secure-http false && \
-    composer config -g repositories.packagist composer http://packagist.phpcomposer.com
+    composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
+    composer config -g repositories.packagist composer https://packagist.phpcomposer.com
 
-#RUN mkdir /root/data
-#VOLUME ["/root/data"]
+WORKDIR /root
 
-EXPOSE 22
-EXPOSE 80
-EXPOSE 443
-EXPOSE 3306
-
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["php", "-a"]

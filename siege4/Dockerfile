@@ -1,20 +1,19 @@
-FROM ubuntu:latest
-MAINTAINER Stevie yzm629@gmail.com
+FROM       ubuntu:devel
+MAINTAINER Stevie https://github.com/yzm629
+
 
 # Set environment vars
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
-    APP_DIR=/app \
     SIEGE_VERSION=4.0.2
 
 # Create app dir
-RUN mkdir -p ${APP_DIR}
-WORKDIR ${APP_DIR}
+WORKDIR /root
 
 # Install and build Siege from source
-RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list && \
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
 	set -ex && \
         buildDeps=' \
                 build-essential \
@@ -33,13 +32,10 @@ RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list 
         ./configure && \
         make && \
         make install && \
-        cd ${APP_DIR} && \
+        cd /root && \
         apt-get purge -y --auto-remove $buildDeps && \
-        rm -rf /var/lib/apt/lists/* ${APP_DIR}/siege-${SIEGE_VERSION}*
-
-# Copy siege files
-COPY . ${APP_DIR}/
+        rm -rf /var/lib/apt/lists/* /root/siege-${SIEGE_VERSION}*
 
 # App command
-ENTRYPOINT [ "/usr/local/bin/siege" ]
-CMD [ "--help" ]
+ENTRYPOINT ["siege"]
+CMD ["--help"]
