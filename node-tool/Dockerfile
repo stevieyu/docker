@@ -1,7 +1,7 @@
 FROM       node:alpine
 MAINTAINER Stevie yzm629@gmail.com
 
-WORKDIR ~
+WORKDIR /root
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
