@@ -1,51 +1,46 @@
-FROM       ubuntu:16.04
+FROM       ubuntu:latest
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
-RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
-#RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \
-    apt-get install -y openssh-server vim zsh screen git curl wget
-
-#ssh 配置
-RUN mkdir /var/run/sshd && \
-    echo "root:'" |chpasswd && \
-    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-
-#zsh 配置
-RUN git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    apt-get install -y vim git axel
 
 #LAMP 安装
-ENV LAMP_VERSION 7.0.7
-RUN wget https://downloads.bitnami.com/files/stacks/lampstack/$LAMP_VERSION-0/bitnami-lampstack-$LAMP_VERSION-0-dev-linux-x64-installer.run
-RUN chmod 777 bitnami-lampstack-$LAMP_VERSION-0-dev-linux-x64-installer.run && \
-    ./bitnami-lampstack-$LAMP_VERSION-0-dev-linux-x64-installer.run --mode unattended --base_password 666666 --prefix /opt/lamp && \
-    rm bitnami-lampstack-$LAMP_VERSION-0-dev-linux-x64-installer.run && \
+ENV LAMP_VERSION 7.1.12-0
+ENV FILENAME bitnami-lampstack-$LAMP_VERSION-linux-x64-installer.run
+
+RUN axel -n 50 https://downloads.bitnami.com/files/stacks/lampstack/$LAMP_VERSION/$FILENAME
+
+RUN chmod 755 $FILENAME && \
+    ./$FILENAME --mode unattended --base_password 666666 --prefix /opt/lamp && \
+    rm $FILENAME
+
+RUN echo PATH="/opt/lamp/git/bin:/opt/lamp/php/bin:/opt/lamp/mysql/bin:/opt/lamp/apache2/bin:/opt/lamp/common/bin:$PATH" >> /root/.bashrc && \
+
+	/opt/lamp/php/bin/composer self-update && \
+	/opt/lamp/php/bin/composer config -g secure-http false && \
+    /opt/lamp/php/bin/composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
+    /opt/lamp/php/bin/composer config -g repositories.packagist composer https://packagist.phpcomposer.com && \
 
     #phpmyadmin开启外网访问
     sed -i "s/Require local/Require all granted/" /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf && \
 
     #mysql开启外网访问
     sed -i "s/bind-address=127.0.0.1/#bind-address=127.0.0.1/" /opt/lamp/mysql/my.cnf && \
-
-    #安装文件管理
-    rm -rf /opt/lamp/apache2/htdocs/* && \
-    wget https://github.com/kalcaddle/KODExplorer/archive/master.zip && unzip master.zip && rm master.zip && \
-    mv KODExplorer-master /opt/lamp/apache2/htdocs/k && \
-    chmod -R 777 /opt/lamp/apache2/htdocs && \
+    chmod 777 -R /opt/lamp/mysql/* && \
 
     #添加软链接
     ln -s /opt/lamp/apache2/htdocs /root/htdocs
 
-VOLUME ["/root/htdocs"]
+VOLUME /root/htdocs
 
-EXPOSE 22
+WORKDIR /root/htdocs
+
 EXPOSE 80
 EXPOSE 443
 EXPOSE 3306
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["bash"]

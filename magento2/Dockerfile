@@ -2,7 +2,7 @@ FROM       php:7-apache
 MAINTAINER Stevie "https://github.com/yzm629"
 
 #更换镜像
-RUN sed -i 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list && \
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
     apt-get update && \
 
     #安装扩展
@@ -23,10 +23,10 @@ RUN sed -i 's/httpredir.debian.org/mirrors.163.com/g' /etc/apt/sources.list && \
     composer config -g repositories.packagist composer https://packagist.phpcomposer.com
 
 RUN apt-get install -y wget unzip git && \
-    wget https://github.com/magento/magento2/archive/2.1.1.zip && \
-    unzip 2.1.1.zip && \
-    rm 2.1.1.zip && \
-    mv magento2-2.1.1 magento2 && \
+    wget https://github.com/magento/magento2/archive/2.2.0.zip && \
+    unzip 2.2.0.zip && \
+    rm 2.2.0.zip && \
+    mv magento2-2.2.0 magento2 && \
     cd magento2 && \
     composer install && \
     chmod -R 777 magento2/var magento2/app/etc magento2/pub/media magento2/pub/static
