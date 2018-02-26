@@ -11,11 +11,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     npm config set registry http://registry.npm.taobao.org && \
     npm config set loglevel=http && \
     npm config set sass_binary_site=http://npm.taobao.org/mirrors/node-sass && \
-    npm config set phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs
+    npm config set phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs && \
 
-RUN git clone --depth=1 https://github.com/Financial-Times/polyfill-service.git && \
+    git clone --depth=1 https://github.com/Financial-Times/polyfill-service.git && \
 	cd polyfill-service && \
-	npm i && \
+	npm install && \
     npm run build && \
     npm cache clear --force
 

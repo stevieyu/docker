@@ -47,7 +47,7 @@
     "logger": "default"
   },
   "security": {
-    "allowAnonymousPreview": false
+    "allowAnonymousPreview": true
   },
   "client": {
     "user": true
@@ -61,7 +61,7 @@
     "report": []
   },
   "api": {
-    "allowAnonymousReadWrite": false,
+    "allowAnonymousReadWrite": true,
     "allowAnonymousRead": true,
     "requireSSL": false
   },
