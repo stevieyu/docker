@@ -8,10 +8,10 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
     apk add --no-cache nodejs nodejs-npm git python make g++
 
-RUN apk add --no-cache mariadb mariadb-client && \
+RUN apk add --no-cache mysql mysql-client && \
     mkdir /run/mysqld && \
-    mysql_install_db --user=root > /dev/null
-    #mysqld --user=root
+    mysql_install_db --user=root > /dev/null && \
+    mysqld_safe --user=root&
 
 	#镜像切换
 RUN	npm config set registry https://registry.npm.taobao.org && \

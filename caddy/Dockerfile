@@ -1,21 +1,19 @@
 FROM       alpine:edge
 MAINTAINER Stevie "https://github.com/yzm629"
 
-ENV COW_INSTALLDIR="/root"
+#https://pkgs.alpinelinux.org/packages
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories \
+    && apk --no-cache add curl \
+    && curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+      "https://caddyserver.com/download/linux/amd64?plugins=http.expires,http.realip&license=personal&telemetry=off" \
+    | tar --no-same-owner -C /usr/bin/ -xz caddy \
+    && chmod 0755 /usr/bin/caddy \
+    && caddy -version
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update && \
-    apk add curl && \
-    curl -L https://raw.githubusercontent.com/cyfdecyf/cow/master/install-cow.sh | sh
+EXPOSE 80 443 2015
 
-WORKDIR /root/.cow/
-RUN mv rc rc.bak && \
-    echo 'listen = http://0.0.0.0:7777' >> rc && \
-    echo 'loadBalance = latency' >> rc && \
-    echo 'alwaysProxy = true' >> rc && \
-    #echo 'proxy = ss://chacha20:JgCGuv@hk-1.mitsuha-node.com:27457' >> rc && \
-    echo 'proxy = socks5://172.17.0.1:9991' >> rc
+ENTRYPOINT ["/usr/bin/caddy"]
 
-EXPOSE 7777
-
-CMD ["/root/cow"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout"]

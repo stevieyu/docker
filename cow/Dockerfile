@@ -1,21 +1,28 @@
 FROM       alpine:edge
 MAINTAINER Stevie "https://github.com/yzm629"
 
+WORKDIR /root/
+
 ENV COW_INSTALLDIR="/root"
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update && \
-    apk add curl && \
-    curl -L https://raw.githubusercontent.com/cyfdecyf/cow/master/install-cow.sh | sh
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+	&& apk update
+    #&& apk add tar \
+    #&& curl -L https://raw.githubusercontent.com/cyfdecyf/cow/master/install-cow.sh | sh
+
+COPY cow-linux64-0.9.8 cow
+
+RUN chmod 777 cow && \
+	mkdir .cow
 
 WORKDIR /root/.cow/
-RUN mv rc rc.bak && \
-    echo 'listen = http://0.0.0.0:7777' >> rc && \
-    echo 'loadBalance = latency' >> rc && \
-    echo 'alwaysProxy = true' >> rc && \
-    #echo 'proxy = ss://chacha20:JgCGuv@hk-1.mitsuha-node.com:27457' >> rc && \
-    echo 'proxy = socks5://172.17.0.1:9991' >> rc
 
-EXPOSE 7777
+RUN echo 'listen = http://0.0.0.0:8080' >> rc && \
+    echo 'loadBalance = latency' >> rc
+    #echo 'alwaysProxy = true' >> rc && \
+    #echo 'proxy = ss://aes-128-cfb:miaomiao@hk-3.mitsuha-node.com:543' >> rc
+    #echo 'proxy = socks5://172.17.0.1:9991' >> rc
+
+EXPOSE 8080
 
 CMD ["/root/cow"]
