@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "8088:80"
+      # - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./letsencrypt:/etc/letsencryp
+      - ./www:/usr/share/nginx/html/php-fpm
+    depends_on:
+      - php-fpm
+    links:
+      - php-fpm
+
+  php-fpm:
+    image: php:fpm-alpine
+    expose:
+      - "9000"
+    volumes:
+      - ./www:/var/www/html
+  #   depends_on:
+  #     - mysql
+  #   links:
+  #     - mysql
+
+  # apn:
+  #   image: apn
+  #   expose:
+  #     - "9000"
+  #   volumes:
+  #     - ./wordpress:/var/www/html
+  #   depends_on:
+  #     - mysql
+  #   links:
+  #     - mysql
+  #   command: php-fpm -F
+
+  # mysql:
+  #   image: mysql
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - ./mysql:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+
