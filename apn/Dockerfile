@@ -29,7 +29,7 @@ RUN php --ini && \
     npm config set loglevel=http && \
 
     mkdir -p /var/www/html && \
-    chmod -R nobody:nobody /var/www/html
+    chown -R nobody:nobody /var/www/html
 
 WORKDIR /var/www/html
 
