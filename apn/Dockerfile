@@ -26,7 +26,12 @@ RUN php --ini && \
     composer config -g repositories.packagist composer https://packagist.phpcomposer.com && \
 
     npm config set registry https://registry.npm.taobao.org && \
-    npm config set loglevel=http
+    npm config set loglevel=http && \
+
+    mkdir -p /var/www/html && \
+    chmod -R nobody:nobody /var/www/html
+
+WORKDIR /var/www/html
 
 CMD ["php", "-a"]
 #CMD ["php-fpm", "-F"]
