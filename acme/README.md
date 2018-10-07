@@ -18,9 +18,5 @@ neilpang/acme.sh --issue --dns dns_ali -d *.flyyweb.com
 
 docker run --rm -it \
 -v $PWD:/acme.sh \
-neilpang/acme.sh --install-cert -d *.flyyweb.com --key-file /acme.sh/ssl/flyyweb.com.key --fullchain-file /acme.sh/ssl/flyyweb.com.cer
-
-docker run --rm -it \
--v $PWD:/acme.sh \
-neilpang/acme.sh --renew --force -d *.stevie.top -d *.flyyweb.com
+neilpang/acme.sh --renew --force -d *.flyyweb.com
 ```

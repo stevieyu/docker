@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-stretch
+FROM php:rc-fpm-stretch
 
 # Install Caddy
 RUN curl --silent --show-error --fail --location \
@@ -8,11 +8,11 @@ RUN curl --silent --show-error --fail --location \
     && chmod 0755 /usr/bin/caddy \
     && caddy -version \
     && docker-php-ext-install mbstring pdo pdo_mysql opcache \
-    && mkdir -p /srv/app/public
+    && mkdir -p /www/public
 
 COPY Caddyfile /etc/Caddyfile
 
-WORKDIR /srv/app
+WORKDIR /www
 
 EXPOSE 80 443 2015
 

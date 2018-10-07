@@ -1,9 +1,7 @@
-FROM       alpine:edge
+FROM       alpine:latest
 MAINTAINER Stevie "https://github.com/yzm629"
 
-#https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories \
     && apk --no-cache add curl \
     && curl --silent --show-error --fail --location \
       --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \

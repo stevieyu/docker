@@ -11,7 +11,6 @@ WORKDIR /opt
 
 #https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    echo http://mirrors.ustc.edu.cn/alpine/edge/testing >> /etc/apk/repositories && \
 
     npm config set registry http://registry.npm.taobao.org && \
     npm config set loglevel=http && \

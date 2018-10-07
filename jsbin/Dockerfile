@@ -3,9 +3,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 WORKDIR /root
 
-#https://pkgs.alpinelinux.org/packages
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-    echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
     apk add --no-cache nodejs nodejs-npm git python make g++
 
 RUN apk add --no-cache mysql mysql-client && \
