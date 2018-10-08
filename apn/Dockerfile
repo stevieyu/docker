@@ -34,5 +34,7 @@ RUN php --ini && \
 
 WORKDIR /var/www/html
 
+EXPOSE 9000
+
 CMD ["php", "-a"]
 #CMD ["php-fpm", "-F"]

@@ -1,10 +1,12 @@
-FROM       golang:alpine
-MAINTAINER Stevie yzm629@gmail.com
-
-WORKDIR ~
-
+FROM golang:alpine as builder
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-	apk add --no-cache git && \
-	go get -u github.com/rakyll/hey
+	apk add --no-cache git upx binutils && \
+	go get -v github.com/rakyll/hey && \
+	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /go/bin/hey src/github.com/rakyll/hey/hey.go && \
+	strip --strip-unneeded /go/bin/hey && \
+	upx /go/bin/hey
 
-ENTRYPOINT ["hey"]
+FROM alpine:latest
+WORKDIR /root
+COPY --from=builder /go/bin/hey .
+ENTRYPOINT ["/root/hey"]
