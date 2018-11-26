@@ -3,7 +3,7 @@
 ```shell
 docker build t apn .
 
-docker run -it --rm -p 80:80 -v $PWD:/var/www/html -w /var/www/html apn php 
+docker run -it --rm -p 80:80 -v $PWD:/home -w /home apn php -S 0.0.0.0:80
 
 docker exec -it {container_id} sh
 ```

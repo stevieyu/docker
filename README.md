@@ -27,3 +27,10 @@ docker exec -it {container_id} sh
 https://caddyserver.com/download/build?os=darwin&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 ```
+
+```
+# alpine build apk
+
+alpine-sdk
+build-base
+```

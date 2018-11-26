@@ -1,19 +1,14 @@
-FROM       ubuntu:latest
+FROM       ubuntu:16.04
 MAINTAINER Stevie "https://github.com/yzm629"
 
+#https://github.com/serghey-rodin/vesta
 WORKDIR /root
 
-#更换镜像
-RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list && \
-
-#安装&更新
+RUN sed -i -E 's/(archive|security).ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list && \
 	apt-get update && \
     apt-get install -y curl lsb-release && \
-
-#安装vestacp
-	curl -O http://vestacp.com/pub/vst-install.sh
-
-# RUN bash vst-install.sh --nginx yes --phpfpm yes --apache no --named no --remi no --vsftpd yes --proftpd no --iptables no --fail2ban no --quota no --exim no --dovecot no --spamassassin no --clamav no --mysql yes --postgresql no --hostname demo --email demo@demo.cn --password demo
+	curl -O http://vestacp.com/pub/vst-install.sh && \
+	bash vst-install.sh --interactive no --lang cn --nginx yes --phpfpm yes --apache no --named no --remi no --vsftpd yes --proftpd no --iptables no --fail2ban no --quota no --exim no --dovecot no --spamassassin no --clamav no --softaculous no --mysql yes --postgresql no --hostname 0.0.0.0 --email admin@admin.cn --password admin
 
 #清理操作
 # 	apt-get autoclean && \

@@ -7,9 +7,10 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #ENV https_proxy ""
 
 #更换镜像
-#RUN sed -i 's/archive.ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
-#RUN sed -i 's/[archive|security].ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
-RUN sed -i 's/archive.ubuntu.com/cn.archive.ubuntu.com/g' /etc/apt/sources.list
+#mirrors.163.com
+#cn.archive.ubuntu.com
+#mirrors.aliyun.com
+RUN sed -i -E 's/(archive|security).ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 #安装&更新
 RUN apt-get update && \

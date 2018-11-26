@@ -1,0 +1,17 @@
+# "."命名开头的文件将不会被载入
+page: 
+    entry: "http://www.66ip.cn/areaindex_33/1.html"
+    template: ""
+    from: 0
+    to: 0
+selector:
+    iterator: "#main > div > div:nth-child(1) > table > tbody  tr"
+    ip: "td:nth-child(1)"
+    port: "td:nth-child(2)"
+    scheme: "td:nth-child(3)"
+    filter: ""
+category:
+    parallelnumber: 1
+    delayRange: [3, 5]
+    interval: "@every 20m"
+debug: false
