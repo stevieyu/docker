@@ -34,3 +34,15 @@ https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilem
 alpine-sdk
 build-base
 ```
+
+```sh
+docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
+
+docker run -d -p 27017:27017 --name mongo mongo
+
+docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres postgres:alpine
+
+docker run -d -p 6379:6379 --name redis redis:alpine
+
+docker run -d -p 11211:11211 --name memcached memcached:alpine
+```
