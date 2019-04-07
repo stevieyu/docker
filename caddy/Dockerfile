@@ -2,13 +2,13 @@ FROM       alpine:latest
 MAINTAINER Stevie "https://github.com/yzm629"
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk --no-cache add curl \
-    && curl --silent --show-error --fail --location \
-      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://caddyserver.com/download/linux/amd64?plugins=http.expires,http.realip&license=personal&telemetry=off" \
-    | tar --no-same-owner -C /usr/bin/ -xz caddy \
+	&& plugins="http.cache,http.cors,http.expires,http.filebrowser,http.filter,http.forwardproxy,http.geoip,http.git,http.minify" \
+    && apk --no-cache add axel \
+    && axel -o caddy.tar.gz "https://caddyserver.com/download/linux/amd64?plugins=$plugins&license=personal&telemetry=off" \
+    && tar -vf caddy.tar.gz -C /usr/bin/ -xz caddy \
     && chmod 0755 /usr/bin/caddy \
-    && caddy -version
+    && rm caddy.tar.gz \
+    && apk del axel
 
 EXPOSE 80 443 2015
 

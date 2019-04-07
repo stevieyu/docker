@@ -12,7 +12,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     npm config set sass_binary_site=http://npm.taobao.org/mirrors/node-sass && \
     npm config set phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs && \
 
-    npm i -g browser-sync whistle spy-debugger vue-cli && \
+    npm i -g browser-sync whistle spy-debugger weinre vue-cli && \
     npm cache clean --force
 
 #browser-sync

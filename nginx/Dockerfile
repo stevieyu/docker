@@ -3,7 +3,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
-ENV NGINX_VERSION 1.15.8
+ENV NGINX_VERSION 1.15.9
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 	&& GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \

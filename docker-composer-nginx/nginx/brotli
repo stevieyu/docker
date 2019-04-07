@@ -3,5 +3,5 @@
 	brotli_buffers 16 10k;
 	brotli_window 512k;
 	brotli_comp_level 10;
-	brotli_types text/html text/xml text/plain application/json text/css image/svg application/font-woff application/vnd.ms-fontobject application/vnd.apple.mpegurl application/javascript image/x-icon image/jpeg image/gif image/png;
+	brotli_types text/html text/plain text/xml text/plain application/json text/css image/svg application/font-woff application/vnd.ms-fontobject application/vnd.apple.mpegurl application/javascript image/x-icon image/jpeg image/gif image/png;
 	brotli_static always;

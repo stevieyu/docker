@@ -14,9 +14,9 @@ docker run --rm -it \
 -e Ali_Key=LTAImSnSXHS6kB11 \
 -e Ali_Secret=OafFLRpNqhgepAG9QuQSlhtMIGbbYM \
 -v $PWD:/acme.sh  \
-neilpang/acme.sh --issue --dns dns_ali -d *.flyyweb.com
+neilpang/acme.sh --issue --dns dns_ali -d '*.d.flyyweb.com'
 
 docker run --rm -it \
 -v $PWD:/acme.sh \
-neilpang/acme.sh --renew --force -d *.flyyweb.com
+neilpang/acme.sh --renew --force -d '*.d.flyyweb.com'
 ```

@@ -1,0 +1,18 @@
+:8000
+
+gzip {
+	ext *
+	level 9
+}
+
+cache
+
+cors / {
+  	allow_credentials true
+    max_age           31536000
+	allowed_headers   authorization
+}
+
+proxy / http://192.168.0.117 {
+	policy header X-My-Header
+}
