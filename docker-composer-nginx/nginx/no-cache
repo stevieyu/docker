@@ -1,0 +1,5 @@
+    location ~.*\.(html)$ {
+        expires    -1;
+        add_header Cache-Control no-cache;
+        root  $htmlPath/lily/public;
+    }

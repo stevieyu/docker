@@ -1,15 +1,14 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER Stevie yzm629@gmail.com
 
-ENV UNIT_VERSION=1.7
-
-WORKDIR /root
+ENV UNIT_VERSION=1.8.0
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk add --no-cache curl alpine-sdk nodejs nodejs-npm && \
+	echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
+    apk add --no-cache curl alpine-sdk python nodejs nodejs-npm && \
     npm config set registry https://registry.npm.taobao.org && \
     npm config set loglevel=http && \
-    npm i -g node-gyp && \
+    npm install -g --unsafe-perm unit-http node-gyp && \
     curl -L https://unit.nginx.org/download/unit-$UNIT_VERSION.tar.gz -o unit.tar.gz && \
     tar -xzvf unit.tar.gz && mv unit-$UNIT_VERSION unit && \
     cd unit && \
@@ -23,9 +22,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 	./configure nodejs && \
 	make all && \
 	make install && \
-	cd .. && rm -rf unit* && apk del alpine-sdk curl
+	cd .. && rm -rf unit* && apk del alpine-sdk python curl
 
-VOLUME /var/www
+VOLUME /www
 
 ENTRYPOINT ["unitd"]
 CMD ["--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
