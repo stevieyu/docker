@@ -3,6 +3,9 @@ VPN on Linux/MacOS/Windows, maybe you can use it for games
 [docs](https://github.com/txthinking/brook)
 
 ```
+# build 
+docker build -t brook .
+
 # run server
 docker run -d -p 9999:9999 --name brook-server brook server -l :9999 -p password
 
