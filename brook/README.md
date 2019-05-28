@@ -7,11 +7,11 @@ VPN on Linux/MacOS/Windows, maybe you can use it for games
 docker build -t brook .
 
 # run server
-docker run -d -p 9999:9999 --name brook-server --debug brook server -l :9999 -p password
+docker run -d -p 9999:9999 --name brook-server brook --debug server -l :9999 -p password
 
 # run client
-docker run -d -p 5080:5080 --name brook-client --debug brook client -l :5080 -i 0.0.0.0 -s 119.29.205.85:9999 -p password
+docker run --rm -d -p 5080:5080 --name brook-client brook --debug client -l :5080 -i 0.0.0.0 -s 47.244.144.198:9999 -p password
 
 # run client for http
-docker run -d -p 5080:5080 --name brook-client --debug brook client -l :5080 -i 0.0.0.0 -s server_address:port -p password --http
+docker run --rm -d -p 5081:5081 --name brook-client brook --debug client -l :5081 -i 0.0.0.0 -s 47.244.144.198:9999 -p password --http
 ```

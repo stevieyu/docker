@@ -3,7 +3,7 @@ MAINTAINER Stevie yzm629@gmail.com
 
 WORKDIR /root
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk add --no-cache axel unzip \
     && axel -k -n 10 https://github.com/v2ray/v2ray-core/releases/download/v4.13.0/v2ray-linux-64.zip \
     && unzip v2ray-linux-64.zip -d v2ray \
