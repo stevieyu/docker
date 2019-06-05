@@ -13,6 +13,7 @@ RUN sed -i -E 's/(archive|security).ubuntu.com/mirrors.aliyun.com/g' /etc/apt/so
 	&& apt-get update \
     && apt-get install -y git curl unzip libglu1-mesa xz-utils lib32stdc++6 \
     && git clone --depth=2 https://github.com/flutter/flutter.git \
-    && flutter doctor -v
+    && flutter doctor -v \
+    && flutter pub global activate webdev -v
 
 CMD flutter doctor
