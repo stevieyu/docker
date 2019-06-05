@@ -2,7 +2,7 @@ FROM       ubuntu:latest
 MAINTAINER Stevie "https://github.com/yzm629"
 
 ENV FLUTTER_PATH=/flutter/bin \
-	PUB_CACHE_BIN=$HOME/.pub-cache/bin \
+	PUB_CACHE_BIN=/root/.pub-cache/bin \
 	DART_PATH=/flutter/bin/cache/dart-sdk/bin \
 	PUB_HOSTED_URL=https://pub.flutter-io.cn \
 	FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
