@@ -46,3 +46,24 @@ docker run -d -p 6379:6379 --name redis redis:alpine
 
 docker run -d -p 11211:11211 --name memcached memcached:alpine
 ```
+
+## drone
+```sh
+docker run \
+  --volume=/var/run/docker.sock:/var/run/docker.sock \
+  --volume=/var/lib/drone:/data \
+  --env=DRONE_USER_CREATE=username:stevieyu,admin:true \
+  --env=DRONE_GITHUB_SERVER=https://github.com \
+  --env=DRONE_GITHUB_CLIENT_ID=e67a849c443ffb962743 \
+  --env=DRONE_GITHUB_CLIENT_SECRET=33189774f574508b8d38b303c83607d2364627a6 \
+  --env=DRONE_RUNNER_CAPACITY=2 \
+  --env=DRONE_SERVER_HOST=119.29.205.85 \
+  --env=DRONE_SERVER_PROTO=http \
+  --env=DRONE_TLS_AUTOCERT=false \
+  --publish=80:80 \
+  --publish=443:443 \
+  --restart=always \
+  --detach=true \
+  --name=drone \
+  drone/drone
+```
