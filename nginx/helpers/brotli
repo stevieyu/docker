@@ -1,0 +1,7 @@
+	brotli on;
+	brotli_min_length 1k;
+	brotli_buffers 16 10k;
+	brotli_window 512k;
+	brotli_comp_level 10;
+	brotli_types text/plain text/xml application/json text/css image/svg application/font-woff application/vnd.ms-fontobject application/vnd.apple.mpegurl application/javascript image/x-icon image/jpeg image/gif image/png;
+	brotli_static always;
