@@ -16,7 +16,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
     \
     apk add --no-cache curl && \
-    curl https://dl.laravel-china.org/composer.phar -o /usr/local/bin/composer && \
+    curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
