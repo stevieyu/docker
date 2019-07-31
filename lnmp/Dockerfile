@@ -22,8 +22,8 @@ RUN echo PATH="/opt/lnmp/git/bin:/opt/lnmp/php/bin:/opt/lnmp/mysql/bin:/opt/lnmp
 
     /opt/lnmp/php/bin/composer self-update && \
     /opt/lnmp/php/bin/composer config -g secure-http false && \
-    /opt/lnmp/php/bin/composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
-    /opt/lnmp/php/bin/composer config -g repositories.packagist composer https://packagist.phpcomposer.com && \
+    /opt/lnmp/php/bin/composer config -g github-oauth.github.com de26cefe889daf1030c123578b162b5a651f08ba && \
+    /opt/lnmp/php/bin/composer config -g repositories.packagist composer https://mirrors.aliyun.com/composer/ && \
 
     #phpmyadmin开启外网访问
     sed -i "s/allow 127.0.0.1;/#allow 127.0.0.1;/" /opt/lnmp/apps/phpmyadmin/conf/nginx-app.conf && \

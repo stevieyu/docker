@@ -22,8 +22,8 @@ RUN echo PATH="/opt/lamp/git/bin:/opt/lamp/php/bin:/opt/lamp/mysql/bin:/opt/lamp
 
 	/opt/lamp/php/bin/composer self-update && \
 	/opt/lamp/php/bin/composer config -g secure-http false && \
-    /opt/lamp/php/bin/composer config -g github-oauth.github.com 8772343e8343b3dfdcf77f57c27bc0bd4f08550f && \
-    /opt/lamp/php/bin/composer config -g repositories.packagist composer https://packagist.phpcomposer.com && \
+    /opt/lamp/php/bin/composer config -g github-oauth.github.com de26cefe889daf1030c123578b162b5a651f08ba && \
+    /opt/lamp/php/bin/composer config -g repositories.packagist composer https://mirrors.aliyun.com/composer/ && \
 
     #phpmyadmin开启外网访问
     sed -i "s/Require local/Require all granted/" /opt/lamp/apps/phpmyadmin/conf/httpd-app.conf && \
