@@ -35,6 +35,7 @@ alpine-sdk
 build-base
 ```
 
+## service
 ```sh
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
 
@@ -45,6 +46,14 @@ docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres postgre
 docker run -d -p 6379:6379 --name redis redis:alpine
 
 docker run -d -p 11211:11211 --name memcached memcached:alpine
+```
+
+## ctop
+```sh
+docker run --rm -ti \
+  --name=ctop \
+  --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+  quay.io/vektorlab/ctop
 ```
 
 ## drone
@@ -67,3 +76,50 @@ docker run \
   --name=drone \
   drone/drone
 ```
+
+## graphql-engine
+```sh
+docker run -d -p 8080:8080 \
+  -e HASURA_GRAPHQL_DATABASE_URL=postgres://ywsestdn:umWT_4hbj6Duw__mF0xBeuvNBdRRUg5M@satao.db.elephantsql.com:5432/ywsestdn \
+  -e HASURA_GRAPHQL_ENABLE_CONSOLE=true \
+  --name graphql-engine \
+  hasura/graphql-engine
+```
+
+### npm mirrors config 
+```
+https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
+
+chromedriver-cdnurl = "https://npm.taobao.org/mirrors/chromedriver"
+couchbase-binary-host-mirror = "https://npm.taobao.org/mirrors/couchbase/v{version}"
+debug-binary-host-mirror = "https://npm.taobao.org/mirrors/node-inspector"
+disturl = "https://npm.taobao.org/dist"
+electron-mirror = "https://npm.taobao.org/mirrors/electron/"
+flow-bin-binary-host-mirror = "https://npm.taobao.org/mirrors/flow/v"
+fse-binary-host-mirror = "https://npm.taobao.org/mirrors/fsevents"
+fuse-bindings-binary-host-mirror = "https://npm.taobao.org/mirrors/fuse-bindings/v{version}"
+git4win-mirror = "https://npm.taobao.org/mirrors/git-for-windows"
+gl-binary-host-mirror = "https://npm.taobao.org/mirrors/gl/v{version}"
+grpc-node-binary-host-mirror = "https://npm.taobao.org/mirrors"
+hackrf-binary-host-mirror = "https://npm.taobao.org/mirrors/hackrf/v{version}"
+leveldown-binary-host-mirror = "https://npm.taobao.org/mirrors/leveldown/v{version}"
+leveldown-hyper-binary-host-mirror = "https://npm.taobao.org/mirrors/leveldown-hyper/v{version}"
+mknod-binary-host-mirror = "https://npm.taobao.org/mirrors/mknod/v{version}"
+node-sqlite3-binary-host-mirror = "https://npm.taobao.org/mirrors"
+node-tk5-binary-host-mirror = "https://npm.taobao.org/mirrors/node-tk5/v{version}"
+nodegit-binary-host-mirror = "https://npm.taobao.org/mirrors/nodegit/v{version}/"
+operadriver-cdnurl = "https://npm.taobao.org/mirrors/operadriver"
+phantomjs-cdnurl = "https://npm.taobao.org/mirrors/phantomjs"
+profiler-binary-host-mirror = "https://npm.taobao.org/mirrors/node-inspector/"
+puppeteer-download-host = "https://npm.taobao.org/mirrors"
+python-mirror = "https://npm.taobao.org/mirrors/python"
+rabin-binary-host-mirror = "https://npm.taobao.org/mirrors/rabin/v{version}"
+registry = "https://registry.npm.taobao.org/"
+sass-binary-site = "https://npm.taobao.org/mirrors/node-sass"
+sodium-prebuilt-binary-host-mirror = "https://npm.taobao.org/mirrors/sodium-prebuilt/v{version}"
+sqlite3-binary-site = "https://npm.taobao.org/mirrors/sqlite3"
+utf-8-validate-binary-host-mirror = "https://npm.taobao.org/mirrors/utf-8-validate/v{version}"
+utp-native-binary-host-mirror = "https://npm.taobao.org/mirrors/utp-native/v{version}"
+zmq-prebuilt-binary-host-mirror = "https://npm.taobao.org/mirrors/zmq-prebuilt/v{version}"
+```
+
