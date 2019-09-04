@@ -14,4 +14,4 @@
     add_header 'Access-Control-Allow-Origin' "$http_origin";
     add_header 'Access-Control-Allow-Credentials' 'true';
 
-    add_header 'Server-Timing' "nginx;dur=$request_time, nginxproxy;dur=$upstream_response_time";
+    add_header 'Server-Timing' "nginx_request_time;dur=$request_time, nginx_upstream_response_time;dur=$upstream_response_time";
