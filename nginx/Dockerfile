@@ -23,7 +23,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 		--http-scgi-temp-path=/var/cache/nginx/scgi_temp \
 		--user=nginx \
 		--group=nginx \
-		--with-ngx_http_upstream_module \
 		--with-http_ssl_module \
 		--with-http_realip_module \
 		--with-http_addition_module \
