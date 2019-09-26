@@ -123,3 +123,9 @@ utp-native-binary-host-mirror = "https://npm.taobao.org/mirrors/utp-native/v{ver
 zmq-prebuilt-binary-host-mirror = "https://npm.taobao.org/mirrors/zmq-prebuilt/v{version}"
 ```
 
+### go proxy
+```sh
+go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+
