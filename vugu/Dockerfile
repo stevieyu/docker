@@ -1,4 +1,4 @@
-FROM golang:alpine as builder
+FROM golang:alpine
 
 ADD demo /demo
 
@@ -10,8 +10,4 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	go get github.com/vugu/vugu/simplehttp && \
 	go build devserver.go
 
-FROM alpine:latest
-WORKDIR /root
-COPY --from=builder /demo/devserver .
-
-CMD ["/root/devserver"]
+CMD ["/demo/devserver"]
