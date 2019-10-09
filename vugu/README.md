@@ -1,3 +1,5 @@
 ```sh
-docker build --build-arg HTTPS_PROXY=http://192.168.2.129:1087 -t vugu .
+docker build -t vugu .
+
+docker run --rm -it -p 8844:8844 vugu
 ```
