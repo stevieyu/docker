@@ -24,7 +24,6 @@ docker exec -it {container_id} sh
 
 #### caddy link
 ```
-https://caddyserver.com/download/build?os=darwin&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 ```
 
@@ -126,6 +125,55 @@ zmq-prebuilt-binary-host-mirror = "https://npm.taobao.org/mirrors/zmq-prebuilt/v
 ### go proxy
 ```sh
 go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+### shadowsocks-libev
+```
+Encrypt method: rc4-md5,
+                aes-128-gcm, aes-192-gcm, aes-256-gcm,
+                aes-128-cfb, aes-192-cfb, aes-256-cfb,
+                aes-128-ctr, aes-192-ctr, aes-256-ctr,
+                camellia-128-cfb, camellia-192-cfb,
+                camellia-256-cfb, bf-cfb,
+                chacha20-ietf-poly1305,
+                xchacha20-ietf-poly1305,
+                salsa20, chacha20 and chacha20-ietf.
+                The default cipher is chacha20-ietf-poly1305
+```
+```sh
+docker run --rm -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSWORD=12345678 --name ss-server shadowsocks/shadowsocks-libev
+```
+
+### install docker
+```sh
+apt update && \
+apt install apt-transport-https ca-certificates software-properties-common curl && \
+curl -fsSL http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - && \
+sudo add-apt-repository "deb [arch=amd64] http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" && \
+apt update && \
+apt install -y docker-ce && \
+docker version
+```
+
+### install dokku
+```sh
+wget -nv -O - https://packagecloud.io/dokku/dokku/gpgkey | apt-key add - && \
+export SOURCE="https://packagecloud.io/dokku/dokku/ubuntu/" && \
+export OS_ID="$(lsb_release -cs 2>/dev/null || echo "trusty")" && \
+echo "utopicvividwilyxenialyakketyzestyartfulbionic" | grep -q "$OS_ID" || OS_ID="trusty" && \
+echo "deb $SOURCE $OS_ID main" | tee /etc/apt/sources.list.d/dokku.list && \
+apt-get update && \
+apt-get install -y dokku && \
+dokku plugin:install-dependencies --core
+```
+
+### install kubernetes
+```sh
+apt-get update && apt-get install -y apt-transport-https && \
+curl http://mirrors.cloud.aliyuncs.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - && \
+echo "deb http://mirrors.cloud.aliyuncs.com/kubernetes/apt/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list && \
+apt update && \
+apt-get install -y kubelet kubeadm kubectl
 ```
 
 

@@ -1,4 +1,4 @@
-FROM       tensorflow/tensorflow:2.0.0r0-py3-jupyter
+FROM       tensorflow/tensorflow:2.0.0-py3-jupyter
 MAINTAINER Stevie https://github.com/yzm629
 
 ADD ./pip.conf /root/.pip/pip.conf
