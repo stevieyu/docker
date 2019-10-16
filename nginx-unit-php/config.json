@@ -7,7 +7,11 @@
     "applications": {
         "php": {
             "type": "php",
-            "processes": 20,
+            "processes": {
+                "max": 20,
+                "spare": 1,
+                "idle_timeout": 10
+            },
             "root": "/www",
             "index": "index.php"
         }

@@ -4,7 +4,6 @@ MAINTAINER Stevie yzm629@gmail.com
 ENV UNIT_VERSION=1.12.0
 
 WORKDIR /root
-COPY config.json .
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
 	apk add --no-cache nodejs-current nodejs-current-npm curl && \
@@ -41,11 +40,12 @@ RUN npm i && \
 	npm cache clean -f
 
 	# unit 配置
+COPY config.json /root/
 COPY app /www/
 RUN chmod +x app.js && \
 	unitd --control unix:/run/control.unit.sock && \
 	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
 	rm /root/config.json
 
-#ENTRYPOINT ["unitd"]
-CMD ["unitd", "--no-daemon", "--control", "unix:/run/control.unit.sock"]
+ENTRYPOINT ["unitd"]
+CMD ["--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
