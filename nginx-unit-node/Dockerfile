@@ -1,17 +1,23 @@
-FROM alpine:edge
+FROM alpine:latest
 MAINTAINER Stevie yzm629@gmail.com
 
 ENV UNIT_VERSION=1.12.0
 
+WORKDIR /root
+COPY config.json .
+
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-	echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
-	apk add --no-cache nodejs nodejs-npm && \
-    apk add --no-cache --virtual .build-deps curl alpine-sdk python && \
+	apk add --no-cache nodejs-current nodejs-current-npm curl && \
+	# 安装编译依赖
+    apk add --no-cache --virtual .build-deps alpine-sdk python && \
+    # 设置 node 环境配置
     npm config set registry https://registry.npm.taobao.org && \
     npm config set loglevel=http && \
-    npm install -g --unsafe-perm unit-http node-gyp && \
+    npm i -g node-gyp && \
+    # 下载解压
     curl -L https://unit.nginx.org/download/unit-$UNIT_VERSION.tar.gz -o unit.tar.gz && \
     tar -xzvf unit.tar.gz && mv unit-$UNIT_VERSION unit && \
+    # 配置 & 安装
     cd unit && \
     ./configure \
 		--prefix="/usr" \
@@ -21,12 +27,25 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 		--log="/var/log/unit.log" \
 		--modules="/usr/lib/unit/modules" && \
 	./configure nodejs && \
-	make all && \
 	make install && \
-	npm config set registry https://registry.npm.taobao.org && \
-	cd .. && rm -rf unit* && apk del .build-deps
+	make node-install && \
+	apk del .build-deps && \
+	rm -rf unit* && npm uninstall node-gyp -g && npm cache clean -f
 
-VOLUME /www
+	# 配置 demo 环境
+COPY app/package.json /www/
+WORKDIR /www
 
-ENTRYPOINT ["unitd"]
-CMD ["--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
+RUN npm i && \
+	npm link unit-http && \
+	npm cache clean -f
+
+	# unit 配置
+COPY app /www/
+RUN chmod +x app.js && \
+	unitd --control unix:/run/control.unit.sock && \
+	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
+	rm /root/config.json
+
+#ENTRYPOINT ["unitd"]
+CMD ["unitd", "--no-daemon", "--control", "unix:/run/control.unit.sock"]

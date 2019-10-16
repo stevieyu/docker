@@ -13,7 +13,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	php7-intl php7-exif php7-xmlwriter php7-simplexml \
     php7-tokenizer php7-dom php7-xml php7-opcache php7-session php7-gd \
     php7-ctype php7-mcrypt php7-pdo_mysql php7-pdo_sqlite php7-mysqli php7-mysqlnd php7-pear && \
-    # 安装开发依赖
+    # 安装编译依赖
     apk add --no-cache --virtual .build-deps curl alpine-sdk php7-dev && \
     curl -L https://unit.nginx.org/download/unit-$UNIT_VERSION.tar.gz -o unit.tar.gz && \
     tar -xzvf unit.tar.gz && mv unit-$UNIT_VERSION unit && \
@@ -27,7 +27,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 		--log="/var/log/unit.log" \
 		--modules="/usr/lib/unit/modules" && \
 	./configure php --module=php7 --config=php-config7 && \
-	make all && \
 	make install && \
 	cd .. && rm -rf unit* && \
 	# 配置 demo 环境
