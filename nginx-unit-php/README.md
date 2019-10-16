@@ -30,7 +30,7 @@ curl -X PUT \
         "php": {
             "type": "php",
             "processes": 20,
-            "root": "/var/www",
+            "root": "/www",
             "index": "index.php"
         }
     }

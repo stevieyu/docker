@@ -1,11 +1,12 @@
 FROM alpine:edge
 MAINTAINER Stevie yzm629@gmail.com
 
-ENV UNIT_VERSION=1.8.0
+ENV UNIT_VERSION=1.12.0
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
 	echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
-    apk add --no-cache curl alpine-sdk python nodejs nodejs-npm && \
+	apk add --no-cache nodejs nodejs-npm && \
+    apk add --no-cache --virtual .build-deps curl alpine-sdk python && \
     npm config set registry https://registry.npm.taobao.org && \
     npm config set loglevel=http && \
     npm install -g --unsafe-perm unit-http node-gyp && \
@@ -22,7 +23,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 	./configure nodejs && \
 	make all && \
 	make install && \
-	cd .. && rm -rf unit* && apk del alpine-sdk python curl
+	npm config set registry https://registry.npm.taobao.org && \
+	cd .. && rm -rf unit* && apk del .build-deps
 
 VOLUME /www
 

@@ -1,0 +1,15 @@
+{
+    "listeners": {
+        "*:8020": {
+            "application": "php"
+        }
+    },
+    "applications": {
+        "php": {
+            "type": "php",
+            "processes": 20,
+            "root": "/www",
+            "index": "index.php"
+        }
+    }
+}
