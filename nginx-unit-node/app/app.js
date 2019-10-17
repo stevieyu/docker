@@ -23,7 +23,7 @@ const koa = () => {
 
 const fastify = () => {
 	const app = require("fastify")({
-		serverFactory: (handler) => createServer(handler)
+		serverFactory: createServer
 	});
 
 	app.get("/", (req, reply) => {
@@ -33,4 +33,4 @@ const fastify = () => {
 	app.ready();
 }
 
-express()
+fastify()
