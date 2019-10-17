@@ -42,10 +42,11 @@ RUN npm i && \
 	# unit 配置
 COPY config.json /root/
 COPY app /www/
-RUN chmod +x app.js && \
+RUN chmod +x app* && \
 	unitd --control unix:/run/control.unit.sock && \
 	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
-	rm /root/config.json
+	rm /root/config.json && \
+	cat /var/log/unit.log
 
 ENTRYPOINT ["unitd"]
 CMD ["--no-daemon", "--control", "unix:/var/run/control.unit.sock"]

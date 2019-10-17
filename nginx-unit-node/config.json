@@ -7,6 +7,11 @@
     "applications": {
         "node": {
             "type": "external",
+            "processes": {
+                "max": 20,
+                "spare": 1,
+                "idle_timeout": 10
+            },
             "working_directory": "/www/",
             "executable": "app.js"
          }
