@@ -3,7 +3,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
-ENV NGINX_VERSION 1.17.3
+ENV NGINX_VERSION 1.17.6
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 	&& GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
@@ -69,23 +69,22 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 		libxslt-dev \
 		gd-dev \
 		geoip-dev \
-	&& git clone --depth=1 https://github.com/google/ngx_brotli.git /usr/src/ngx_brotli \
-	&& cd /usr/src/ngx_brotli && git submodule update --init && cd / \
+	&& git clone --depth=1 --recursive https://github.com/google/ngx_brotli.git /usr/src/ngx_brotli \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& found=''; \
-	for server in \
-		ha.pool.sks-keyservers.net \
-		hkp://keyserver.ubuntu.com:80 \
-		hkp://p80.pool.sks-keyservers.net:80 \
-		pgp.mit.edu \
-	; do \
-		echo "Fetching GPG key $GPG_KEYS from $server"; \
-		gpg --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$GPG_KEYS" && found=yes && break; \
-	done; \
-	test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEYS" && exit 1; \
-	gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
+    	for server in \
+    		ha.pool.sks-keyservers.net \
+    		hkp://keyserver.ubuntu.com:80 \
+    		hkp://p80.pool.sks-keyservers.net:80 \
+    		pgp.mit.edu \
+    	; do \
+    		echo "Fetching GPG key $GPG_KEYS from $server"; \
+    		gpg --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$GPG_KEYS" && found=yes && break; \
+    	done; \
+        	test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEYS" && exit 1; \
+        	gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
 	&& rm -rf "$GNUPGHOME" nginx.tar.gz.asc \
 	&& mkdir -p /usr/src \
 	&& tar -zxC /usr/src -f nginx.tar.gz \

@@ -7,7 +7,7 @@
 docker run --rm -it \
 -e Ali_Key=9RaC1IMSBx7LQcBM \
 -e Ali_Secret=UNdm8OS8nXyMlKTvjD9X6sRMU0hbte \
--v $PWD:/acme.sh  \
+-v $PWD/acme:/acme.sh  \
 neilpang/acme.sh --issue --dns dns_ali -d *.stevie.top
 
 docker run --rm -it \

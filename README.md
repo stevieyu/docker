@@ -55,6 +55,10 @@ docker run --rm -ti \
   quay.io/vektorlab/ctop
 ```
 
+```
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it nicolargo/glances
+```
+
 ## drone
 ```sh
 docker run \
@@ -127,6 +131,20 @@ zmq-prebuilt-binary-host-mirror = "https://npm.taobao.org/mirrors/zmq-prebuilt/v
 go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
+### docker mirrors
+`http://hub-mirror.c.163.com`
+
+```
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://8dqe4zuz.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
 ### shadowsocks-libev
 ```
 Encrypt method: rc4-md5,
@@ -147,12 +165,18 @@ docker run --rm -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSW
 ### install docker
 ```sh
 apt update && \
-apt install apt-transport-https ca-certificates software-properties-common curl && \
+apt install -y apt-transport-https ca-certificates software-properties-common curl && \
 curl -fsSL http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - && \
 sudo add-apt-repository "deb [arch=amd64] http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" && \
 apt update && \
 apt install -y docker-ce && \
 docker version
+```
+
+### install docker composer
+```sh
+curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
+chmod +x /usr/local/bin/docker-compose
 ```
 
 ### install dokku
@@ -176,4 +200,10 @@ apt update && \
 apt-get install -y kubelet kubeadm kubectl
 ```
 
+### 定时清理
+```sh
+EDITOR=vim crontab -e
+
+0 1 * * * docker rm $(docker ps -a -q); docker rmi $(docker images -q -f dangling=true)
+```
 
