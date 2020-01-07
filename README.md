@@ -191,6 +191,21 @@ apt-get install -y dokku && \
 dokku plugin:install-dependencies --core
 ```
 
+#### dokku config
+```sh
+dokku config:set NPM_CONFIG_PRODUCTION=false DOKKU_LETSENCRYPT_EMAIL=dgjx163@163.com
+```
+
+### install podman,buildah,skopeo
+```sh
+apt install -y software-properties-common uidmap slirp4netns && \
+add-apt-repository -y ppa:projectatomic/ppa && \
+apt update -y && \
+apt -y install podman buildah skopeo && \
+echo -e "[registries.search]\nregistries = ['docker.io', 'quay.io']" | sudo tee /etc/containers/registries.conf && \
+wget -O /etc/containers/policy.json -e robots=off https://raw.githubusercontent.com/containers/skopeo/master/default-policy.json
+```
+
 ### install kubernetes
 ```sh
 apt-get update && apt-get install -y apt-transport-https && \

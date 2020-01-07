@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Stevie yzm629@gmail.com
 
-ENV UNIT_VERSION=1.12.0
+ENV UNIT_VERSION=1.14.0
 
 WORKDIR /root
 
