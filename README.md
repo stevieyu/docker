@@ -166,8 +166,8 @@ docker run --rm -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSW
 ```sh
 apt update && \
 apt install -y apt-transport-https ca-certificates software-properties-common curl && \
-curl -fsSL http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - && \
-sudo add-apt-repository "deb [arch=amd64] http://mirrors.cloud.aliyuncs.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" && \
+curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add - && \
+add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" && \
 apt update && \
 apt install -y docker-ce && \
 docker version
