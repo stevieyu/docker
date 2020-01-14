@@ -173,6 +173,12 @@ apt install -y docker-ce && \
 docker version
 ```
 
+#### 非 root 用户
+```sh
+sudo usermod -aG docker $USER && \
+sudo service docker restart
+```
+
 ### install docker composer
 ```sh
 curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
