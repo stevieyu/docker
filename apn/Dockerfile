@@ -19,7 +19,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
-    composer config --global --auth github-oauth.github.com af69430710b8d80247b5410e03e2af261da41ae4 && \
+    composer config --global --auth github-oauth.github.com a4b2307846304c5b2eceb2dc3b75bbdd19476421 && \
     composer config -g repositories.packagist composer https://mirrors.aliyun.com/composer/ && \
     \
     apk add --no-cache nodejs nodejs-npm && \

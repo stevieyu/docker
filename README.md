@@ -93,6 +93,7 @@ docker run -d -p 8080:8080 \
 ```
 https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
+metrics-registry = "https://registry.npm.taobao.org/"
 chromedriver-cdnurl = "https://npm.taobao.org/mirrors/chromedriver"
 couchbase-binary-host-mirror = "https://npm.taobao.org/mirrors/couchbase/v{version}"
 debug-binary-host-mirror = "https://npm.taobao.org/mirrors/node-inspector"
@@ -175,9 +176,9 @@ docker version
 
 #### 非 root 用户
 ```sh
-sudo usermod -aG docker $USER && \
-sudo service docker restart
+sudo usermod -aG docker $USER
 ```
+新开终端
 
 ### install docker composer
 ```sh
