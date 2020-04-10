@@ -90,7 +90,7 @@ docker run -d -p 8080:8080 \
 ```
 
 ### npm mirrors config 
-`curl -O https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc`
+`curl -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc`
 ```
 https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
