@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./letsencrypt:/etc/letsencrypt
+      - ./lily:/usr/share/nginx/html/lily
+      - ./WordPress:/usr/share/nginx/html/wp
+    depends_on:
+      - apn
+    links:
+      - apn
+
+  apn:
+    image: apn
+    expose:
+      - "9000"
+    volumes:
+      - ./lily:/var/www/html/lily
+      - ./WordPress:/var/www/html/wp
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    command: php-fpm -F
+
+  mysql:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root

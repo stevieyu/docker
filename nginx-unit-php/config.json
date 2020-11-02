@@ -1,0 +1,19 @@
+{
+    "listeners": {
+        "*:8020": {
+            "application": "php"
+        }
+    },
+    "applications": {
+        "php": {
+            "type": "php",
+            "processes": {
+                "max": 20,
+                "spare": 1,
+                "idle_timeout": 10
+            },
+            "root": "/www",
+            "index": "index.php"
+        }
+    }
+}

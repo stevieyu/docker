@@ -1,0 +1,21 @@
+:8000 {
+	gzip {
+		ext *
+		level 9
+	}
+
+	cache
+
+	cors / {
+	  	allow_credentials true
+	    max_age           31536000
+		allowed_headers   *
+	}
+
+	proxy / http://192.168.0.117 {
+		websocket
+		transparent
+		timeout 5s
+	}
+}
+
