@@ -36,7 +36,7 @@ build-base
 
 ## service
 ```sh
-docker run -d -v $PWD/mysql-cnf:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
+docker run -d -v $PWD/mysql-cnf:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql --default-authentication-plugin=mysql_native_password
 
 docker run -d -p 27017:27017 --name mongo mongo
 
@@ -53,6 +53,10 @@ docker run --rm -ti \
   --name=ctop \
   --volume /var/run/docker.sock:/var/run/docker.sock:ro \
   quay.io/vektorlab/ctop
+
+echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list && \
+wget -qO - https://azlux.fr/repo.gpg.key | apt-key add - && \
+apt update && apt install docker-ctop
 ```
 
 ```
@@ -202,7 +206,7 @@ dokku plugin:install-dependencies --core
 
 #### dokku config
 ```sh
-dokku config:set NPM_CONFIG_PRODUCTION=false DOKKU_LETSENCRYPT_EMAIL=dgjx163@163.com
+dokku config:set --global NPM_CONFIG_PRODUCTION=false DOKKU_LETSENCRYPT_EMAIL=dgjx163@163.com
 ```
 
 ### install podman,buildah,skopeo
