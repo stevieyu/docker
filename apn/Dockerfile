@@ -19,7 +19,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
     \
-    curl https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
+    curl -k https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g --auth github-oauth.github.com a4b2307846304c5b2eceb2dc3b75bbdd19476421 && \
