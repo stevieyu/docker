@@ -7,37 +7,32 @@
     "routes": [
         {
             "match": {
-                "uri": [
-                    "*.css",
-                    "*.ico",
-                    "*.jpg",
-                    "*.js",
-                    "*.png",
-                    "*.xml",
-                    "*.html",
-                    "*.htm"
-                ]
+                "uri": "!/index.php"
             },
             "action": {
-                "share": "/www/"
-            }
-        },
-        {
-            "action": {
-                "pass": "applications/php"
+                "share": "/www/",
+                "fallback": {
+                    "pass": "applications/php"
+                }
             }
         }
     ],
     "applications": {
         "php": {
             "type": "php",
+            "root": "/www/",
+            "index": "index.php",
+            "script": "index.php",
             "processes": {
-                "max": 20,
+                "max": 10,
                 "spare": 1,
-                "idle_timeout": 10
+                "idle_timeout": 5
             },
-            "root": "/www",
-            "index": "index.php"
+            "options": {
+                "user": {
+                    "display_errors": "On"
+                }
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     # 配置 & 编译
     cd unit && \
     ./configure \
+		#--debug \
 		--prefix="/usr" \
 		--state="/var/lib/unit" \
 		--control="unix:/run/control.unit.sock" \
@@ -36,6 +37,7 @@ COPY app /www/
 WORKDIR /www
 RUN unitd --control unix:/run/control.unit.sock && \
 	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
+	curl -X PUT -d '"/var/log/access.log"' --unix-socket /run/control.unit.sock http://localhost/config/access_log && \
 	rm /root/config.json && \
 	ln -sf /dev/stdout /var/log/unit.log
 
