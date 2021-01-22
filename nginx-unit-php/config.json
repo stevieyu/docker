@@ -21,12 +21,11 @@
         "php": {
             "type": "php",
             "root": "/www/",
-            "index": "index.php",
             "script": "index.php",
             "processes": {
                 "max": 10,
-                "spare": 1,
-                "idle_timeout": 5
+                "spare": 5,
+                "idle_timeout": 20
             },
             "options": {
                 "user": {
