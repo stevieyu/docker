@@ -36,9 +36,10 @@ COPY app /www/
 WORKDIR /www
 RUN unitd --control unix:/run/control.unit.sock && \
 	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
-	rm /root/config.json
+	rm /root/config.json && \
+	ln -sf /dev/stdout /var/log/unit.log
 
 EXPOSE 8020
 
 ENTRYPOINT ["unitd"]
-CMD ["--no-daemon", "--control", "unix:/run/control.unit.sock"]
+CMD ["--no-daemon", "--user", "root","--control", "unix:/run/control.unit.sock"]

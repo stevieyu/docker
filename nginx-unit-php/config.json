@@ -1,9 +1,33 @@
 {
     "listeners": {
         "*:8020": {
-            "application": "php"
+            "pass": "routes"
         }
     },
+    "routes": [
+        {
+            "match": {
+                "uri": [
+                    "*.css",
+                    "*.ico",
+                    "*.jpg",
+                    "*.js",
+                    "*.png",
+                    "*.xml",
+                    "*.html",
+                    "*.htm"
+                ]
+            },
+            "action": {
+                "share": "/www/"
+            }
+        },
+        {
+            "action": {
+                "pass": "applications/php"
+            }
+        }
+    ],
     "applications": {
         "php": {
             "type": "php",
