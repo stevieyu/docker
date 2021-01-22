@@ -24,7 +24,7 @@
             "script": "index.php",
             "processes": {
                 "max": 10,
-                "spare": 5,
+                "spare": 1,
                 "idle_timeout": 20
             },
             "options": {
