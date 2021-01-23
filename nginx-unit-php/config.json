@@ -7,6 +7,14 @@
     "routes": [
         {
             "match": {
+                "uri": "*.php"
+            },
+            "action": {
+                "pass": "applications/phpf"
+            }
+        },
+        {
+            "match": {
                 "uri": "!/index.php"
             },
             "action": {
@@ -22,6 +30,21 @@
             "type": "php",
             "root": "/www/",
             "script": "index.php",
+            "processes": {
+                "max": 10,
+                "spare": 1,
+                "idle_timeout": 20
+            },
+            "options": {
+                "user": {
+                    "display_errors": "On"
+                }
+            }
+        },
+        "phpf": {
+            "type": "php",
+            "root": "/www/",
+            "index": "index.php",
             "processes": {
                 "max": 10,
                 "spare": 1,
