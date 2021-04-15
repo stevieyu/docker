@@ -5,4 +5,4 @@ RUN yarn global add verdaccio
 
 EXPOSE 9000
 
-CMD ["verdaccio", "-listen", "0.0.0.0:9000"]
+CMD ["verdaccio", "--listen", "0.0.0.0:9000"]
