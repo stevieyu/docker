@@ -7,52 +7,35 @@
     "routes": [
         {
             "match": {
-                "uri": "*.php"
+                "uri": [
+                    "*.php",
+                    "*.phar"
+                ]
             },
             "action": {
-                "pass": "applications/phpf"
+                "pass": "applications/php/direct"
             }
         },
         {
-            "match": {
-                "uri": "!/index.php"
-            },
             "action": {
-                "share": "/www/",
+                "share": "/www",
+                "types": [ "!application/x-httpd-php" ],
                 "fallback": {
-                    "pass": "applications/php"
-                }
+                    "pass": "applications/php/index"
+                }          
             }
         }
     ],
     "applications": {
         "php": {
             "type": "php",
-            "root": "/www/",
-            "script": "index.php",
-            "processes": {
-                "max": 10,
-                "spare": 1,
-                "idle_timeout": 20
-            },
-            "options": {
-                "user": {
-                    "display_errors": "On"
-                }
-            }
-        },
-        "phpf": {
-            "type": "php",
-            "root": "/www/",
-            "index": "index.php",
-            "processes": {
-                "max": 10,
-                "spare": 1,
-                "idle_timeout": 20
-            },
-            "options": {
-                "user": {
-                    "display_errors": "On"
+            "targets": {
+                "direct": {
+                    "root": "/www/"
+                },
+                "index": {
+                    "root": "/www/",
+                    "script": "index.php"
                 }
             }
         }

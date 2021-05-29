@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER Stevie yzm629@gmail.com
 
-ENV UNIT_VERSION=1.21.0
+ENV UNIT_VERSION=1.24.0
 
 WORKDIR /root
 
@@ -37,8 +37,7 @@ COPY app /www/
 WORKDIR /www
 RUN unitd --control unix:/run/control.unit.sock && \
 	curl -X PUT --data-binary @/root/config.json --unix-socket /run/control.unit.sock http://localhost/config/ && \
-	curl -X PUT -d '"/var/log/access.log"' --unix-socket /run/control.unit.sock http://localhost/config/access_log && \
-	rm /root/config.json && \
+	#rm /root/config.json && \
 	ln -sf /dev/stdout /var/log/unit.log
 
 EXPOSE 8020
