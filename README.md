@@ -39,7 +39,7 @@ build-base
 podman run --net=host
 docker run -d -v $PWD/conf.d:/etc/mysql/conf.d -v $PWD/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql --default-authentication-plugin=mysql_native_password
 
-docker run -d -p 27017:27017 --name mongo mongo
+docker run -d -v $PWD/data:/data/db -p 27017:27017 --name mongo mongo
 
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres postgres:alpine
 
