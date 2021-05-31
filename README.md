@@ -36,7 +36,8 @@ build-base
 
 ## service
 ```sh
-docker run -d -v $PWD/mysql-cnf:/etc/mysql/conf.d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql --default-authentication-plugin=mysql_native_password
+podman --net=host
+docker run -d -v $PWD/conf.d:/etc/mysql/conf.d -v $PWD/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql --default-authentication-plugin=mysql_native_password
 
 docker run -d -p 27017:27017 --name mongo mongo
 
