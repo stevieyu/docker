@@ -41,7 +41,7 @@ docker run -d -v $PWD/conf.d:/etc/mysql/conf.d -v $PWD/data:/var/lib/mysql -p 33
 
 docker run -d -v $PWD/data:/data/db -p 27017:27017 --name mongo mongo
 
-docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres postgres:alpine
+docker run -d -v $PWD/data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_PASSWORD=postgres --name postgres postgres:alpine
 
 docker run -d -p 6379:6379 --name redis redis:alpine
 
