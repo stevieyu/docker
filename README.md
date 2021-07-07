@@ -32,6 +32,9 @@ https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilem
 
 alpine-sdk
 build-base
+
+# ubuntu build
+build-essential
 ```
 
 ## service

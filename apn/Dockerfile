@@ -19,14 +19,15 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
     \
-    curl -k https://getcomposer.org/composer.phar -o /usr/local/bin/composer && \
+    curl -k https://install.phpcomposer.com/composer.phar -o /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g --auth github-oauth.github.com a4b2307846304c5b2eceb2dc3b75bbdd19476421 && \
     composer config -g repositories.packagist composer https://mirrors.aliyun.com/composer/ && \
     \
-    apk add --no-cache nodejs-current nodejs-npm && \
+    apk add --no-cache nodejs-current npm yarn && \
     curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc && \
+    npm config set loglevel=http && \
     \
     apk add --no-cache libc6-compat && \
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 && \

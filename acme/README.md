@@ -3,12 +3,20 @@
 [How to use DNS API](https://github.com/Neilpang/acme.sh/blob/master/dnsapi/README.md)
 
 `https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker`
+
 ```
+# 第一步
+docker run --rm -it \
+-v $PWD/acme:/acme.sh  \
+neilpang/acme.sh --register-account  -m myemail@example.com --server zerossl
+
+# 接下来
 docker run --rm -it \
 -e Ali_Key= \
 -e Ali_Secret= \
 -v $PWD/acme:/acme.sh  \
-neilpang/acme.sh --issue --dns dns_ali -d *.stevie.top
+neilpang/acme.sh --issue --dns dns_ali --dnssleep 30 --ocsp --days 30 --keylength 2048 \
+-d *.surge.stevie.top -d surge.stevie.top
 
 docker run --rm -it \
 -e Ali_Key= \

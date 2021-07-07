@@ -4,7 +4,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 WORKDIR /root
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-    apk add --no-cache nodejs nodejs-npm git python make g++
+    apk add --no-cache nodejs npm git python make g++
 
 RUN apk add --no-cache mysql mysql-client && \
     mkdir /run/mysqld && \
@@ -21,7 +21,7 @@ RUN	npm config set registry https://registry.npm.taobao.org && \
 	npm config set ELECTRON_MIRROR http://npm.taobao.org/mirrors/electron/ && \
 
 	#安装jsbin
-	git clone --depth=1 https://gitee.com/yzm94/jsbin.git /root/jsbin && \
+	git clone --depth=1 https://github.com/jsbin/jsbin.git /root/jsbin && \
     cd /root/jsbin && \
     npm i && \
     npm run build
