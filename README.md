@@ -49,6 +49,8 @@ docker run -d -v $PWD/data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_PAS
 docker run -d -p 6379:6379 --name redis redis:alpine
 
 docker run -d -p 11211:11211 --name memcached memcached:alpine
+
+docker run -d --name yacy -p 8090:8090 -p 8443:8443 --log-opt max-size=200m --log-opt max-file=2 yacy/yacy_search_server
 ```
 
 ## ctop

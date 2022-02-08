@@ -10,10 +10,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     php7-gd php7-ctype php7-soap php7-xsl php7-iconv php7-zip php7-mcrypt php7-pdo_mysql php7-pdo_sqlite php7-mysqli php7-mysqlnd && \
     php --ini && \
 
-    php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" && \
-    php composer-setup.php && \
-    php -r "unlink('composer-setup.php');" && \
-    mv composer.phar /usr/local/bin/composer && \
+    curl -k https://mirrors.aliyun.com/composer/composer.phar -o /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g github-oauth.github.com de26cefe889daf1030c123578b162b5a651f08ba && \

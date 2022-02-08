@@ -18,7 +18,7 @@ docker run -d --name nginx-unit-php -p 8010:8010 -p 8020:8020 nginx-unit-php --n
 
 ```sh
 curl -X PUT \
-  http://127.0.0.1:8010/config \
+   --unix-socket /run/control.unit.sock http://localhost/config/ \
   -H 'Content-Type: application/json' \
   -d '{
     "listeners": {
@@ -30,9 +30,11 @@ curl -X PUT \
         "php": {
             "type": "php",
             "processes": 20,
-            "root": "/www",
+            "root": "/www/public",
             "index": "index.php"
         }
     }
 }'
 ```
+
+docker run --rm -it -p 8020:8020 -v $PWD:/www 
