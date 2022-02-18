@@ -14,12 +14,13 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     php7-xmlwriter php7-simplexml php7-xmlreader php7-pcntl php7-posix \
     php7-ctype php7-mcrypt php7-bcmath php7-pdo_mysql php7-pdo_sqlite php7-mysqli php7-mysqlnd php7-pear \
     php7-pecl-redis php7-pecl-swoole php7-pecl-inotify && \
-    php --ini && \
+    php7 --ini && \
     echo "swoole.use_shortname = off" >> /etc/php7/conf.d/50_swoole.ini && \
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
     \
-    curl -k https://mirrors.aliyun.com/composer/composer.phar -o /usr/local/bin/composer && \
+    curl -k -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g --auth github-oauth.github.com a4b2307846304c5b2eceb2dc3b75bbdd19476421 && \
