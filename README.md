@@ -22,6 +22,16 @@ docker exec -it {container_id} sh
 
 宿主机ip`172.17.0.1`
 
+
+### build demo
+
+```sh
+docker build  --squash --rm -t nuxt3 .
+DOCKER_BUILDKIT=1 docker build --squash --rm -t nuxt3 .
+docker buildx build --squash --rm -t nuxt3 .
+```
+
+
 #### caddy link
 ```
 https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload

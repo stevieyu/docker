@@ -3,7 +3,7 @@ MAINTAINER Stevie "https://github.com/yzm629"
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
-ENV NGINX_VERSION 1.19.2
+ENV NGINX_VERSION 1.21.6
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 	&& GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
@@ -69,7 +69,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 		libxslt-dev \
 		gd-dev \
 		geoip-dev \
-	&& git clone --depth=1 --recursive https://github.com/google/ngx_brotli.git /usr/src/ngx_brotli \
+	&& git clone --depth=1 https://hub.fastgit.xyz/google/ngx_brotli.git /usr/src/ngx_brotli \
+    && cd /usr/src/ngx_brotli \
+    && sed -i 's/github.com/hub.fastgit.xyz/g' .gitmodules \
+    && git submodule update --init --recursive --depth=1 \
+	&& cd / \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
 	&& export GNUPGHOME="$(mktemp -d)" \

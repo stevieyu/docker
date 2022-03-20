@@ -1,6 +1,7 @@
 FROM       alpine:latest
 MAINTAINER Stevie "https://github.com/yzm629"
 
+#https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fueffel%2Fcaddy-brotli
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
 	&& plugins="http.cache,http.cors,http.expires,http.filebrowser,http.filter,http.forwardproxy,http.geoip,http.git,http.minify" \
     && apk add --no-cache axel \

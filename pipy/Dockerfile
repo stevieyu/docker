@@ -23,11 +23,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 RUN apk add --no-cache --virtual .build-deps openssh-client cmake clang alpine-sdk linux-headers autoconf automake libtool tiff jpeg zlib zlib-dev pkgconf nasm file musl-dev nodejs npm
 
-RUN apk add --no-cache unzip axel curl yarn util-linux
-RUN curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc
+ADD https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc ~/.npmrc
+ADD https://ghproxy.com/https://github.com/flomesh-io/pipy/archive/refs/heads/main.zip main.zip
 
-RUN axel -o pipy.zip https://ghproxy.com/https://github.com/flomesh-io/pipy/archive/refs/heads/main.zip && \
-    unzip pipy.zip && \
+RUN apk add --no-cache unzip yarn util-linux && \
+    unzip main.zip && \
     mv pipy-main pipy
 
 RUN cd pipy \

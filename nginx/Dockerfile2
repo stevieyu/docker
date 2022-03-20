@@ -1,5 +1,5 @@
 #read https://www.tuicool.com/articles/2UzYNzF
-ARG version=1.20.2
+ARG version=1.21.6
 
 FROM nginx:${version}-alpine AS builder
 
@@ -7,12 +7,14 @@ ARG version
 
 WORKDIR /root/
 
-RUN apk add --update --no-cache build-base git pcre-dev openssl-dev zlib-dev linux-headers \
-    && wget http://nginx.org/download/nginx-${version}.tar.gz \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk add --update --no-cache build-base git pcre-dev openssl-dev zlib-dev linux-headers axel \
+    && axel http://nginx.org/download/nginx-${version}.tar.gz \
     && tar zxf nginx-${version}.tar.gz \
-    && git clone https://github.com/google/ngx_brotli.git \
+    && git clone --depth=1 https://hub.fastgit.xyz/google/ngx_brotli.git \
     && cd ngx_brotli \
-    && git submodule update --init --recursive \
+    && sed -i 's/github.com/hub.fastgit.xyz/g' .gitmodules \
+    && git submodule update --init --recursive --depth=1 \
     && cd ../nginx-${version} \
     && ./configure \
     --add-dynamic-module=../ngx_brotli \
