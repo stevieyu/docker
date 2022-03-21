@@ -5,5 +5,5 @@
     ssl_stapling on;
     ssl_stapling_verify on;# 启用OCSP响应验证，OCSP信息响应适用的证书
     # ssl_trusted_certificate /path/to/xxx.pem;#若 ssl_certificate 指令指定了完整的证书链，则 ssl_trusted_certificate 可省略。
-    resolver 8.8.8.8 8.8.4.4 216.146.35.35 216.146.36.36 valid=3600s;#添加resolver解析OSCP响应服务器的主机名，valid表示缓存。
+    resolver 119.29.29.29 223.5.5.5 valid=3600s;#添加resolver解析OSCP响应服务器的主机名，valid表示缓存。
     resolver_timeout 1s；# resolver_timeout表示网络超时时间
