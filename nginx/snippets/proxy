@@ -1,4 +1,4 @@
-# 放到根位置 nginx.conf -> http
+# 位置 nginx.conf -> http
 # include 'snippets/brotli';
 # proxy_cache_path /var/cache/nginx/proxy_cache levels=1:2 keys_zone=default:10m max_size=1000m inactive=600m use_temp_path=off;
 

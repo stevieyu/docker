@@ -1,5 +1,5 @@
-    # 放到 location 下面
-    # include 'snippets/cors'
+# 位置 *.conf -> location
+# include 'snippets/cors'
 
     if ($request_method = 'OPTIONS') {
         add_header 'Access-Control-Allow-Origin' "$http_origin";

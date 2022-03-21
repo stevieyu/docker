@@ -1,4 +1,5 @@
-	# include 'snippets/gzip'
+	# 位置 nginx.conf -> http
+    # include 'snippets/gzip'
 
     gzip on;
     gzip_min_length 1k;

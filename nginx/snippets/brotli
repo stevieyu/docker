@@ -1,4 +1,4 @@
-	# 放到根位置 nginx.conf -> http
+	# 位置 nginx.conf -> http
 	# include 'snippets/brotli';
 
 	brotli on;
