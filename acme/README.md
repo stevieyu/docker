@@ -27,4 +27,8 @@ neilpang/acme.sh --issue --dns dns_ali -d *.d.flyyweb.com
 docker run --rm -it \
 -v $PWD:/acme.sh \
 neilpang/acme.sh --renew --force -d *.d.flyyweb.com
+
+docker run --rm -it -e Ali_Key= -e Ali_Secret= neilpang/acme.sh sh
+acme.sh --register-account -m yzm791@qq.com
+acme.sh --issue --dns dns_ali --ocsp --keylength ec-256 -d stevie.top -d *.stevie.top -d *.surge.stevie.top
 ```
