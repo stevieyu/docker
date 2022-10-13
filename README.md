@@ -115,6 +115,12 @@ docker run -d -p 8080:8080 \
 
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
+### pip
+```sh
+pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
+pip config set global.trusted-host mirrors.aliyun.com
+```
+
 
 ### go proxy
 ```sh
