@@ -119,6 +119,9 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 ```sh
 pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
 pip config set global.trusted-host mirrors.aliyun.com
+
+pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
+pip config set global.trusted-host mirrors.cloud.tencent.com
 ```
 
 
