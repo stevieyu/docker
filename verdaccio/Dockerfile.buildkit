@@ -1,0 +1,10 @@
+# syntax = docker/dockerfile:experimental
+FROM       node:alpine
+MAINTAINER Stevie "https://github.com/yzm629"
+
+RUN --mount=type=cache,target=/root/.npm,id=npm_cache \
+    npm i -g verdaccio
+
+EXPOSE 9000
+
+CMD ["verdaccio", "--listen", "0.0.0.0:9000"]
