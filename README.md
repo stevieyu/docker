@@ -18,6 +18,15 @@ docker rmi $(docker images -q -f dangling=true)
 
 #进入容器
 docker exec -it {container_id} sh
+
+#删除 build cache
+docker builder prune
+
+#查看 Docker 的磁盘使用情况
+docker system df
+
+#清理磁盘，删除关闭的容器、无用的数据卷和网络，以及 dangling 镜像（即无 tag 的镜像），暂时关闭的容器
+docker system prune
 ```
 
 宿主机ip`172.17.0.1`
