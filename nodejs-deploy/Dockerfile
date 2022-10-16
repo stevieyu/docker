@@ -1,9 +1,9 @@
 # 1. 构建基础镜像
-FROM alpine:3.14 AS base
+FROM alpine AS base
 
 # 设置环境变量
-ENV NODE_ENV=production \
-    APP_PATH=/node/app
+ENV NODE_ENV=production
+ENV APP_PATH=/app
 
 # 设置工作目录
 WORKDIR $APP_PATH
