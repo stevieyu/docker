@@ -9,7 +9,7 @@ ENV APP_PATH=/app
 WORKDIR $APP_PATH
 
 # 安装 nodejs 和 yarn
-RUN apk add --no-cache --update nodejs=14.17.4-r0
+RUN apk add --no-cache --update nodejs=16
 
 # -------------------------------
 # 2. 使用基础镜像 装依赖阶段
