@@ -13,4 +13,5 @@ RUN sed -i 's#deb.debian.org#mirrors.cloud.tencent.com#g' /etc/apt/sources.list 
 	pip install paddlespeech && \
 	wget -P data https://paddlespeech.bj.bcebos.com/Parakeet/tools/nltk_data.tar.gz && \
 	tar zxvf data/nltk_data.tar.gz && \
+	paddlespeech tts --input "你好，欢迎使用百度飞桨深度学习框架！" --output output.wav && \
 	paddlespeech tts --am fastspeech2_mix --voc hifigan_csmsc --lang mix --spk_id 174 --input "你好，欢迎使用百度 PaddlePaddle 深度学习框架！" --output /root/output.wav
