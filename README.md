@@ -134,7 +134,7 @@ sed -i -E 's/(archive|security).ubuntu.com/mirrors.cloud.tencent.com/g' /etc/apt
 
 sed -i -E 's/(deb).debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
 
-sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories
+sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories
 ```
 
 ### pip
