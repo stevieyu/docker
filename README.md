@@ -125,6 +125,7 @@ docker run -d -p 8080:8080 \
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
 ### 系统
+`mirrors.cloud.aliyuncs.com`
 `mirrors.aliyun.com`
 `mirrors.163.com`
 `mirrors.cloud.tencent.com`
