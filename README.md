@@ -187,6 +187,20 @@ Encrypt method: rc4-md5,
 docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSWORD=12345678 --name ss-server shadowsocks/shadowsocks-libev
 ```
 
+### brew
+```sh
+# env
+export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles/api" && \
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles" && \
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git" && \
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
+
+# ubuntu install
+apt-get install -y build-essential procps file git && \
+bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/homebrew/install/install.sh)" && \
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /root/.profile
+```
+
 ### install docker
 ```sh
 apt update && \
