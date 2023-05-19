@@ -5,6 +5,8 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 #https://pkgs.alpinelinux.org/packages
 # sed -i 's/dl-cdn.alpinelinux.org/repo.huaweicloud.com/g' /etc/apk/repositories && \
+# sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories && \
+# sed -i 's/https:/http:/g' /etc/apk/repositories
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
     \

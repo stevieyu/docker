@@ -124,6 +124,16 @@ docker run -d -p 8080:8080 \
 
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
+### 系统
+`mirrors.aliyun.com`
+`mirrors.163.com`
+`mirrors.cloud.tencent.com`
+```sh
+sed -i -E 's/(archive|security).ubuntu.com/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
+
+sed -i -E 's/(deb).debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
+```
+
 ### pip
 ```sh
 pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
@@ -146,7 +156,11 @@ go env -w GOPROXY=https://goproxy.cn,direct
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://8dqe4zuz.mirror.aliyuncs.com"]
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com",
+    "https://dockerproxy.com"
+  ]
 }
 EOF
 sudo systemctl daemon-reload
