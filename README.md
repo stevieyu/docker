@@ -128,10 +128,13 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 `mirrors.aliyun.com`
 `mirrors.163.com`
 `mirrors.cloud.tencent.com`
+`repo.huaweicloud.com`
 ```sh
 sed -i -E 's/(archive|security).ubuntu.com/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
 
 sed -i -E 's/(deb).debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
+
+sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories
 ```
 
 ### pip
