@@ -133,7 +133,7 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 ```sh
 sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
 
-sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories
+sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories
 ```
 
 ### pip
@@ -168,6 +168,8 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
+
+TODO::https://github.com/slimtoolkit/slim
 
 ### shadowsocks-libev
 ```
