@@ -152,8 +152,6 @@ go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
 ### docker mirrors
-`http://hub-mirror.c.163.com`
-
 ```
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
