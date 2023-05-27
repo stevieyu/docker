@@ -39,7 +39,7 @@ docker build  --squash --rm -t nuxt3 .
 DOCKER_BUILDKIT=1 docker build --squash --rm -t nuxt3 .
 docker buildx build --squash --rm -t nuxt3 .
 ```
-`curl -k -L https://github.com/alist-org/alist/releases/latest/download/alist-linux-amd64.tar.gz | tar -vxz`
+`curl -k -L https://github.com/alist-org/alist/releases/latest/download/alist-linux-amd64.tar.gz | tar -vxz alist`
 
 
 #### caddy link
