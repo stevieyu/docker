@@ -1,5 +1,4 @@
 FROM alpine:edge
-MAINTAINER Stevie yzm629@gmail.com
 
 WORKDIR /root
 

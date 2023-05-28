@@ -1,5 +1,4 @@
 FROM alpine:latest
-MAINTAINER Stevie yzm629@gmail.com
 
 ENV UNIT_VERSION=1.24.0
 

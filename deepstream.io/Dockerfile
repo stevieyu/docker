@@ -1,5 +1,4 @@
 FROM       node:alpine
-MAINTAINER Stevie yzm629@gmail.com
 
 ENV DEEPSTREAM_PATH /opt/deepstream
 ENV DEEPSTREAM_CONF /opt/deepstream/conf

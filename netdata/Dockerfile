@@ -1,5 +1,4 @@
 FROM alpine:latest
-MAINTAINER Stevie yzm629@gmail.com
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     apk add --no-cache alpine-sdk bash curl zlib-dev util-linux-dev libmnl-dev gcc make git autoconf automake pkgconfig python logrotate \

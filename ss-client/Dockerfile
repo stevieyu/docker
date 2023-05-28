@@ -1,5 +1,4 @@
 FROM shadowsocks/shadowsocks-libev
-MAINTAINER Stevie yzm629@gmail.com
 
 USER root
 

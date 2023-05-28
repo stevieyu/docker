@@ -1,5 +1,4 @@
 FROM       golang:alpine
-MAINTAINER Stevie yzm629@gmail.com
 
 WORKDIR ~
 
