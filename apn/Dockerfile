@@ -16,7 +16,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repos
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
     \
-    curl -k -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar && \
+    curl -k -o /usr/local/bin/composer https://mirrors.tencent.com/composer/composer.phar && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
     composer config -g repositories.packagist composer https://mirrors.tencent.com/composer/ && \
