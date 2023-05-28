@@ -4,14 +4,13 @@ MAINTAINER Stevie "https://github.com/yzm629"
 #docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql
 #docker run -d -p 8888:80 --link mysql:mysql adminer
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk update && \
-    apk add wget php7 \
-    php7-mysqli php7-pgsql && \
-    mkdir /var/www && \
-    wget http://www.adminer.org/latest.php -O /var/www/index.php
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories && \
+    apk add --no-cache php8 \
+    php8-mysqli php8-pgsql
 
-WORKDIR /var/www
+ADD http://www.adminer.org/latest.php /www/
+
+WORKDIR /www
 
 EXPOSE 80
 
