@@ -28,8 +28,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repos
     apk add --no-cache libc6-compat && \
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 && \
     \
-    apk del -f .build-deps && \
-    mkdir -p /www
+    apk del -f .build-deps
 
 WORKDIR /www
 
