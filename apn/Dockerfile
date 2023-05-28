@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.15
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
