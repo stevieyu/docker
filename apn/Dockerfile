@@ -3,7 +3,7 @@ FROM alpine:3.15
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 #https://pkgs.alpinelinux.org/packages
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories && \
     \
     apk add --no-cache --virtual .build-deps curl && \
     apk add --no-cache git \
@@ -15,15 +15,13 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     php7 --ini && \
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
     ln -s /usr/sbin/php-fpm7 /usr/sbin/php-fpm && \
-    ln -s /usr/bin/php7 /usr/bin/php && \
     \
     curl -k -o /usr/local/bin/composer https://mirrors.aliyun.com/composer/composer.phar && \
     chmod a+x /usr/local/bin/composer && \
     composer config -g secure-http false && \
-    composer config -g --auth github-oauth.github.com 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 && \
     composer config -g repositories.packagist composer https://mirrors.tencent.com/composer/ && \
     \
-    apk add --no-cache nodejs-current npm && \
+    apk add --no-cache nodejs npm && \
     curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/docker/.npmrc && \
     npm config set loglevel=http && \
     \
