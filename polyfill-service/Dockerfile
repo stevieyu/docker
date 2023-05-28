@@ -3,7 +3,7 @@ FROM alpine
 ENV NODE_ENV production
 
 ADD https://cdn.jsdelivr.net/gh/stevieyu/docker/.npmrc /root/.npmrc
-ADD --keep-git-dir=true https://github.com/Financial-Times/polyfill-service.git#v4.50.1 /app
+ADD https://github.com/Financial-Times/polyfill-service.git#v4.50.1 /app
 
 WORKDIR /app
 
