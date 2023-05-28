@@ -3,11 +3,7 @@ FROM alpine:3.15
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 #https://pkgs.alpinelinux.org/packages
-# sed -i 's/dl-cdn.alpinelinux.org/repo.huaweicloud.com/g' /etc/apk/repositories && \
-# sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.aliyuncs.com/g' /etc/apk/repositories && \
-# sed -i 's/https:/http:/g' /etc/apk/repositories
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-    echo http://mirrors.aliyun.com/alpine/edge/testing >> /etc/apk/repositories && \
     \
     apk add --no-cache --virtual .build-deps curl && \
     apk add --no-cache git \
@@ -29,7 +25,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     composer config -g repositories.packagist composer https://mirrors.tencent.com/composer/ && \
     \
     apk add --no-cache nodejs-current npm && \
-    curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc && \
+    curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/docker/.npmrc && \
     npm config set loglevel=http && \
     \
     apk add --no-cache libc6-compat && \
