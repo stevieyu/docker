@@ -29,8 +29,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repos
     ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 && \
     \
     apk del -f .build-deps && \
-    mkdir -p /www && \
-    chown -R nobody:nobody /www
+    mkdir -p /www
 
 WORKDIR /www
 
