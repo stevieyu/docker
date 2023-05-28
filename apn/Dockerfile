@@ -28,7 +28,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     composer config -g --auth github-oauth.github.com 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 && \
     composer config -g repositories.packagist composer https://mirrors.tencent.com/composer/ && \
     \
-    apk add --no-cache nodejs-current npm yarn && \
+    apk add --no-cache nodejs-current npm && \
     curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/stevieyu.github.io/.npmrc && \
     npm config set loglevel=http && \
     \
