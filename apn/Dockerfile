@@ -15,7 +15,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
     php7-intl php7-exif php7-iconv php7-tokenizer php7-opcache php7-session php7-gd php7-zip \
     php7-xmlwriter php7-simplexml php7-xmlreader php7-pcntl php7-posix \
     php7-ctype php7-mcrypt php7-bcmath php7-pdo_mysql php7-pdo_sqlite php7-mysqli php7-mysqlnd php7-pear \
-    php7-pecl-redis php7-pecl-swoole php7-pecl-inotify && \
+    php7-pecl-redis && \
     php7 --ini && \
     echo "swoole.use_shortname = off" >> /etc/php7/conf.d/50_swoole.ini && \
     sed -i 's/127.0.0.1:9000/9000/g' /etc/php7/php-fpm.d/www.conf && \
