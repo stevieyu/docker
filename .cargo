@@ -1,0 +1,8 @@
+# curl -k -o ~/.cargo/config https://cdn.jsdelivr.net/gh/stevieyu/docker/.cargo
+
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'gcore'
+
+[source.gcore]
+registry = "https://gh.gcore.stevie.top/rust-lang/crates.io-index"
