@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if curl -s "http://ip-api.com/line?lang=zh-CN" | grep -q "中国"; then
+    IS_CHINA=true
+else
+    IS_CHINA=false
+fi
+
 apt update
 
 ARCH=$(uname -m)
