@@ -149,7 +149,7 @@ pip config set global.trusted-host mirrors.cloud.tencent.com
 
 ### go proxy
 ```sh
-go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy,https://proxy.golang.com.cn,direct
 ```
 
 ### docker mirrors
