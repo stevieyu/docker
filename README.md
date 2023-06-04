@@ -131,10 +131,17 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 `mirrors.163.com`
 `mirrors.cloud.tencent.com`
 `repo.huaweicloud.com`
+`mirrors.cernet.edu.cn`
 ```sh
-sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list
+sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org/mirrors.cernet.edu.cn/g' /etc/apt/sources.list
 
-sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g' /etc/apk/repositories
+sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cernet.edu.cn/g' /etc/apk/repositories
+```
+
+### ttyd
+```sh
+curl -k -L https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && chmod +x ttyd.x86_64
+ttyd.x86_64 -p 8080 bash
 ```
 
 ### pip
