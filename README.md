@@ -151,6 +151,8 @@ pip config set global.trusted-host mirrors.aliyun.com
 
 pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
 pip config set global.trusted-host mirrors.cloud.tencent.com
+
+pip config set global.index-url https://mirrors.cernet.edu.cn/pypi/web/simple
 ```
 
 
