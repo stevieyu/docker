@@ -140,8 +140,8 @@ sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cernet.edu.cn/g' /etc/apk/repositori
 
 ### ttyd
 ```sh
-curl -k -L -O https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && chmod +x ttyd.x86_64
-ttyd.x86_64 -p 8080 bash
+curl -k -L -o ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && chmod +x ttyd
+./ttyd -p 8080 bash
 ```
 
 ### pip
