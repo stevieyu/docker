@@ -25,5 +25,5 @@ chmod a+x /usr/local/bin/composer
 export COMPOSER_ALLOW_SUPERUSER=1
 echo 'export COMPOSER_ALLOW_SUPERUSER='$COMPOSER_ALLOW_SUPERUSER >> ~/.bashrc >> ~/.zshrc
 composer config -g repositories.packagist composer ${mirror}
-composer config -g disable-tls true
+#composer config -g disable-tls true
 composer config -g secure-http false
