@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# source <(curl -skL https://ghproxy.com/https://raw.githubusercontent.com/stevieyu/docker/master/china-ubuntu-php.sh)
+# source <(curl -skL https://fastly.jsdelivr.net/gh/stevieyu/docker/china-ubuntu-php.sh)
 
 apt install -y software-properties-common
   
