@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# curl -skL https://raw.githubusercontent.com/stevieyu/docker/master/china-ubuntu-php.sh | sh
+
 apt install -y software-properties-common
   
 add-apt-repository -y ppa:ondrej/php
