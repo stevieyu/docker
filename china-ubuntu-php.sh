@@ -14,4 +14,5 @@ chmod a+x /usr/local/bin/composer
 
 export COMPOSER_ALLOW_SUPERUSER=1
 echo 'export COMPOSER_ALLOW_SUPERUSER='$COMPOSER_ALLOW_SUPERUSER >> ~/.bashrc
+echo 'export COMPOSER_ALLOW_SUPERUSER='$COMPOSER_ALLOW_SUPERUSER >> ~/.zshrc
 composer config -g repositories.packagist composer https://mirrors.tencent.com/composer/
