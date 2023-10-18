@@ -5,7 +5,8 @@
 apt install -y software-properties-common
   
 add-apt-repository -y ppa:ondrej/php
-sed -i 's/ppa/hono.dgcf.link\/ppa/' /etc/apt/sources.list.d/ondrej-ubuntu-php-focal.list
+sed -i 's/ppa/hono.dgcf.link\/ppa/' /etc/apt/sources.list.d/*-focal.list
+apt update
   
 apt -y install php8.2-cli
   
