@@ -1,10 +1,9 @@
-FROM       openwrtorg/rootfs:x86-64-21.02.1
-MAINTAINER Stevie "https://github.com/yzm629"
+FROM scratch
+# ADD http://sgp.kodo.stevie.top/dl.openwrt.ai/releases/targets/x86/64/openwrt-10.15.2023-x86-64-generic-rootfs.tar.gz /
+ADD openwrt-10.15.2023-x86-64-generic-rootfs.tar.gz /
 
-RUN sed -i 's_downloads.openwrt.org_mirrors.aliyun.com/openwrt_' /etc/opkg/distfeeds.conf && \
-    sed -i 's/option check/#option check/'  /etc/opkg.conf && \
-    opkg update && \
-    opkg install luci \
-    && \
-    /etc/init.d/uhttpd enable && \
-    /etc/init.d/uhttpd start
+RUN sed -i 's_downloads.openwrt.org_mirrors.aliyun.com/openwrt_' /etc/opkg/distfeeds.conf
+
+EXPOSE 80
+
+CMD ["/sbin/init"]
