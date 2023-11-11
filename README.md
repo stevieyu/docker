@@ -158,7 +158,7 @@ pip config set global.index-url https://mirrors.cernet.edu.cn/pypi/web/simple
 
 ### nim
 ```
-curl -skL https://nim-lang.org/choosenim/init.sh | sed 's/github/s.stevie.top\/github/g' | sh -s -- -n
+curl -skL https://nim-lang.org/choosenim/init.sh | sed 's/github/s.stevie.top\/github/g' | sh -s -- -y
 ```
 
 
