@@ -85,6 +85,7 @@ wget -qO - https://azlux.fr/repo.gpg.key | apt-key add - && \
 apt update && apt install docker-ctop
 ```
 
+#### 限制
 ```
 docker run --rm -it -m 256m --memory-swap=256m --cpus 1 -v $PWD:/www -w /www node:alpine sh
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it nicolargo/glances
@@ -153,6 +154,11 @@ pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple
 pip config set global.trusted-host mirrors.cloud.tencent.com
 
 pip config set global.index-url https://mirrors.cernet.edu.cn/pypi/web/simple
+```
+
+### nim
+```
+curl -skL https://nim-lang.org/choosenim/init.sh | sed 's/github/s.stevie.top\/github/g' | sh -s -- -n
 ```
 
 
