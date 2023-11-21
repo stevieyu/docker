@@ -8,7 +8,7 @@ add-apt-repository -y ppa:ondrej/php
 sed -i 's/ppa/hono.dgcf.link\/ppa/' /etc/apt/sources.list.d/*-focal.list
 apt update
   
-apt install -y php8.2-cli php8.2-dom php8.2-sqlite3 php8.2-mysql php8.2-curl
+apt install -y php8.2-cli php8.2-dom php8.2-sqlite3 php8.2-mysql php8.2-curl php8.2-mbstring
 sed -i 's/opcache.jit/;opcache.jit/' /etc/php/8.2/cli/conf.d/10-opcache.ini
 
 
