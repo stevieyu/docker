@@ -127,11 +127,11 @@ docker run -d -p 8080:8080 \
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
 ### 系统
+`mirrors.cloud.tencent.com`
+`repo.huaweicloud.com`
 `mirrors.cloud.aliyuncs.com`
 `mirrors.aliyun.com`
 `mirrors.163.com`
-`mirrors.cloud.tencent.com`
-`repo.huaweicloud.com`
 `mirrors.cernet.edu.cn`
 ```sh
 sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org/mirrors.cernet.edu.cn/g' /etc/apt/sources.list
