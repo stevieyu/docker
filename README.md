@@ -139,10 +139,11 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 `mirrors.cloud.aliyuncs.com`
 `mirrors.aliyun.com`
 `mirrors.ustc.edu.cn`
+`mirrors.sustech.edu.cn`
 `mirrors.cernet.edu.cn`
 
 ```sh
-find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.cloud.tencent.com/g'
+find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.sustech.edu.cn/g'
 ```
 
 ### ttyd
