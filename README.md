@@ -31,7 +31,6 @@ docker system prune
 
 宿主机ip`172.17.0.1`
 
-
 ### build demo
 
 ```sh
@@ -39,10 +38,11 @@ docker build  --squash --rm -t nuxt3 .
 DOCKER_BUILDKIT=1 docker build --squash --rm -t nuxt3 .
 docker buildx build --squash --rm -t nuxt3 .
 ```
+
 `curl -k -L https://github.com/alist-org/alist/releases/latest/download/alist-linux-amd64.tar.gz | tar -vxz alist`
 
-
 #### caddy link
+
 ```
 https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 ```
@@ -58,6 +58,7 @@ build-essential
 ```
 
 ## service
+
 ```sh
 podman run --net=host
 docker run -d -v $PWD/conf.d:/etc/mysql/conf.d -v $PWD/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --name mysql mysql --default-authentication-plugin=mysql_native_password
@@ -74,6 +75,7 @@ docker run -d --name yacy -p 8090:8090 -p 8443:8443 --log-opt max-size=200m --lo
 ```
 
 ## ctop
+
 ```sh
 docker run --rm -ti \
   --name=ctop \
@@ -86,12 +88,14 @@ apt update && apt install docker-ctop
 ```
 
 #### 限制
+
 ```
 docker run --rm -it -m 256m --memory-swap=256m --cpus 1 -v $PWD:/www -w /www node:alpine sh
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it nicolargo/glances
 ```
 
 ## drone
+
 ```sh
 docker run \
   --volume=/var/run/docker.sock:/var/run/docker.sock \
@@ -113,6 +117,7 @@ docker run \
 ```
 
 ## graphql-engine
+
 ```sh
 docker run -d -p 8080:8080 \
   -e HASURA_GRAPHQL_DATABASE_URL=postgres://ywsestdn:umWT_4hbj6Duw__mF0xBeuvNBdRRUg5M@satao.db.elephantsql.com:5432/ywsestdn \
@@ -121,31 +126,34 @@ docker run -d -p 8080:8080 \
   hasura/graphql-engine
 ```
 
-### npm mirrors config 
+### npm mirrors config
+
 `curl -k -o ~/.npmrc https://cdn.jsdelivr.net/gh/stevieyu/docker/.npmrc`
 
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
 ### 系统
+
 `mirrors.cloud.tencent.com`
 `repo.huaweicloud.com`
 `mirrors.cloud.aliyuncs.com`
 `mirrors.aliyun.com`
 `mirrors.163.com`
 `mirrors.cernet.edu.cn`
-```sh
-sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org/mirrors.cernet.edu.cn/g' /etc/apt/sources.list
 
-sed -i -E 's/dl-cdn.alpinelinux.org/mirrors.cernet.edu.cn/g' /etc/apk/repositories
+```sh
+find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g'
 ```
 
 ### ttyd
+
 ```sh
 curl -k -L -o ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && chmod +x ttyd
 ./ttyd -p 8080 bash
 ```
 
 ### pip
+
 ```sh
 pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
 pip config set global.trusted-host mirrors.aliyun.com
@@ -157,17 +165,19 @@ pip config set global.index-url https://mirrors.cernet.edu.cn/pypi/web/simple
 ```
 
 ### nim
+
 ```
 curl -skL https://nim-lang.org/choosenim/init.sh | sed 's/github/s.stevie.top\/github/g' | sh -s -- -y
 ```
 
-
 ### go proxy
+
 ```sh
 go env -w GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy,https://proxy.golang.com.cn,direct
 ```
 
 ### docker mirrors
+
 ```
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
@@ -186,6 +196,7 @@ sudo systemctl restart docker
 TODO::https://github.com/slimtoolkit/slim
 
 ### shadowsocks-libev
+
 ```
 Encrypt method: rc4-md5,
                 aes-128-gcm, aes-192-gcm, aes-256-gcm,
@@ -198,11 +209,13 @@ Encrypt method: rc4-md5,
                 salsa20, chacha20 and chacha20-ietf.
                 The default cipher is chacha20-ietf-poly1305
 ```
+
 ```sh
 docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSWORD=12345678 --name ss-server shadowsocks/shadowsocks-libev
 ```
 
 ### brew
+
 ```sh
 # env
 export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles/api" && \
@@ -217,6 +230,7 @@ bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/homebrew/install/install.sh)" 
 ```
 
 ### install docker
+
 ```sh
 apt update && \
 apt install -y apt-transport-https ca-certificates software-properties-common curl && \
@@ -228,18 +242,22 @@ docker version
 ```
 
 #### 非 root 用户
+
 ```sh
 sudo usermod -aG docker $USER
 ```
+
 新开终端
 
 ### install docker composer
+
 ```sh
 curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
 chmod +x /usr/local/bin/docker-compose
 ```
 
 ### install dokku
+
 ```sh
 wget -nv -O - https://packagecloud.io/dokku/dokku/gpgkey | apt-key add - && \
 export SOURCE="https://packagecloud.io/dokku/dokku/ubuntu/" && \
@@ -252,11 +270,13 @@ dokku plugin:install-dependencies --core
 ```
 
 #### dokku config
+
 ```sh
 dokku config:set --global NPM_CONFIG_PRODUCTION=false DOKKU_LETSENCRYPT_EMAIL=dgjx163@163.com
 ```
 
 ### install podman,buildah,skopeo
+
 ```sh
 apt install -y software-properties-common uidmap slirp4netns && \
 add-apt-repository -y ppa:projectatomic/ppa && \
@@ -267,6 +287,7 @@ wget -O /etc/containers/policy.json -e robots=off https://raw.githubusercontent.
 ```
 
 ### install kubernetes
+
 ```sh
 apt-get update && apt-get install -y apt-transport-https && \
 curl http://mirrors.cloud.aliyuncs.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - && \
@@ -276,9 +297,9 @@ apt-get install -y kubelet kubeadm kubectl
 ```
 
 ### 定时清理
+
 ```sh
 EDITOR=vim crontab -e
 
 0 1 * * * docker rm $(docker ps -a -q); docker rmi $(docker images -q -f dangling=true)
 ```
-
