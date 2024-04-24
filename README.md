@@ -143,7 +143,19 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 `mirrors.cernet.edu.cn`
 
 ```sh
-find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.sustech.edu.cn/g'
+find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.aliyun.com/g'
+```
+
+### alpine-glibc
+
+```
+wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
+    && wget https://gh.dgcf.link/github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-2.35-r1.apk \
+    && apk add glibc-2.35-r1.apk \
+    && wget https://gh.dgcf.link/github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-bin-2.35-r1.apk \
+    && wget https://gh.dgcf.link/github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-i18n-2.35-r1.apk \
+    && apk add --force-overwrite glibc-bin-2.35-r1.apk glibc-i18n-2.35-r1.apk \
+    && /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 ```
 
 ### ttyd
