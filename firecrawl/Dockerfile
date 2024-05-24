@@ -46,8 +46,7 @@ WORKDIR /app
 EXPOSE 3002
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
 
-CMD ["redis-server", "/etc/redis.conf"]
-CMD [ "npm", "run", "start:production" ]
-CMD [ "npm", "run", "worker:production" ]
-
-# (redis-server /etc/redis.conf) & (npm run start:production) & (npm run worker:production)
+# CMD ["redis-server", "/etc/redis.conf"]
+# CMD [ "npm", "run", "start:production" ]
+# CMD [ "npm", "run", "worker:production" ]
+CMD "(redis-server /etc/redis.conf) & (npm run start:production) & (npm run worker:production)"

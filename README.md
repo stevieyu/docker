@@ -141,9 +141,10 @@ source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.
 `mirrors.ustc.edu.cn`
 `mirrors.sustech.edu.cn`
 `mirrors.cernet.edu.cn`
+`mirrors.hust.edu.cn`
 
 ```sh
-find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.aliyun.com/g'
+find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g'
 ```
 
 ### alpine-glibc
