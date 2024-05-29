@@ -1,4 +1,4 @@
-#docker
+# docker
 
 ```sh
 #使用代理编译
@@ -47,6 +47,7 @@ docker buildx build --squash --rm -t nuxt3 .
 https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors%2Cfilemanager%2Cgit%2Cjsonp%2Cminify%2Cupload
 ```
 
+## 编译环境
 ```
 # alpine build apk
 
@@ -55,6 +56,10 @@ build-base
 
 # ubuntu build
 build-essential
+
+
+# devbox
+curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
 ```
 
 ## service
