@@ -58,7 +58,7 @@ build-base
 build-essential
 
 
-# devbox
+# devbox jetpackio/devbox
 curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
 ```
 
