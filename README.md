@@ -201,6 +201,11 @@ go env -w GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy,https://
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
+  "proxies": {
+    "http-proxy": "http://192.168.0.104:7890",
+    "https-proxy": "http://192.168.0.104:7890",
+    "no-proxy": "127.*,192.*,*.cn"
+  },
   "registry-mirrors": [
     "https://hub-mirror.c.163.com",
     "https://mirror.baidubce.com",
