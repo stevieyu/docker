@@ -137,7 +137,9 @@ docker run -d -p 8080:8080 \
 
 source https://github.com/gucong3000/mirror-config-china/blob/master/lib/config.js
 
-### 系统
+### 系统镜像
+
+`curl -L https://gitee.com/RubyMetric/chsrc/releases/download/pre/chsrc-x64-linux -o chsrc; chmod +x ./chsrc; ./chsrc set ubuntu|debian|alpine`
 
 `mirrors.cloud.tencent.com`
 `repo.huaweicloud.com`
