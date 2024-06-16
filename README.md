@@ -31,13 +31,17 @@ docker system prune
 
 宿主机ip`172.17.0.1`
 
-### build min image
+## build min image
 
 ```sh
 docker build  --squash --rm -t nuxt3 .
 DOCKER_BUILDKIT=1 docker build --squash --rm -t nuxt3 .
 docker buildx build --squash --rm -t nuxt3 .
 ```
+
+#### other
+
+- https://github.com/slimtoolkit/slim
 
 ## 编译环境
 ```
@@ -82,14 +86,14 @@ docker run --rm -ti \
   quay.io/vektorlab/ctop
 ```
 
-#### 运行限制
+## 运行限制
 
 ```
 docker run --rm -it -m 256m --memory-swap=256m --cpus 1 -v $PWD:/www -w /www node:alpine sh
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it nicolargo/glances
 ```
 
-### 系统镜像
+## 系统镜像
 
 `curl -L https://gitee.com/RubyMetric/chsrc/releases/download/pre/chsrc-x64-linux -o chsrc; chmod +x ./chsrc; ./chsrc set ubuntu|debian|alpine`
 
@@ -107,7 +111,7 @@ find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | xargs sed -i -
 ```
 
 
-### ttyd
+## ttyd
 
 ```sh
 curl -k -L -o ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64 && chmod +x ttyd
@@ -115,7 +119,7 @@ curl -k -L -o ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd
 ```
 
 
-### docker mirrors
+## docker mirrors
 
 ```
 sudo mkdir -p /etc/docker
@@ -136,9 +140,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-TODO::https://github.com/slimtoolkit/slim
-
-### shadowsocks-libev
+## shadowsocks-libev
 
 ```
 Encrypt method: rc4-md5,
@@ -158,7 +160,7 @@ docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-
 ```
 
 
-### 定时清理
+## 定时清理
 
 ```sh
 EDITOR=vim crontab -e
