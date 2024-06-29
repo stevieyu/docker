@@ -12,4 +12,5 @@ fi
 if command -v go &> /dev/null; then
   echo "设置go镜像"
   go env -w GOPROXY=https://$mirror_GO,direct && go env -w GO111MODULE=on && go env -w GONOSUMDB=off
+  curl -sSfL https://gcore.jsdelivr.net/gh/air-verse/air/install.sh | sh -s
 fi
