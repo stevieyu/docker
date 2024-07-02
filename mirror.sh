@@ -4,7 +4,6 @@
 mirror_OS=mirrors.ustc.edu.cn
 mirror_GO=goproxy.cn
 
-# curl -L https://github.com/stevieyu/docker/raw/master/mirror.sh | sudo bash
 # curl -L https://gcore.jsdelivr.net/gh/stevieyu/docker/mirror.sh | sudo bash
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
