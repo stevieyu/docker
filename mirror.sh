@@ -7,16 +7,10 @@ mirror_GO=goproxy.cn
 # curl -L https://github.com/stevieyu/docker/raw/master/mirror.sh | sudo bash
 # curl -L https://gcore.jsdelivr.net/gh/stevieyu/docker/mirror.sh | sudo bash
 
-with_sudo() {
-    if [ "$(id -u)" != "0" ]; then
-        sudo "$@"
-    else
-        "$@"
-    fi
-}
+use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
 if command -v apt &> /dev/null || command -v apk &> /dev/null; then
-  with_sudo find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | with_sudo xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/'$mirror_OS'/g'
+  use_sudo find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | use_sudo xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/'$mirror_OS'/g'
   echo "设置apt或者apk镜像"
 fi
 
