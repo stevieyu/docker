@@ -27,6 +27,10 @@ docker system df
 
 #清理磁盘，删除关闭的容器、无用的数据卷和网络，以及 dangling 镜像（即无 tag 的镜像），暂时关闭的容器
 docker system prune
+
+#定时清理
+EDITOR=vim crontab -e
+0 1 * * * docker rm $(docker ps -a -q); docker rmi $(docker images -q -f dangling=true)
 ```
 
 宿主机ip`172.17.0.1`
@@ -159,11 +163,8 @@ Encrypt method: rc4-md5,
 docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-cfb -e PASSWORD=12345678 --name ss-server shadowsocks/shadowsocks-libev
 ```
 
-
-## 定时清理
-
-```sh
-EDITOR=vim crontab -e
-
-0 1 * * * docker rm $(docker ps -a -q); docker rmi $(docker images -q -f dangling=true)
+## env
 ```
+curl -sfS https://dotenvx.sh | sh
+```
+
