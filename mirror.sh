@@ -18,3 +18,9 @@ if command -v go &> /dev/null; then
   go env -w GOPROXY=https://$mirror_GO,direct && go env -w GO111MODULE=on && go env -w GONOSUMDB=off
   echo "设置go镜像"
 fi
+
+if command -v npm &> /dev/null; then
+  curl -k -o ~/.npmrc https://gcore.jsdelivr.net/gh/stevieyu/docker/.npmrc
+  echo "设置npm镜像"
+fi
+
