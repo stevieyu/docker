@@ -86,6 +86,7 @@ docker run --rm -it --group-add $(id -g) \
   -e CODER_ACCESS_URL=http://ip172-18-0-9-cqtel4gl2o9000fc0d90-3000.direct.labs.play-with-docker.com \
   ghcr.io/coder/coder:latest
 
+chmod -R a+rw $PWD
 docker run -d \
   --name=code-server \
   -u "$(id -u):$(id -g)" \
