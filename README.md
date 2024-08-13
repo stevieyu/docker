@@ -91,6 +91,7 @@ docker run -d \
   -u "$(id -u):$(id -g)" \
   -e TZ=Asia/Shanghai \
   -e PASSWORD=password \
+  -e SUDO_PASSWORD=password \
   -e DEFAULT_WORKSPACE=/config/workspace \
   -p 8443:8443 \
   --restart unless-stopped \
