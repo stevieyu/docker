@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "terminal.integrated.profiles.linux": {
+        "devbox": {
+            "path": "devbox",
+            "args": ["shell"],
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.env.linux": {
+        "PATH": "/home/devbox/.nix-profile/bin:${env:PATH}"
+    }
+}
