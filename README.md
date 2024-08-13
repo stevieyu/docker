@@ -86,14 +86,15 @@ docker run --rm -it --group-add $(id -g) \
   -e CODER_ACCESS_URL=http://ip172-18-0-9-cqtel4gl2o9000fc0d90-3000.direct.labs.play-with-docker.com \
   ghcr.io/coder/coder:latest
 
-mkdir -p ~/.config && \
-docker run -it --name code-server -p 8080:8080 \
-  -v "$HOME/.local:/home/coder/.local" \
-  -v "$HOME/.config:/home/coder/.config" \
-  -v "$PWD:/home/coder/project" \
+docker run -d \
+  --name=code-server \
   -u "$(id -u):$(id -g)" \
-  -e "DOCKER_USER=$USER" \
-  codercom/code-server:latest
+  -e TZ=Asia/Shanghai \
+  -e PASSWORD=password \
+  -e DEFAULT_WORKSPACE=/config/workspace \
+  -p 8443:8443 \
+  --restart unless-stopped \
+  lscr.io/linuxserver/code-server:latest
 ```
 
 ## ctop
