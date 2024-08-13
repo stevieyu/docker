@@ -79,6 +79,12 @@ docker run -d -p 6379:6379 --name redis redis:alpine
 docker run -d -p 11211:11211 --name memcached memcached:alpine
 
 docker run -d --name yacy -p 8090:8090 -p 8443:8443 --log-opt max-size=200m --log-opt max-file=2 yacy/yacy_search_server
+
+docker run --rm -it --group-add $(id -g) \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e CODER_HTTP_ADDRESS=0.0.0.0:3000 -p 3000:3000 \
+  -e CODER_ACCESS_URL=http://ip172-18-0-9-cqtel4gl2o9000fc0d90-3000.direct.labs.play-with-docker.com \
+  ghcr.io/coder/coder:latest
 ```
 
 ## ctop
