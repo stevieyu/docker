@@ -85,6 +85,15 @@ docker run --rm -it --group-add $(id -g) \
   -e CODER_HTTP_ADDRESS=0.0.0.0:3000 -p 3000:3000 \
   -e CODER_ACCESS_URL=http://ip172-18-0-9-cqtel4gl2o9000fc0d90-3000.direct.labs.play-with-docker.com \
   ghcr.io/coder/coder:latest
+
+mkdir -p ~/.config && \
+docker run -it --name code-server -p 8080:8080 \
+  -v "$HOME/.local:/home/coder/.local" \
+  -v "$HOME/.config:/home/coder/.config" \
+  -v "$PWD:/home/coder/project" \
+  -u "$(id -u):$(id -g)" \
+  -e "DOCKER_USER=$USER" \
+  codercom/code-server:latest
 ```
 
 ## ctop
