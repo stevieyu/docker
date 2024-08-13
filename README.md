@@ -99,6 +99,12 @@ docker run -d \
   lscr.io/linuxserver/code-server:latest
 ```
 
+#### 开发环境
+
+```
+apt update && apt install xz-utils && curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
+```
+
 ## ctop
 
 ```sh
