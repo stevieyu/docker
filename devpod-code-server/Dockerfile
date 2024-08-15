@@ -12,6 +12,8 @@ RUN sudo mkdir -p /workspace && \
 
 ADD settings.json /home/devbox/.local/share/code-server/User/settings.json
 
+RUN sudo chmod -R a+rw /home/devbox/.local/share
+
 EXPOSE 8080
 
-CMD sudo chmod -R a+rw /home/devbox/.local/share && code-server --bind-addr 0.0.0.0:8080 --locale zh --auth none /workspace
+CMD code-server --bind-addr 0.0.0.0:8080 --locale zh --auth none /workspace
