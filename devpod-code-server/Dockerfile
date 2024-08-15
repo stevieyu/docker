@@ -10,6 +10,7 @@ RUN sudo mkdir -p /workspace && \
     cd /workspace && \
     devbox init && devbox run date
 
+RUN mkdir -p /home/devbox/.local/share/code-server/User
 ADD settings.json /home/devbox/.local/share/code-server/User/settings.json
 
 EXPOSE 8080
