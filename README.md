@@ -191,3 +191,11 @@ docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-
 curl -sfS https://dotenvx.sh | sh
 ```
 
+## git sync
+```
+git lfs install && git clone --depth=1 https://huggingface.co/defog/llama-3-sqlcoder-8b hf-model && rm -rf hf-model/.git && \
+git clone --depth=1 https://oauth2:yzL8vJSiHz7E6FdGTRJ8@www.modelscope.cn/stevie/llama-3-sqlcoder-8b.git ms-model && \
+cd ms-model && find . -mindepth 1 -not -path './.git/*' -not -path './.git' -delete && \
+mv ../hf-model/.[^.]* . && git add . && git commit -am "sync" && git push
+```
+
