@@ -18,6 +18,7 @@ if ! command -v nix &> /dev/null; then
   nix-channel --update
 fi
 
+
 if ! command -v devbox &> /dev/null; then
   nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
   echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc.d/devbox
