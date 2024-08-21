@@ -5,12 +5,12 @@ MIRROR_HOST=mirrors.bfsu.edu.cn
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
-if ! command -v xz &> /dev/null; then
+if ! command -v xz &> /dev/null 2>&1; then
   use_sudo apt install -y xz-utils
 fi
 
 
-if command -v xz &> /dev/null && ! command -v nix &> /dev/null; then
+if command -v xz &> /dev/null 2>&1 && ! command -v nix &> /dev/null 2>&1; then
   sh <(curl -L https://$MIRROR_HOST/nix/latest/install) --daemon --yes --no-channel-add && \
   echo "substituters = https://$MIRROR_HOST/nix-channels/store https://cache.nixos.org/" >> /etc/nix/nix.conf && \
   echo "https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs" > $HOME/.nix-channels && \
@@ -19,7 +19,7 @@ if command -v xz &> /dev/null && ! command -v nix &> /dev/null; then
 fi
 
 
-if command -v nix-env &> /dev/null && ! command -v devbox &> /dev/null; then
+if command -v nix-env &> /dev/null 2>&1 && ! command -v devbox &> /dev/null 2>&1; then
   nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
   echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc.d/devbox
 fi
