@@ -48,14 +48,14 @@ docker buildx build --squash --rm -t nuxt3 .
 - https://github.com/slimtoolkit/slim
 
 ## 编译开发环境
-```
-# alpine build apk
 
-alpine-sdk
-build-base
+```sh
+# alpine build apk
+apk add alpine-sdk build-base
+
 
 # ubuntu build
-build-essential
+apt install -y build-essential
 
 
 # nix
@@ -118,7 +118,7 @@ docker run --rm -ti \
 
 ## 运行限制
 
-```
+```sh
 docker run --rm -it -m 256m --memory-swap=256m --cpus 1 -v $PWD:/www -w /www node:alpine sh
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it nicolargo/glances
 ```
@@ -151,7 +151,7 @@ curl -k -L -o ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd
 
 ## docker mirrors
 
-```
+```sh
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
@@ -190,12 +190,12 @@ docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-
 ```
 
 ## env
-```
+```sh
 curl -sfS https://dotenvx.sh | sh
 ```
 
 ## git sync
-```
+```sh
 git lfs install && git clone --depth=1 https://huggingface.co/defog/llama-3-sqlcoder-8b hf-model && rm -rf hf-model/.git && \
 git clone --depth=1 https://oauth2:yzL8vJSiHz7E6FdGTRJ8@www.modelscope.cn/stevie/llama-3-sqlcoder-8b.git ms-model && \
 cd ms-model && find . -mindepth 1 -not -path './.git/*' -not -path './.git' -delete && \
