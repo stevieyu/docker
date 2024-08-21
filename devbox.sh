@@ -6,7 +6,6 @@ MIRROR_HOST=mirrors.bfsu.edu.cn
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
 if ! command -v xz &> /dev/null; then
-  use_sudo apt update
   use_sudo apt install -y xz-utils
 fi
 
