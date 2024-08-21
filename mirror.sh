@@ -1,12 +1,18 @@
 #!/bin/bash
-
+# curl -L https://gcore.jsdelivr.net/gh/stevieyu/docker/mirror.sh | sudo bash
 
 mirror_OS=mirrors.ustc.edu.cn
 mirror_GO=goproxy.cn
 
-# curl -L https://gcore.jsdelivr.net/gh/stevieyu/docker/mirror.sh | sudo bash
+
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
+
+if command -v xz &> /dev/null; then
+  use_sudo apt update
+  use_sudo apt install -y xz-utils
+  echo "支持xz"
+fi
 
 if command -v apt &> /dev/null || command -v apk &> /dev/null; then
   use_sudo find /etc -regex '.*\(repositories\|sources.list\(.d\/.*\)?\)$' | use_sudo xargs sed -i -E 's/(archive|security).ubuntu.com|(deb).debian.org|dl-cdn.alpinelinux.org/'$mirror_OS'/g'
