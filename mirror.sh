@@ -8,7 +8,7 @@ mirror_GO=goproxy.cn
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
-if command -v xz &> /dev/null; then
+if ! command -v xz &> /dev/null; then
   use_sudo apt update
   use_sudo apt install -y xz-utils
   echo "支持xz"
