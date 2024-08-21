@@ -1,5 +1,5 @@
 #!/bin/bash
-curl -L https://fastly.jsdelivr.net/gh/stevieyu/docker/devbox.sh | bash
+curl -L https://fastly.jsdelivr.net/gh/stevieyu/docker/devbox.sh | bash -s --
 
 MIRROR_HOST=mirrors.bfsu.edu.cn
 
