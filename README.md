@@ -47,7 +47,7 @@ docker buildx build --squash --rm -t nuxt3 .
 
 - https://github.com/slimtoolkit/slim
 
-## 编译环境
+## 编译开发环境
 ```
 # alpine build apk
 
@@ -58,11 +58,20 @@ build-base
 build-essential
 
 
+# nix
+apt update && apt install -y curl xz-utils && \
+sh <(curl -L https://mirrors.bfsu.edu.cn/nix/latest/install) --daemon --yes --no-channel-add && \
+echo 'substituters = https://mirrors.bfsu.edu.cn/nix-channels/store https://cache.nixos.org/' >> /etc/nix/nix.conf && \
+echo 'https://mirrors.bfsu.edu.cn/nix-channels/nixpkgs-unstable nixpkgs' > $HOME/.nix-channels && \
+export PATH=$PATH:$HOME/.nix-profile/bin && \
+nix-channel --update
+
 # devbox jetpackio/devbox
-curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
+nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
+echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc.d/devbox
 
 # devenv cachix/devenv
-sh <(curl -L https://nixos.org/nix/install) --daemon && nix-env -iA devenv -f https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable
+nix-env -iA devenv
 ```
 
 ## service
@@ -96,12 +105,6 @@ docker run -d \
   -p 8443:8443 \
   --restart unless-stopped \
   lscr.io/linuxserver/code-server:latest
-```
-
-#### 开发环境
-
-```
-apt update && apt install xz-utils && curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
 ```
 
 ## ctop
