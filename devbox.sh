@@ -16,6 +16,6 @@ nix-channel --update
 
 
 
-nix-env -iA nixpkgs.devbox && $(devbox global shellenv --recompute) && \
+nix-env -iA nixpkgs.devbox && eval $(devbox global shellenv --recompute) && \
 echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc
 
