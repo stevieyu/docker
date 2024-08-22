@@ -9,7 +9,7 @@ use_sudo apt install -y xz-utils
 
 
 export PATH=$PATH:$HOME/.nix-profile/bin && \
-sh <(curl -L https://$MIRROR_HOST/nix/latest/install) --daemon --yes --no-channel-add && \
+sh <(curl -L https://mirrors.bfsu.edu.cn/nix/latest/install) --daemon --yes --no-channel-add && \
 echo "substituters = https://$MIRROR_HOST/nix-channels/store https://cache.nixos.org/" >> /etc/nix/nix.conf && \
 nix-channel --add https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs && \
 nix-channel --update
