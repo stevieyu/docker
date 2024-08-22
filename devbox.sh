@@ -12,7 +12,7 @@ else
 fi
 
 
-if command -v xz &> /dev/null 2>&1 && command -v nix &> /dev/null 2>&1; then
+if command -v nix &> /dev/null 2>&1; then
   echo 'nix已安装'
 else
   export PATH=$PATH:$HOME/.nix-profile/bin && \
@@ -23,7 +23,7 @@ else
 fi
 
 
-if command -v nix-env &> /dev/null 2>&1 && ! command -v devbox &> /dev/null 2>&1; then
+if command -v devbox &> /dev/null 2>&1; then
   echo 'devbox已安装'
 else
   nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
