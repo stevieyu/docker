@@ -1,7 +1,7 @@
 #!/bin/bash
 # curl -L https://fastly.jsdelivr.net/gh/stevieyu/docker/devbox.sh | bash -s --
 
-export MIRROR_HOST=mirrors.bfsu.edu.cn
+export MIRROR_HOST=mirrors.ustc.edu.cn
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
