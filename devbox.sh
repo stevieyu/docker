@@ -5,27 +5,17 @@ export MIRROR_HOST=mirrors.ustc.edu.cn
 
 use_sudo() { [ "$(id -u)" = "0" ] || sudo "$@"; }
 
-if command -v xz &> /dev/null 2>&1; then
-  echo 'xz已安装'
-else
-  use_sudo apt install -y xz-utils
-fi
+use_sudo apt install -y xz-utils
 
 
-if command -v nix &> /dev/null 2>&1; then
-  echo 'nix已安装'
-else
-  export PATH=$PATH:$HOME/.nix-profile/bin && \
-  sh <(curl -L https://$MIRROR_HOST/nix/latest/install) --daemon --yes --no-channel-add && \
-  echo "substituters = https://$MIRROR_HOST/nix-channels/store https://cache.nixos.org/" >> /etc/nix/nix.conf && \
-  nix-channel --add https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs
-  nix-channel --update
-fi
+export PATH=$PATH:$HOME/.nix-profile/bin && \
+sh <(curl -L https://$MIRROR_HOST/nix/latest/install) --daemon --yes --no-channel-add && \
+echo "substituters = https://$MIRROR_HOST/nix-channels/store https://cache.nixos.org/" >> /etc/nix/nix.conf && \
+nix-channel --add https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs && \
+nix-channel --update
 
 
-if command -v devbox &> /dev/null 2>&1; then
-  echo 'devbox已安装'
-else
-  nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
-  echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc.d/devbox
-fi
+
+nix-env -iA nixpkgs.devbox && devbox global shellenv --recompute && \
+echo 'eval "$(devbox global shellenv)"' >> $HOME/.zshrc >> $HOME/.bashrc.d/devbox
+
