@@ -15,10 +15,10 @@ fi
 if command -v xz &> /dev/null 2>&1 && command -v nix &> /dev/null 2>&1; then
   echo 'nix已安装'
 else
+  export PATH=$PATH:$HOME/.nix-profile/bin && \
   sh <(curl -L https://$MIRROR_HOST/nix/latest/install) --daemon --yes --no-channel-add && \
   echo "substituters = https://$MIRROR_HOST/nix-channels/store https://cache.nixos.org/" >> /etc/nix/nix.conf && \
-  echo "https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs" > $HOME/.nix-channels && \
-  export PATH=$PATH:$HOME/.nix-profile/bin && \
+  nix-channel --add https://$MIRROR_HOST/nix-channels/nixpkgs-unstable nixpkgs
   nix-channel --update
 fi
 
