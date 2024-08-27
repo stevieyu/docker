@@ -202,3 +202,14 @@ cd ms-model && find . -mindepth 1 -not -path './.git/*' -not -path './.git' -del
 mv ../hf-model/.[^.]* . && git add . && git commit -am "sync" && git push
 ```
 
+### frankenphp
+```bash
+url="https://www.ghproxy.cn/https://github.com/dunglas/frankenphp/releases/latest/download/frankenphp-linux-x86_64" # 替换为你要下载的文件的 URL
+
+curl -L "$url" -o ./frankenphp && \
+chmod +x ./frankenphp && \
+curl -LO https://mirrors.aliyun.com/composer/composer.phar && \
+alias composer='./frankenphp php-cli ./composer.phar' && \
+composer config -g repos.packagist composer https://mirrors.tencent.com/composer/ && \
+./frankenphp php-server
+```
