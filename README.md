@@ -204,12 +204,14 @@ mv ../hf-model/.[^.]* . && git add . && git commit -am "sync" && git push
 
 ### frankenphp
 ```bash
-url="https://www.ghproxy.cn/https://github.com/dunglas/frankenphp/releases/latest/download/frankenphp-linux-x86_64" # 替换为你要下载的文件的 URL
-
-curl -L "$url" -o ./frankenphp && \
-chmod +x ./frankenphp && \
-curl -LO https://mirrors.aliyun.com/composer/composer.phar && \
-alias composer='./frankenphp php-cli ./composer.phar' && \
+url="https://www.ghproxy.cn/https://github.com/dunglas/frankenphp/releases/latest/download/frankenphp-linux-x86_64" && \
+binpath="/root/.local/bin" && \
+curl -L "$url" -o "$binpath"/frankenphp && \
+chmod +x "$binpath"/frankenphp && \
+alias php-cli='frankenphp php-cli' && \
+echo '#!/usr/bin/env bash\nfrankenphp php-cli "$@"' >> "$binpath"/php && \
+curl -L https://mirrors.aliyun.com/composer/composer.phar -o "$binpath"/composer && \
+chmod +x "$binpath"/composer && \
 composer config -g repos.packagist composer https://mirrors.tencent.com/composer/ && \
-./frankenphp php-server
+frankenphp php-server
 ```
