@@ -210,6 +210,7 @@ curl -L "$url" -o "$binpath"/frankenphp && \
 chmod +x "$binpath"/frankenphp && \
 alias php-cli='frankenphp php-cli' && \
 echo '#!/usr/bin/env bash\nfrankenphp php-cli "$@"' >> "$binpath"/php && \
+chmod +x "$binpath"/php && \
 curl -L https://mirrors.aliyun.com/composer/composer.phar -o "$binpath"/composer && \
 chmod +x "$binpath"/composer && \
 composer config -g repos.packagist composer https://mirrors.tencent.com/composer/ && \
