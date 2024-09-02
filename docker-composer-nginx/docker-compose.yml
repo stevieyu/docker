@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=https://fastly.jsdelivr.net/gh/compose-spec/compose-spec@master/schema/compose-spec.json
 version: "3"
 
 services:
