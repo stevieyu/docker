@@ -125,7 +125,7 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host -it n
 
 ## 系统镜像
 
-`curl -L https://gitee.com/RubyMetric/chsrc/releases/download/pre/chsrc-x64-linux -o chsrc; chmod +x ./chsrc; ./chsrc set ubuntu|debian|alpine`
+`curl https://chsrc.run/posix | bash; chsrc set ubuntu|debian|alpine`
 
 `mirrors.cloud.tencent.com`
 `repo.huaweicloud.com`
