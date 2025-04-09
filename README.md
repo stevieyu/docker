@@ -229,5 +229,6 @@ echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.sustech.edu.cn/homebrew-bot
 echo '. ~/.profile_brew' >> ~/.bashrc && \
 NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.profile_brew && \
-bash && brew update
+. ~/.profile_brew && \
+brew update
 ```
