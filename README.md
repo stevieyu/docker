@@ -228,7 +228,7 @@ echo 'export HOMEBREW_API_DOMAIN="https://mirrors.sustech.edu.cn/homebrew-bottle
 echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.sustech.edu.cn/homebrew/homebrew-bottles"' >> ~/.profile_brew && \
 source ~/.profile_brew && \
 echo '. ~/.profile_brew' >> ~/.bashrc && \
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.profile_brew && \
 brew update
 ```
