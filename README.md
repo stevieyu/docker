@@ -229,6 +229,6 @@ echo 'export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.
 echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"' >> ~/.profile_brew && \
 echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"' >> ~/.profile_brew && \
 source ~/.profile_brew && \
-echo '. .profile_brew' >> ~/.bashrc
+echo '. ~/.profile_brew' >> ~/.bashrc
 brew update
 ```
