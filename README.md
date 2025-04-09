@@ -222,12 +222,10 @@ frankenphp php-server
 - https://help.mirrors.cernet.edu.cn/homebrew-bottles/
 
 ```bash
-
-
-echo 'export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew-bottles/api"' >> ~/.profile_brew && \
 echo 'export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git"' >> ~/.profile_brew && \
 echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"' >> ~/.profile_brew && \
-echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"' >> ~/.profile_brew && \
+echo 'export HOMEBREW_API_DOMAIN="https://mirrors.sustech.edu.cn/homebrew-bottles/api"' >> ~/.profile_brew && \
+echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.sustech.edu.cn/homebrew/homebrew-bottles"' >> ~/.profile_brew && \
 source ~/.profile_brew && \
 echo '. ~/.profile_brew' >> ~/.bashrc && \
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
