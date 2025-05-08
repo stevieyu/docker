@@ -222,13 +222,13 @@ frankenphp php-server
 - https://help.mirrors.cernet.edu.cn/homebrew-bottles/
 
 ```bash
-echo 'export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git"' >> ~/.profile_brew && \
-echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"' >> ~/.profile_brew && \
-echo 'export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles/api"' >> ~/.profile_brew && \
-echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"' >> ~/.profile_brew && \
-echo >> ~/.bashrc && echo '. ~/.profile_brew' >> ~/.bashrc && \
-NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.profile_brew && \
-. ~/.profile_brew && \
+echo 'export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/brew.git"' >> ~/.brewrc && \
+echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.aliyun.com/homebrew/homebrew-core.git"' >> ~/.brewrc && \
+echo 'export HOMEBREW_API_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles/api"' >> ~/.brewrc && \
+echo 'export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.aliyun.com/homebrew/homebrew-bottles"' >> ~/.brewrc && \
+echo >> ~/.bashrc && echo '. ~/.brewrc' >> ~/.bashrc && \
+NONINTERACTIVE=1 bash -c "$(curl -fsSL https://fastly.jsdelivr.net/gh/Homebrew/install/install.sh)" && \
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.brewrc && \
+. ~/.brewrc && \
 brew update
 ```
