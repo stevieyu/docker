@@ -194,6 +194,19 @@ docker run --restart always -d -p 8388:8388 -p 8388:8388/udp -e  METHOD=aes-256-
 curl -sfS https://dotenvx.sh | sh
 ```
 
+
+## zsh + onmyzsh + deja
+会显示以输入的内容开头的命令，还使用模糊匹配 、 目录感知和命令序列预测来建议实际想要运行的命令——以内联提示文本的形式，在每次按键后显示，且零延迟。
+```bash
+apt update && apt install -y curl git zsh && \
+curl -fsSL https://fastly.jsdelivr.net/gh/Giammarco-Ferranti/deja@main/install.sh | sed 's|//github.com|//gh.g.stevie.top/github.com|g' | sh && \
+sh -c "$(curl -fsSL https://install.ohmyz.sh/ | sed 's|//github.com|//gh.g.stevie.top/github.com|g')" "" --unattended && \
+sed -i 's|# export|export|' /root/.zshrc && \
+mkdir -p ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/deja && curl -fsSL https://fastly.jsdelivr.net/gh/Giammarco-Ferranti/deja@main/deja.plugin.zsh -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/deja/deja.plugin.zsh && \
+sed -i 's/plugins=(/plugins=(deja /' /root/.zshrc
+```
+
+
 ## git sync
 ```sh
 git lfs install && git clone --depth=1 https://huggingface.co/defog/llama-3-sqlcoder-8b hf-model && rm -rf hf-model/.git && \
