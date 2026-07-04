@@ -245,3 +245,29 @@ echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.brewrc && \
 . ~/.brewrc && \
 brew update
 ```
+
+### podman
+
+#### 镜像
+/etc/containers/registries.conf.d/999-podman-machine.conf
+```toml
+unqualified-search-registries=["docker.io"]
+
+[[registry]]
+prefix = "docker.io"
+location = "docker.io"
+
+#[[registry.mirror]]
+#location = "docker.m.daocloud.io"
+
+#[[registry.mirror]]
+#location = "docker.1ms.run"
+
+[[registry.mirror]]
+location = "d.stvcf.ggff.net"
+
+#[[registry.mirror]]
+#location = "docker.g.stevie.top"
+```
+
+
