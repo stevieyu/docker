@@ -249,7 +249,11 @@ brew update
 ### podman
 
 #### 镜像
+
+pull registry/library/alpine
+
 /etc/containers/registries.conf.d/999-podman-machine.conf
+
 ```toml
 unqualified-search-registries=["docker.io"]
 
