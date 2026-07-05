@@ -250,7 +250,7 @@ brew update
 
 #### 镜像
 
-pull registry/library/alpine
+pull docker.1ms.run/library/alpine
 
 /etc/containers/registries.conf.d/999-podman-machine.conf
 
@@ -273,5 +273,10 @@ location = "d.stvcf.ggff.net"
 #[[registry.mirror]]
 #location = "docker.g.stevie.top"
 ```
+```bash
+curl -u "dugujianxiao:duguxiaoyao" "https://d.stvcf.ggff.net/token?scope=repository:library/ubuntu:pull&service=token-service"
 
+curl -L -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+     https://docker.1ms.run/v2/library/ubuntu/manifests/latest
+```
 
