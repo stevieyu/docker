@@ -66,7 +66,7 @@ configure_shell() {
 
 # >>> China mirrors & mise urls >>>
 # 控制 mise 下载语言二进制/源码的镜像
-export MISE_NODE_MIRROR_URL="https://npmmirror.com/mirrors/node"
+export MISE_NODE_MIRROR_URL="https://npmmirror.com/mirrors/node/"
 export MISE_PYTHON_BUILD_MIRROR_URL="https://mirrors.huaweicloud.com/python/"
 export MISE_GO_MIRROR_URL="https://golang.google.cn/dl/"
 export MISE_RUBY_MIRROR_URL="https://cache.ruby-china.com/"
