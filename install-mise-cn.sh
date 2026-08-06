@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # mise 一键安装 + 国内镜像配置脚本
-# 用法： bash install-mise-cn.sh
+# 用法： curl -Lk https://fastly.jsdelivr.net/gh/stevieyu/docker@master/install-mise-cn.sh | bash
 set -euo pipefail
 
 # ============ 颜色输出 ============
