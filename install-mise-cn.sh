@@ -17,13 +17,11 @@ install_mise() {
     fi
 
     info "开始安装 mise ..."
-    # 使用官方安装脚本（脚本本身较小，几秒钟即可完成）
-    if ! curl -fsSL https://mise.run | sed 's|s://github|://q.stevie.top/github|g' | bash; then
+    if ! curl -fsSL https://mise.run | bash; then
         error "mise 安装失败，请检查网络后重试"
         exit 1
     fi
 
-    # 让当前 shell 能找到 mise
     export PATH="$HOME/.local/bin:$PATH"
     hash -r 2>/dev/null || true
 
@@ -34,9 +32,9 @@ install_mise() {
     info "mise 安装完成：$(mise --version)"
 }
 
-# ============ 2. 写入 shell 激活代码 ============
+# ============ 2. 写入 shell 激活代码与环境变量 ============
 configure_shell() {
-    info "配置 shell 激活代码 ..."
+    info "配置 shell 激活代码及环境变量 ..."
     local rc_file
     case "${SHELL:-/bin/bash}" in
         */zsh)  rc_file="$HOME/.zshrc" ;;
@@ -45,6 +43,7 @@ configure_shell() {
     esac
     touch "$rc_file"
 
+    # 写入 mise 激活代码
     if ! grep -q 'mise activate' "$rc_file"; then
         {
             echo ''
@@ -60,50 +59,36 @@ configure_shell() {
     else
         warn "$rc_file 中已存在 mise 激活代码，跳过"
     fi
+
+    # 写入环境变量 (用于控制 mise 下载各语言源码的镜像地址)
+    if ! grep -q '# >>> China mirrors & mise urls >>>' "$rc_file" 2>/dev/null; then
+        cat >> "$rc_file" <<'EOF'
+
+# >>> China mirrors & mise urls >>>
+# 控制 mise 下载语言二进制/源码的镜像
+export MISE_NODE_MIRROR_URL="https://npmmirror.com/mirrors/node"
+export MISE_PYTHON_BUILD_MIRROR_URL="https://mirrors.huaweicloud.com/python/"
+export MISE_GO_MIRROR_URL="https://golang.google.cn/dl/"
+export MISE_RUBY_MIRROR_URL="https://cache.ruby-china.com/"
+
+# 控制包管理器走国内镜像的环境变量
+export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
+export RUSTUP_UPDATE_ROOT="https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup-dist"
+export GOPROXY="https://goproxy.cn,direct"
+export GO111MODULE="on"
+export PIP_INDEX_URL="https://mirrors.aliyun.com/pypi/simple/"
+export PIP_TRUSTED_HOST="mirrors.aliyun.com"
+# <<< China mirrors & mise urls <<<
+EOF
+        info "国内镜像环境变量已写入 $rc_file"
+    else
+        warn "$rc_file 中已存在镜像环境变量配置，跳过"
+    fi
 }
 
-# ============ 3. 配置 mise 各语言下载镜像 ============
-configure_mise_mirrors() {
-    info "配置 mise 下载镜像 ..."
-
-    # Node.js 二进制下载镜像（淘宝 / npmmirror）
-    mise settings set node.mirror_url "https://npmmirror.com/mirrors/node" 2>/dev/null \
-        || warn "设置 node.mirror_url 失败"
-
-    # Python 源码下载镜像（华为云）
-    mise settings set python.build.mirror_url "https://mirrors.huaweicloud.com/python/" 2>/dev/null \
-        || warn "设置 python.build.mirror_url 失败"
-
-    # Ruby 源码镜像（清华）
-    mise settings set ruby.mirror_url "https://cache.ruby-china.com/" 2>/dev/null \
-        || warn "设置 ruby.mirror_url 失败"
-
-    # Go 源码镜像（golang.google.cn）
-    mise settings set go.mirror_url "https://golang.google.cn/dl/" 2>/dev/null \
-        || warn "设置 go.mirror_url 失败"
-
-    # Rust rustup 镜像（清华）—— 通过环境变量
-    mise settings set env.RUSTUP_DIST_SERVER "https://mirrors.tuna.tsinghua.edu.cn/rustup" 2>/dev/null \
-        || warn "设置 RUSTUP_DIST_SERVER 失败"
-    mise settings set env.RUSTUP_UPDATE_ROOT "https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup-dist" 2>/dev/null \
-        || warn "设置 RUSTUP_UPDATE_ROOT 失败"
-
-    # Go GOPROXY
-    mise settings set env.GOPROXY "https://goproxy.cn,direct" 2>/dev/null \
-        || warn "设置 GOPROXY 失败"
-
-    # pip 镜像
-    mise settings set env.PIP_INDEX_URL "https://mirrors.aliyun.com/pypi/simple/" 2>/dev/null \
-        || warn "设置 PIP_INDEX_URL 失败"
-    mise settings set env.PIP_TRUSTED_HOST "mirrors.aliyun.com" 2>/dev/null \
-        || warn "设置 PIP_TRUSTED_HOST 失败"
-
-    info "mise 镜像配置完成"
-}
-
-# ============ 4. 配置各包管理器镜像 ============
+# ============ 3. 配置各包管理器自身镜像文件 ============
 configure_package_managers() {
-    info "配置各语言包管理器镜像 ..."
+    info "配置各语言包管理器原生镜像配置 ..."
 
     # ---------- npm ----------
     mkdir -p "$HOME/.npm"
@@ -132,15 +117,13 @@ EOF
     cp "$HOME/.pip/pip.conf" "$HOME/.config/pip/pip.conf"
     info "pip 镜像已写入 ~/.pip/pip.conf 和 ~/.config/pip/pip.conf"
 
-    # ---------- Go (GOPROXY) ----------
-    # 通过 mise env 已设置 GOPROXY；这里再通过 go env 兜底（若 go 已安装）
-    if command -v go &>/dev/null; then
-        go env -w GOPROXY=https://goproxy.cn,direct
-        go env -w GO111MODULE=on
-        info "Go env 已设置 GOPROXY"
-    else
-        info "Go 尚未安装，GOPROXY 已通过 mise env 配置"
-    fi
+    # ---------- Go (GOPROXY 原生配置) ----------
+    mkdir -p "$HOME/.config/go"
+    cat > "$HOME/.config/go/env" <<'EOF'
+GOPROXY=https://goproxy.cn,direct
+GO111MODULE=on
+EOF
+    info "Go env 已写入 ~/.config/go/env"
 
     # ---------- Rust / Cargo ----------
     mkdir -p "$HOME/.cargo"
@@ -250,32 +233,9 @@ EOF
 }
 EOF
     info "Composer (PHP) 镜像已写入 ~/.composer/config.json"
-
-    # ---------- Rustup 镜像兜底（写到 shell rc）----------
-    local rc_file
-    case "${SHELL:-/bin/bash}" in
-        */zsh)  rc_file="$HOME/.zshrc" ;;
-        */bash) rc_file="$HOME/.bashrc" ;;
-        *)      rc_file="$HOME/.profile" ;;
-    esac
-    if ! grep -q '# >>> China mirrors >>>' "$rc_file" 2>/dev/null; then
-        cat >> "$rc_file" <<'EOF'
-
-# >>> China mirrors >>>
-export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
-export RUSTUP_UPDATE_ROOT="https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup-dist"
-export GOPROXY="https://goproxy.cn,direct"
-export GO111MODULE="on"
-export PIP_INDEX_URL="https://mirrors.aliyun.com/pypi/simple/"
-export PIP_TRUSTED_HOST="mirrors.aliyun.com"
-export COMPOSER_PACKAGIST_MIRROR="https://mirrors.aliyun.com/composer/"
-# <<< China mirrors <<<
-EOF
-        info "国内镜像环境变量已写入 $rc_file"
-    fi
 }
 
-# ============ 5. 主流程 ============
+# ============ 4. 主流程 ============
 main() {
     echo -e "${BLUE}================================================${NC}"
     echo -e "${BLUE}  mise 一键安装 + 国内镜像配置${NC}"
@@ -283,7 +243,6 @@ main() {
 
     install_mise
     configure_shell
-    configure_mise_mirrors
     configure_package_managers
 
     echo ""
