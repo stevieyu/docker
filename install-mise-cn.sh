@@ -18,7 +18,7 @@ install_mise() {
 
     info "开始安装 mise ..."
     # 使用官方安装脚本（脚本本身较小，几秒钟即可完成）
-    if ! curl -fsSL https://mise.run | sed 's|//github|//gh-proxy.stvcf.ggff.net/github|g' | bash; then
+    if ! curl -fsSL https://mise.run | sed 's|s://github|://q.stevie.top/github|g' | bash; then
         error "mise 安装失败，请检查网络后重试"
         exit 1
     fi
