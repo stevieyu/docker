@@ -280,3 +280,9 @@ curl -L -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
      https://docker.1ms.run/v2/library/ubuntu/manifests/latest
 ```
 
+### silo | S3 自托管
+
+```bash
+wslc run --rm -it -p 9000:9000 -p 9001:9001 -e MINIO_ROOT_USER=user -e MINIO_ROOT_PASSWORD=password -v "$PWD/data:/data" docker.1panel.live/pgsty/silo:distroless server /data --console-address ":9001"
+```
+
