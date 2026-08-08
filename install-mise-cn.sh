@@ -72,8 +72,8 @@ export MISE_GO_MIRROR_URL="https://golang.google.cn/dl/"
 export MISE_RUBY_MIRROR_URL="https://cache.ruby-china.com/"
 
 # 控制包管理器走国内镜像的环境变量
-export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
-export RUSTUP_UPDATE_ROOT="https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup"
+export RUSTUP_DIST_SERVER="https://mirrors.huaweicloud.com/rustup"
+export RUSTUP_UPDATE_ROOT="https://mirrors.huaweicloud.com/rustup/rustup"
 export GOPROXY="https://goproxy.cn,direct"
 export GO111MODULE="on"
 export PIP_INDEX_URL="https://mirrors.aliyun.com/pypi/simple/"
